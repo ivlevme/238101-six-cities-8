@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
-* Студент: [Дмитрий Ивлев](https://up.htmlacademy.ru/react/8/user/238101).
-* Наставник: `Неизвестно`.
+- Студент: [Дмитрий Ивлев](https://up.htmlacademy.ru/react/8/user/238101).
+- Наставник: [Михаил Кислый](https://github.com/smart-grizzly).
 
 ---
 
