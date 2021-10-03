@@ -1,8 +1,6 @@
-import Main from '../main/main';
+import type { AppProps } from './types';
 
-type AppProps = {
-  countRentalOffers: number;
-};
+import { Main } from '../index';
 
 function App({ countRentalOffers }: AppProps): JSX.Element {
   return <Main countRentalOffers={countRentalOffers} />;

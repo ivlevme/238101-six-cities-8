@@ -1,91 +1,29 @@
-import Header from '../header/header';
-import OfferCard from '../offer-card/offer-card';
+import type { MainProps } from './types';
+import type { Offers } from '../../types';
 
-type MainProps = {
-  countRentalOffers: number;
-};
+import { Header, OfferCard } from '../index';
 
-type Offer = {
-  id: string;
-  houseType: string;
-  img: string;
-  premium: boolean;
-  price: number;
-  title: string;
-};
-
-type Offers = Offer[];
-
-const OfferOneMock: Offer = {
-  id: '1',
-  houseType: 'Apartment',
-  img: 'img/apartment-01.jpg',
-  premium: true,
-  price: 120,
-  title: 'Beautiful & luxurious apartment at great location',
-};
-
-const OfferTwoMock: Offer = {
-  id: '2',
-  houseType: 'Private room',
-  img: 'img/room.jpg',
-  price: 80,
-  title: 'Wood and stone place',
-  premium: false,
-};
-
-const OfferThreeMock: Offer = {
-  id: '3',
-  houseType: 'Apartment',
-  img: 'img/apartment-02.jpg',
-  price: 132,
-  title: 'Canal View Prinsengracht',
-  premium: false,
-};
-const OfferFourMock: Offer = {
-  id: '4',
-  houseType: 'Apartment',
-  img: 'img/apartment-03.jpg',
-  price: 180,
-  title: 'Nice, cozy, warm big bed apartment',
-  premium: true,
-};
-
-const OfferFiveMock: Offer = {
-  id: '5',
-  houseType: 'Private room',
-  img: 'img/room.jpg',
-  price: 80,
-  title: 'Wood and stone place',
-  premium: false,
-};
-
-const offersMock: Offers = [
-  OfferOneMock,
-  OfferTwoMock,
-  OfferThreeMock,
-  OfferFourMock,
-  OfferFiveMock,
-];
+import { offersMock } from './constants';
 
 function Main({ countRentalOffers }: MainProps): JSX.Element {
   const renderOffers = (offers: Offers) =>
     offers.map(
-      ({ id, houseType, img, premium, price, title }): JSX.Element => (
+      (offer): JSX.Element => (
         <OfferCard
-          key={id}
-          houseType={houseType}
-          img={img}
-          premium={premium}
-          price={price}
-          title={title}
+          key={offer.id}
+          bookmarks={offer.bookmarks}
+          houseType={offer.houseType}
+          img={offer.img}
+          premium={offer.premium}
+          price={offer.price}
+          title={offer.title}
         />
       ),
     );
+
   return (
     <div className='page page--gray page--main'>
       <Header />
-
       <main className='page__main page__main--index'>
         <h1 className='visually-hidden'>Cities</h1>
         <div className='tabs'>

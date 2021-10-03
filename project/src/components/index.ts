@@ -1,0 +1,12 @@
+export { default as App } from './app/app';
+export { default as Bookmarks } from './bookmarks/bookmarks';
+export { default as Favorites } from './favorites/favorites';
+export { default as FavoritesEmpty } from './favorites-empty/favorites-empty';
+export { default as Footer } from './footer/footer';
+export { default as Header } from './header/header';
+export { default as Login } from './login/login';
+export { default as Main } from './main/main';
+export { default as MainEmpty } from './main-empty/main-empty';
+export { default as OfferCard } from './offer-card/offer-card';
+export { default as Property } from './property/property';
+export { default as PropertyNotLogged } from './property-not-logged/property-not-logged';

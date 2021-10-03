@@ -1,26 +1,27 @@
-type OfferCardProps = {
-  price: number;
-  title: string;
-  houseType: string;
-  img: string;
-  premium?: boolean;
-};
+import type { OfferCardProps } from './types';
+
+import { Bookmarks } from '../index';
 
 function OfferCard({
+  bookmarks,
+  houseType,
+  img,
+  premium,
   price,
   title,
-  houseType,
-  premium,
-  img,
 }: OfferCardProps): JSX.Element {
+  const renderPremium = () =>
+    premium ? (
+      <div className='place-card__mark'>
+        <span>Premium</span>
+      </div>
+    ) : (
+      ''
+    );
+
   return (
     <article className='cities__place-card place-card'>
-      {premium && (
-        <div className='place-card__mark'>
-          <span>Premium</span>
-        </div>
-      )}
-
+      {renderPremium()}
       <div className='cities__image-wrapper place-card__image-wrapper'>
         <a href='/'>
           <img
@@ -39,12 +40,7 @@ function OfferCard({
             <span className='place-card__price-text'>&#47;&nbsp;night</span>
           </div>
 
-          <button className='place-card__bookmark-button button' type='button'>
-            <svg className='place-card__bookmark-icon' width='18' height='19'>
-              <use xlinkHref='#icon-bookmark'></use>
-            </svg>
-            <span className='visually-hidden'>To bookmarks</span>
-          </button>
+          <Bookmarks active={bookmarks} />
         </div>
         <div className='place-card__rating rating'>
           <div className='place-card__stars rating__stars'>

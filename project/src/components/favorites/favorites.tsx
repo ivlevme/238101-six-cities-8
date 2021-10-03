@@ -1,5 +1,4 @@
-import Footer from '../footer/footer';
-import Header from '../header/header';
+import { Footer, Header } from '../index';
 
 function Favorites(): JSX.Element {
   return (
