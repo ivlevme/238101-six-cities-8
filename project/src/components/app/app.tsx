@@ -33,7 +33,6 @@ function App({ countRentalOffers }: AppProps): JSX.Element {
         <Route exact path={AppRoute.Main}>
           <Main countRentalOffers={countRentalOffers} />
         </Route>
-
         <Route>
           <NotFoundScreen />
         </Route>

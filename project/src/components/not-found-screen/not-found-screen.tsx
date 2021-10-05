@@ -6,7 +6,10 @@ function NotFoundScreen(): JSX.Element {
   return (
     <>
       <Header />
-      <section className='container' style={{ textAlign: 'center' }}>
+      <section
+        className='container'
+        style={{ textAlign: 'center' }}
+      >
         <h1>404. Page not found</h1>
         <Link to='/'>Вернуться на главную</Link>
       </section>

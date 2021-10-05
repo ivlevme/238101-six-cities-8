@@ -12,11 +12,9 @@ function PrivateRoute(props: PrivateRouteProps): JSX.Element {
   const { authorizationStatus, children, exact, path } = props;
 
   const renderComponent = () =>
-    authorizationStatus === AuthorizationStatus.Auth ? (
-      children
-    ) : (
-      <Redirect to={AppRoute.Login} />
-    );
+    authorizationStatus === AuthorizationStatus.Auth
+      ? (children)
+      : (<Redirect to={AppRoute.Login} />);
 
   return (
     <Route exact={exact} path={path}>
