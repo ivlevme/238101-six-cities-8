@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import type { OfferProps } from './types';
 
 import { BookmarksText } from '../../consts';
-import { CommentForm, Header } from '../index';
+import {
+  CommentForm,
+  Header
+} from '../index';
+import { getRandomInteger } from '../../helpers';
 import { createRouteToOffer } from '../../routes/helpers';
 
 function Offer({ offer }: OfferProps): JSX.Element {
@@ -16,19 +20,22 @@ function Offer({ offer }: OfferProps): JSX.Element {
   const renderImages = () => (
     <div className='property__gallery-container container'>
       <div className='property__gallery'>
-        {Array.from({ length: 6 }).map(() => renderImage(Math.random()))}
+        {
+          Array
+            .from({ length: 6 })
+            .map(() => renderImage(getRandomInteger()))
+        }
       </div>
     </div>
   );
 
   const renderPremiumMark = () =>
-    offer.premium ? (
-      <div className='property__mark'>
-        <span>Premium</span>
-      </div>
-    ) : (
-      ''
-    );
+    offer.premium ?
+      (
+        <div className='property__mark'>
+          <span>Premium</span>
+        </div>
+      ) : ('');
 
   return (
     <div className='page'>
@@ -55,9 +62,11 @@ function Offer({ offer }: OfferProps): JSX.Element {
                     <use xlinkHref='#icon-bookmark'></use>
                   </svg>
                   <span className='visually-hidden'>
-                    {offer.bookmark
-                      ? BookmarksText.Active
-                      : BookmarksText.InActive}
+                    {
+                      offer.bookmark
+                        ? BookmarksText.Active
+                        : BookmarksText.InActive
+                    }
                   </span>
                 </button>
               </div>

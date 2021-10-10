@@ -17,7 +17,10 @@ function FavoritesLocation({
       </div>
       <div className='favorites__places'>
         {offers.map((offer) => (
-          <FavoritesCard key={offer.id} offer={offer} />
+          <FavoritesCard
+            key={offer.id}
+            offer={offer}
+          />
         ))}
       </div>
     </li>

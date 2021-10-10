@@ -2,7 +2,13 @@ import type { FavoritesProps } from './types';
 import type { Offers } from '../../types';
 
 import { City } from '../../consts';
-import { FavoritesEmpty, FavoritesLocation, Footer, Header } from '../index';
+import {
+  FavoritesEmpty,
+  FavoritesLocation,
+  Footer,
+  Header
+} from '../index';
+import { getRandomInteger } from '../../helpers';
 
 const LOCATION_INDEX = 0;
 const OFFERS_INDEX = 1;
@@ -10,7 +16,7 @@ const OFFERS_INDEX = 1;
 function Favorites({ favorities }: FavoritesProps): JSX.Element {
   const renderLocation = (location: City, offers: Offers) => (
     <FavoritesLocation
-      key={Math.random()}
+      key={getRandomInteger()}
       location={location}
       offers={offers}
     />
@@ -29,14 +35,13 @@ function Favorites({ favorities }: FavoritesProps): JSX.Element {
   };
 
   const renderFavoritesContent = () =>
-    favorities.size ? (
-      <section className='favorites'>
-        <h1 className='favorites__title'>Saved listing</h1>
-        <ul className='favorites__list'>{renderFavoritesCardByLocation()}</ul>
-      </section>
-    ) : (
-      <FavoritesEmpty />
-    );
+    favorities.size ?
+      (
+        <section className='favorites'>
+          <h1 className='favorites__title'>Saved listing</h1>
+          <ul className='favorites__list'>{renderFavoritesCardByLocation()}</ul>
+        </section>
+      ) : (<FavoritesEmpty />);
 
   return (
     <div className='page'>

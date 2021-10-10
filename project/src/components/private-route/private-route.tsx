@@ -1,4 +1,7 @@
-import { Redirect, Route } from 'react-router-dom';
+import {
+  Redirect,
+  Route
+} from 'react-router-dom';
 import type { RouteProps } from 'react-router-dom';
 
 import { AppRoute } from '../../routes';
@@ -9,7 +12,12 @@ type PrivateRouteProps = RouteProps & {
 };
 
 function PrivateRoute(props: PrivateRouteProps): JSX.Element {
-  const { authorizationStatus, children, exact, path } = props;
+  const {
+    authorizationStatus,
+    children,
+    exact,
+    path,
+  } = props;
 
   const renderComponent = () =>
     authorizationStatus === AuthorizationStatus.Auth
@@ -17,7 +25,10 @@ function PrivateRoute(props: PrivateRouteProps): JSX.Element {
       : (<Redirect to={AppRoute.Login} />);
 
   return (
-    <Route exact={exact} path={path}>
+    <Route
+      exact={exact}
+      path={path}
+    >
       {renderComponent()}
     </Route>
   );

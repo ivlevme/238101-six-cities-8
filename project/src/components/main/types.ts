@@ -5,4 +5,6 @@ export type MainProps = {
   offers: Offer[];
 };
 
-export type ActiveOfferState = { id: null | string };
+export type ActiveOfferState = {
+  id: null | string
+};

@@ -22,9 +22,7 @@ function OfferCard({
       <div className='place-card__mark'>
         <span>Premium</span>
       </div>
-    ) : (
-      ''
-    );
+    ) : ('');
 
   const handleOfferMouseEnter = () => {
     onMouseEnter(id);
