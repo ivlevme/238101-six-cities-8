@@ -2,7 +2,7 @@ import { Redirect, Route } from 'react-router-dom';
 import type { RouteProps } from 'react-router-dom';
 
 import { AppRoute } from '../../routes';
-import { AuthorizationStatus } from '../../conts';
+import { AuthorizationStatus } from '../../consts';
 
 type PrivateRouteProps = RouteProps & {
   authorizationStatus: AuthorizationStatus;

@@ -1,7 +1,7 @@
-import type { Offer, Offers } from '../../types';
+import type { Offer, Offers } from '../types';
 
-const oneOfferMock: Offer = {
-  bookmarks: false,
+export const oneOfferMock: Offer = {
+  bookmark: false,
   houseType: 'Apartment',
   id: '1',
   img: 'img/apartment-01.jpg',
@@ -10,8 +10,8 @@ const oneOfferMock: Offer = {
   title: 'Beautiful & luxurious apartment at great location',
 };
 
-const twoOfferMock: Offer = {
-  bookmarks: true,
+export const twoOfferMock: Offer = {
+  bookmark: true,
   houseType: 'Private room',
   id: '2',
   img: 'img/room.jpg',
@@ -20,8 +20,8 @@ const twoOfferMock: Offer = {
   title: 'Wood and stone place',
 };
 
-const threeOfferMock: Offer = {
-  bookmarks: false,
+export const threeOfferMock: Offer = {
+  bookmark: false,
   houseType: 'Apartment',
   id: '3',
   img: 'img/apartment-02.jpg',
@@ -30,7 +30,7 @@ const threeOfferMock: Offer = {
   title: 'Canal View Prinsengracht',
 };
 const fourOfferMock: Offer = {
-  bookmarks: false,
+  bookmark: false,
   houseType: 'Apartment',
   id: '4',
   img: 'img/apartment-03.jpg',
@@ -40,7 +40,7 @@ const fourOfferMock: Offer = {
 };
 
 const fiveOfferMock: Offer = {
-  bookmarks: true,
+  bookmark: true,
   houseType: 'Private room',
   id: '5',
   img: 'img/room.jpg',

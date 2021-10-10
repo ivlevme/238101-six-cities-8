@@ -1,5 +1,14 @@
+import { City } from '../consts';
+
+export type CommentUser = {
+  rating: string;
+  text: string;
+};
+
+export type Favorites = Map<City, Offers>;
+
 export type Offer = {
-  bookmarks: boolean;
+  bookmark: boolean;
   houseType: string;
   id: string;
   img: string;
