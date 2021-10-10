@@ -1,29 +1,42 @@
 import type { OfferCardProps } from './types';
 
+import { Link } from 'react-router-dom';
+
+import { createRouteToOffer } from '../../routes/helpers';
 import { Bookmarks } from '../index';
 
 function OfferCard({
   bookmarks,
   houseType,
+  id,
   img,
   premium,
   price,
   title,
+
+  onMouseEnter,
+  onMouseLeave,
 }: OfferCardProps): JSX.Element {
   const renderPremium = () =>
     premium ? (
       <div className='place-card__mark'>
         <span>Premium</span>
       </div>
-    ) : (
-      ''
-    );
+    ) : ('');
+
+  const handleOfferMouseEnter = () => {
+    onMouseEnter(id);
+  };
 
   return (
-    <article className='cities__place-card place-card'>
+    <article
+      className='cities__place-card place-card'
+      onMouseEnter={handleOfferMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       {renderPremium()}
       <div className='cities__image-wrapper place-card__image-wrapper'>
-        <a href='/'>
+        <Link to={createRouteToOffer(id)}>
           <img
             className='place-card__image'
             src={img}
@@ -31,7 +44,7 @@ function OfferCard({
             height='200'
             alt='Place'
           />
-        </a>
+        </Link>
       </div>
       <div className='place-card__info'>
         <div className='place-card__price-wrapper'>
@@ -49,7 +62,7 @@ function OfferCard({
           </div>
         </div>
         <h2 className='place-card__name'>
-          <a href='/'>{title}</a>
+          <Link to={createRouteToOffer(id)}>{title}</Link>
         </h2>
         <p className='place-card__type'>{houseType}</p>
       </div>

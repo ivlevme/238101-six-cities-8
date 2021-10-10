@@ -1,25 +1,29 @@
-import type { MainProps } from './types';
-import type { Offers } from '../../types';
+import { useState } from 'react';
 
-import { Header, OfferCard } from '../index';
+import type {
+  ActiveOfferState,
+  MainProps
+} from './types';
 
-import { offersMock } from './constants';
+import {
+  Header,
+  OfferList
+} from '../index';
 
-function Main({ countRentalOffers }: MainProps): JSX.Element {
-  const renderOffers = (offers: Offers) =>
-    offers.map(
-      (offer): JSX.Element => (
-        <OfferCard
-          key={offer.id}
-          bookmarks={offer.bookmarks}
-          houseType={offer.houseType}
-          img={offer.img}
-          premium={offer.premium}
-          price={offer.price}
-          title={offer.title}
-        />
-      ),
-    );
+function Main({
+  countRentalOffers,
+  offers,
+}: MainProps): JSX.Element {
+  const [activeOffer, setActiveOffer] = useState<ActiveOfferState>({
+    id: null,
+  });
+
+  const handleOfferMouseEnter = (id: string) => {
+    setActiveOffer({ id });
+  };
+  const handleOfferMouseLeave = () => {
+    setActiveOffer({ id: null });
+  };
 
   return (
     <div className='page page--gray page--main'>
@@ -98,12 +102,17 @@ function Main({ countRentalOffers }: MainProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <div className='cities__places-list places__list tabs__content'>
-                {renderOffers(offersMock)}
-              </div>
+              <OfferList
+                offers={offers}
+                onMouseEnter={handleOfferMouseEnter}
+                onMouseLeave={handleOfferMouseLeave}
+              />
             </section>
             <div className='cities__right-section'>
-              <section className='cities__map map'></section>
+              <section
+                data-active={activeOffer}
+                className='cities__map map'
+              />
             </div>
           </div>
         </div>

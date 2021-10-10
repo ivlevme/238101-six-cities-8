@@ -1,68 +1,57 @@
-import { Header } from '../index';
+import { Link } from 'react-router-dom';
 
-function Offer(): JSX.Element {
+import type { OfferProps } from './types';
+
+import { BookmarksText } from '../../consts';
+import {
+  CommentForm,
+  Header
+} from '../index';
+import { getRandomInteger } from '../../helpers';
+import { createRouteToOffer } from '../../routes/helpers';
+
+function Offer({ offer }: OfferProps): JSX.Element {
+  const renderImage = (key: number) => (
+    <div key={key} className='property__image-wrapper'>
+      <img className='property__image' src={offer.img} alt='Studio' />
+    </div>
+  );
+
+  const renderImages = () => (
+    <div className='property__gallery-container container'>
+      <div className='property__gallery'>
+        {
+          Array
+            .from({ length: 6 })
+            .map(() => renderImage(getRandomInteger()))
+        }
+      </div>
+    </div>
+  );
+
+  const renderPremiumMark = () =>
+    offer.premium ?
+      (
+        <div className='property__mark'>
+          <span>Premium</span>
+        </div>
+      ) : ('');
+
   return (
     <div className='page'>
       <Header />
       <main className='page__main page__main--property'>
         <section className='property'>
-          <div className='property__gallery-container container'>
-            <div className='property__gallery'>
-              <div className='property__image-wrapper'>
-                <img
-                  className='property__image'
-                  src='img/room.jpg'
-                  alt='Studio'
-                />
-              </div>
-              <div className='property__image-wrapper'>
-                <img
-                  className='property__image'
-                  src='img/apartment-01.jpg'
-                  alt='Studio'
-                />
-              </div>
-              <div className='property__image-wrapper'>
-                <img
-                  className='property__image'
-                  src='img/apartment-02.jpg'
-                  alt='Studio'
-                />
-              </div>
-              <div className='property__image-wrapper'>
-                <img
-                  className='property__image'
-                  src='img/apartment-03.jpg'
-                  alt='Studio'
-                />
-              </div>
-              <div className='property__image-wrapper'>
-                <img
-                  className='property__image'
-                  src='img/studio-01.jpg'
-                  alt='Studio'
-                />
-              </div>
-              <div className='property__image-wrapper'>
-                <img
-                  className='property__image'
-                  src='img/apartment-01.jpg'
-                  alt='Studio'
-                />
-              </div>
-            </div>
-          </div>
+          {renderImages()}
           <div className='property__container container'>
             <div className='property__wrapper'>
-              <div className='property__mark'>
-                <span>Premium</span>
-              </div>
+              {renderPremiumMark()}
               <div className='property__name-wrapper'>
-                <h1 className='property__name'>
-                  Beautiful &amp; luxurious studio at great location
-                </h1>
+                <h1 className='property__name'>{offer.title}</h1>
                 <button
-                  className='property__bookmark-button button'
+                  className={`property__bookmark-button ${
+                    offer.bookmark ? 'property__bookmark-button--active' : ''
+                  } button`}
                   type='button'
                 >
                   <svg
@@ -72,7 +61,13 @@ function Offer(): JSX.Element {
                   >
                     <use xlinkHref='#icon-bookmark'></use>
                   </svg>
-                  <span className='visually-hidden'>To bookmarks</span>
+                  <span className='visually-hidden'>
+                    {
+                      offer.bookmark
+                        ? BookmarksText.Active
+                        : BookmarksText.InActive
+                    }
+                  </span>
                 </button>
               </div>
               <div className='property__rating rating'>
@@ -86,7 +81,7 @@ function Offer(): JSX.Element {
               </div>
               <ul className='property__features'>
                 <li className='property__feature property__feature--entire'>
-                  Apartment
+                  {offer.houseType}
                 </li>
                 <li className='property__feature property__feature--bedrooms'>
                   3 Bedrooms
@@ -96,7 +91,7 @@ function Offer(): JSX.Element {
                 </li>
               </ul>
               <div className='property__price'>
-                <b className='property__price-value'>&euro;120</b>
+                <b className='property__price-value'>&euro;{offer.price}</b>
                 <span className='property__price-text'>&nbsp;night</span>
               </div>
               <div className='property__inside'>
@@ -178,121 +173,7 @@ function Offer(): JSX.Element {
                     </div>
                   </li>
                 </ul>
-                <form className='reviews__form form' action='#' method='post'>
-                  <label
-                    className='reviews__label form__label'
-                    htmlFor='review'
-                  >
-                    Your review
-                  </label>
-                  <div className='reviews__rating-form form__rating'>
-                    <input
-                      className='form__rating-input visually-hidden'
-                      name='rating'
-                      value='5'
-                      id='5-stars'
-                      type='radio'
-                    />
-                    <label
-                      htmlFor='5-stars'
-                      className='reviews__rating-label form__rating-label'
-                      title='perfect'
-                    >
-                      <svg className='form__star-image' width='37' height='33'>
-                        <use xlinkHref='#icon-star'></use>
-                      </svg>
-                    </label>
-
-                    <input
-                      className='form__rating-input visually-hidden'
-                      name='rating'
-                      value='4'
-                      id='4-stars'
-                      type='radio'
-                    />
-                    <label
-                      htmlFor='4-stars'
-                      className='reviews__rating-label form__rating-label'
-                      title='good'
-                    >
-                      <svg className='form__star-image' width='37' height='33'>
-                        <use xlinkHref='#icon-star'></use>
-                      </svg>
-                    </label>
-
-                    <input
-                      className='form__rating-input visually-hidden'
-                      name='rating'
-                      value='3'
-                      id='3-stars'
-                      type='radio'
-                    />
-                    <label
-                      htmlFor='3-stars'
-                      className='reviews__rating-label form__rating-label'
-                      title='not bad'
-                    >
-                      <svg className='form__star-image' width='37' height='33'>
-                        <use xlinkHref='#icon-star'></use>
-                      </svg>
-                    </label>
-
-                    <input
-                      className='form__rating-input visually-hidden'
-                      name='rating'
-                      value='2'
-                      id='2-stars'
-                      type='radio'
-                    />
-                    <label
-                      htmlFor='2-stars'
-                      className='reviews__rating-label form__rating-label'
-                      title='badly'
-                    >
-                      <svg className='form__star-image' width='37' height='33'>
-                        <use xlinkHref='#icon-star'></use>
-                      </svg>
-                    </label>
-
-                    <input
-                      className='form__rating-input visually-hidden'
-                      name='rating'
-                      value='1'
-                      id='1-star'
-                      type='radio'
-                    />
-                    <label
-                      htmlFor='1-star'
-                      className='reviews__rating-label form__rating-label'
-                      title='terribly'
-                    >
-                      <svg className='form__star-image' width='37' height='33'>
-                        <use xlinkHref='#icon-star'></use>
-                      </svg>
-                    </label>
-                  </div>
-                  <textarea
-                    className='reviews__textarea form__textarea'
-                    id='review'
-                    name='review'
-                    placeholder='Tell how was your stay, what you like and what can be improved'
-                  />
-                  <div className='reviews__button-wrapper'>
-                    <p className='reviews__help'>
-                      To submit review please make sure to set{' '}
-                      <span className='reviews__star'>rating</span> and describe
-                      your stay with at least{' '}
-                      <b className='reviews__text-amount'>50 characters</b>.
-                    </p>
-                    <button
-                      className='reviews__submit form__submit button'
-                      type='submit'
-                      disabled
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </form>
+                <CommentForm />
               </section>
             </div>
           </div>
@@ -400,7 +281,7 @@ function Offer(): JSX.Element {
 
               <article className='near-places__card place-card'>
                 <div className='near-places__image-wrapper place-card__image-wrapper'>
-                  <a href='/'>
+                  <Link to={createRouteToOffer('5')}>
                     <img
                       className='place-card__image'
                       src='img/apartment-03.jpg'
@@ -408,7 +289,7 @@ function Offer(): JSX.Element {
                       height='200'
                       alt='Place'
                     />
-                  </a>
+                  </Link>
                 </div>
                 <div className='place-card__info'>
                   <div className='place-card__price-wrapper'>
@@ -439,7 +320,9 @@ function Offer(): JSX.Element {
                     </div>
                   </div>
                   <h2 className='place-card__name'>
-                    <a href='/'>Nice, cozy, warm big bed apartment</a>
+                    <Link to={createRouteToOffer('5')}>
+                      Nice, cozy, warm big bed apartment
+                    </Link>
                   </h2>
                   <p className='place-card__type'>Apartment</p>
                 </div>

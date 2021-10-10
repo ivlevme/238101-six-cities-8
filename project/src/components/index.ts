@@ -1,7 +1,10 @@
 export { default as App } from './app/app';
-export { default as Bookmarks } from './bookmarks/bookmarks';
+export { default as Bookmarks } from './offer-card-bookmark/offer-card-bookmark';
+export { default as CommentForm } from './comment-form/comment-form';
 export { default as Favorites } from './favorites/favorites';
 export { default as FavoritesEmpty } from './favorites-empty/favorites-empty';
+export { default as FavoritesCard } from './favorites-card/favorites-card';
+export { default as FavoritesLocation } from './favorites-location/favorites-location';
 export { default as Footer } from './footer/footer';
 export { default as Header } from './header/header';
 export { default as Login } from './login/login';
@@ -11,5 +14,6 @@ export { default as MainEmpty } from './main-empty/main-empty';
 export { default as NotFoundScreen } from './not-found-screen/not-found-screen';
 export { default as OfferCard } from './offer-card/offer-card';
 export { default as Offer } from './offer/offer';
+export { default as OfferList } from './offer-list/offer-list';
 export { default as OfferNotLogged } from './offer-not-logged/offer-not-logged';
 export { default as PrivateRoute } from './private-route/private-route';

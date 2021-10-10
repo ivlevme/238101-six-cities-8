@@ -1,6 +1,7 @@
 import type { BookmarksProps } from './types';
 
-import { BookmarksClassName, BookmarksText } from './constants';
+import { BookmarksText } from '../../consts';
+import { BookmarksClassName } from './constants';
 import { createPlaceCardClassName } from './helpers';
 
 function Bookmarks({ active }: BookmarksProps): JSX.Element {
