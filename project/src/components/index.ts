@@ -11,6 +11,7 @@ export { default as Login } from './login/login';
 export { default as Logo } from './logo/logo';
 export { default as Main } from './main/main';
 export { default as MainEmpty } from './main-empty/main-empty';
+export { default as Map } from './map/map';
 export { default as NotFoundScreen } from './not-found-screen/not-found-screen';
 export { default as OfferCard } from './offer-card/offer-card';
 export { default as Offer } from './offer/offer';

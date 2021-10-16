@@ -1,20 +1,20 @@
 import { useState } from 'react';
 
-import type {
-  ActiveOfferState,
-  MainProps
-} from './types';
+import type { ActiveOffer } from '../../types';
+import type { MainProps } from './types';
 
 import {
   Header,
+  Map,
   OfferList
 } from '../index';
 
 function Main({
+  city,
   countRentalOffers,
   offers,
 }: MainProps): JSX.Element {
-  const [activeOffer, setActiveOffer] = useState<ActiveOfferState>({
+  const [activeOffer, setActiveOffer] = useState<ActiveOffer>({
     id: null,
   });
 
@@ -109,10 +109,13 @@ function Main({
               />
             </section>
             <div className='cities__right-section'>
-              <section
-                data-active={activeOffer}
-                className='cities__map map'
-              />
+              <section className='cities__map map'>
+                <Map
+                  activeOffer={activeOffer}
+                  city={city}
+                  offers={offers}
+                />
+              </section>
             </div>
           </div>
         </div>

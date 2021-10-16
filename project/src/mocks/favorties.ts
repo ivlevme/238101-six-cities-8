@@ -1,6 +1,6 @@
 import type { Favorites } from '../types';
 
-import { City } from '../consts';
+import { NameCity } from '../consts';
 import {
   oneOfferMock,
   threeOfferMock,
@@ -8,8 +8,8 @@ import {
 } from './offers';
 
 export const favoritesMock: Favorites = new Map();
-favoritesMock.set(City.Amsterdam, [
+favoritesMock.set(NameCity.Amsterdam, [
   oneOfferMock,
   twoOfferMock,
 ]);
-favoritesMock.set(City.Cologne, [threeOfferMock]);
+favoritesMock.set(NameCity.Cologne, [threeOfferMock]);

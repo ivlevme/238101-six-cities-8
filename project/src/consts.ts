@@ -9,7 +9,7 @@ export enum BookmarksText {
   InActive = 'To bookmarks',
 }
 
-export enum City {
+export enum NameCity {
   Paris = 'Paris',
   Cologne = 'Cologne',
   Brussels = 'Brussels',

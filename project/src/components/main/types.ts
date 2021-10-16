@@ -1,10 +1,7 @@
-import type { Offer } from '../../types';
+import type { City, Offers } from '../../types';
 
 export type MainProps = {
+  city: City;
   countRentalOffers: number;
-  offers: Offer[];
-};
-
-export type ActiveOfferState = {
-  id: null | string
+  offers: Offers;
 };

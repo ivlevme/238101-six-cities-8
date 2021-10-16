@@ -17,10 +17,11 @@ import {
 } from '../index';
 import { AppRoute } from '../../routes';
 import {
+  amsterdam,
+  favoritesMock,
   offersMock,
   oneOfferMock
-} from '../../mocks/offers';
-import { favoritesMock } from '../../mocks/favorties';
+} from '../../mocks';
 
 function App({ countRentalOffers }: AppProps): JSX.Element {
   return (
@@ -52,6 +53,7 @@ function App({ countRentalOffers }: AppProps): JSX.Element {
           <Main
             countRentalOffers={countRentalOffers}
             offers={offersMock}
+            city={amsterdam}
           />
         </Route>
         <Route>
