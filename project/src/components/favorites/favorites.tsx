@@ -1,7 +1,7 @@
 import type { FavoritesProps } from './types';
 import type { Offers } from '../../types';
 
-import { City } from '../../consts';
+import { NameCity } from '../../consts';
 import {
   FavoritesEmpty,
   FavoritesLocation,
@@ -14,7 +14,7 @@ const LOCATION_INDEX = 0;
 const OFFERS_INDEX = 1;
 
 function Favorites({ favorities }: FavoritesProps): JSX.Element {
-  const renderLocation = (location: City, offers: Offers) => (
+  const renderLocation = (location: NameCity, offers: Offers) => (
     <FavoritesLocation
       key={getRandomInteger()}
       location={location}

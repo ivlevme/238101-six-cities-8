@@ -1,10 +1,11 @@
 import type {
+  ActiveOffer,
   City,
   Offers
 } from '../../types';
 
-export type MainProps = {
+export type MapProps = {
+  activeOffer: ActiveOffer;
   city: City;
-  countRentalOffers: number;
   offers: Offers;
-};
+}
