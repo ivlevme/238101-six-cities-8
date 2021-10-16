@@ -1,7 +1,7 @@
 import type { Location } from './index';
 
 export type ActiveOffer = {
-  id: null | string
+  id: null | string;
 };
 
 export type Offer = {

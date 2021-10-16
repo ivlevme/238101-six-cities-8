@@ -1,4 +1,7 @@
-import type { Offer, Offers } from '../types';
+import type {
+  Offer,
+  Offers
+} from '../types';
 
 export const oneOfferMock: Offer = {
   bookmark: false,

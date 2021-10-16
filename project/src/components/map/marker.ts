@@ -1,6 +1,9 @@
 import { Icon } from 'leaflet';
 
-import type { ActiveOffer, Offer } from '../../types';
+import type {
+  ActiveOffer,
+  Offer
+} from '../../types';
 
 const defaultCustomIcon = new Icon({
   iconUrl: `${process.env.PUBLIC_URL}/img/pin.svg`,
