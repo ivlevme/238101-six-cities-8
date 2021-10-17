@@ -18,7 +18,9 @@ import {
 import { AppRoute } from '../../routes';
 import {
   amsterdam,
+  comments,
   favoritesMock,
+  nearbyOffersMock,
   offersMock,
   oneOfferMock
 } from '../../mocks';
@@ -32,7 +34,12 @@ function App({ countRentalOffers }: AppProps): JSX.Element {
           exact
           path={AppRoute.Offer}
         >
-          <Offer offer={oneOfferMock} />
+          <Offer
+            city={amsterdam}
+            comments={comments}
+            nearbyOffers={nearbyOffersMock}
+            offer={oneOfferMock}
+          />
         </PrivateRoute>
         <Route
           exact
@@ -51,9 +58,9 @@ function App({ countRentalOffers }: AppProps): JSX.Element {
           path={AppRoute.Main}
         >
           <Main
+            city={amsterdam}
             countRentalOffers={countRentalOffers}
             offers={offersMock}
-            city={amsterdam}
           />
         </Route>
         <Route>

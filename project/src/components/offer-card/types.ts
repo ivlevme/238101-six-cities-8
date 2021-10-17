@@ -1,12 +1,11 @@
-export type OfferCardProps = {
-  bookmarks: boolean;
-  houseType: string;
-  id: string;
-  img: string;
-  premium: boolean;
-  price: number;
-  title: string;
+import type {
+  HandleOfferMouseEnter,
+  HandleOfferMouseLeave,
+  Offer
+} from '../../types';
 
-  onMouseEnter: (id: string) => void;
-  onMouseLeave: () => void;
+export type OfferCardProps = {
+  offer: Offer;
+  onMouseEnter: HandleOfferMouseEnter;
+  onMouseLeave: HandleOfferMouseLeave;
 };

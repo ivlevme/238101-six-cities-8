@@ -6,26 +6,12 @@ import { createRouteToOffer } from '../../routes/helpers';
 import { Bookmarks } from '../index';
 
 function OfferCard({
-  bookmarks,
-  houseType,
-  id,
-  img,
-  premium,
-  price,
-  title,
-
+  offer,
   onMouseEnter,
   onMouseLeave,
 }: OfferCardProps): JSX.Element {
-  const renderPremium = () =>
-    premium ? (
-      <div className='place-card__mark'>
-        <span>Premium</span>
-      </div>
-    ) : ('');
-
   const handleOfferMouseEnter = () => {
-    onMouseEnter(id);
+    onMouseEnter(offer.id);
   };
 
   return (
@@ -34,12 +20,16 @@ function OfferCard({
       onMouseEnter={handleOfferMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {renderPremium()}
+      {offer.premium && (
+        <div className='place-card__mark'>
+          <span>Premium</span>
+        </div>
+      )}
       <div className='cities__image-wrapper place-card__image-wrapper'>
-        <Link to={createRouteToOffer(id)}>
+        <Link to={createRouteToOffer(offer.id)}>
           <img
             className='place-card__image'
-            src={img}
+            src={offer.img}
             width='260'
             height='200'
             alt='Place'
@@ -49,11 +39,10 @@ function OfferCard({
       <div className='place-card__info'>
         <div className='place-card__price-wrapper'>
           <div className='place-card__price'>
-            <b className='place-card__price-value'>&euro;{price}</b>
+            <b className='place-card__price-value'>&euro;{offer.price}</b>
             <span className='place-card__price-text'>&#47;&nbsp;night</span>
           </div>
-
-          <Bookmarks active={bookmarks} />
+          <Bookmarks active={offer.bookmark} />
         </div>
         <div className='place-card__rating rating'>
           <div className='place-card__stars rating__stars'>
@@ -62,9 +51,11 @@ function OfferCard({
           </div>
         </div>
         <h2 className='place-card__name'>
-          <Link to={createRouteToOffer(id)}>{title}</Link>
+          <Link to={createRouteToOffer(offer.id)}>
+            {offer.title}
+          </Link>
         </h2>
-        <p className='place-card__type'>{houseType}</p>
+        <p className='place-card__type'>{offer.houseType}</p>
       </div>
     </article>
   );

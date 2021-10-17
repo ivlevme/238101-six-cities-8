@@ -3,6 +3,8 @@ import type { Location } from './index';
 export type ActiveOffer = {
   id: null | string;
 };
+export type HandleOfferMouseEnter = (id: string) => void;
+export type HandleOfferMouseLeave = () => void;
 
 export type Offer = {
   bookmark: boolean;

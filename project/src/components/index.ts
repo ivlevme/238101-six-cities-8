@@ -1,6 +1,8 @@
 export { default as App } from './app/app';
 export { default as Bookmarks } from './offer-card-bookmark/offer-card-bookmark';
+export { default as Comment } from './comment/comment';
 export { default as CommentForm } from './comment-form/comment-form';
+export { default as Comments } from './comments/comments';
 export { default as Favorites } from './favorites/favorites';
 export { default as FavoritesEmpty } from './favorites-empty/favorites-empty';
 export { default as FavoritesCard } from './favorites-card/favorites-card';

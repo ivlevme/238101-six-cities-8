@@ -19,10 +19,10 @@ export enum NameCity {
 }
 
 export enum Rating {
-  NotDefined = '0',
-  Terribly = '1',
-  Badly = '2',
-  NotBad = '3',
-  Good = '4',
-  Perfect = '5',
+  NotDefined = 0,
+  Terribly = 1,
+  Badly = 2,
+  NotBad = 3,
+  Good = 4,
+  Perfect = 5,
 }
