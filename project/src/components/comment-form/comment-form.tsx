@@ -4,7 +4,10 @@ import { useState } from 'react';
 
 import { Rating } from '../../consts';
 
-import { initalComment, RADIX } from './consts';
+import {
+  initalComment,
+  RADIX
+} from './consts';
 
 function CommentForm(): JSX.Element {
   const [

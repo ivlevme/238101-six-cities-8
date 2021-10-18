@@ -5,8 +5,8 @@ import type {
 } from '../../types';
 
 export type OfferProps = {
-  city: City,
-  comments: Comment[],
-  nearbyOffers: Offer[]
+  city: City;
+  comments: Comment[];
+  nearbyOffers: Offer[];
   offer: Offer;
 };
