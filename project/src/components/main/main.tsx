@@ -1,8 +1,7 @@
-import { useState } from 'react';
-
-import type { ActiveOffer } from '../../types';
 import type { MainProps } from './types';
 
+import { initalActiveOffer } from './consts';
+import { useActiveOffer } from '../../hooks';
 import {
   Header,
   Map,
@@ -14,16 +13,11 @@ function Main({
   countRentalOffers,
   offers,
 }: MainProps): JSX.Element {
-  const [activeOffer, setActiveOffer] = useState<ActiveOffer>({
-    id: null,
-  });
-
-  const handleOfferMouseEnter = (id: string) => {
-    setActiveOffer({ id });
-  };
-  const handleOfferMouseLeave = () => {
-    setActiveOffer({ id: null });
-  };
+  const [
+    activeOffer,
+    handleOfferMouseEnter,
+    handleOfferMouseLeave,
+  ] = useActiveOffer(initalActiveOffer);
 
   return (
     <div className='page page--gray page--main'>

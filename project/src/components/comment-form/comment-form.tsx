@@ -1,23 +1,36 @@
 import type { ChangeEvent } from 'react';
+
 import { useState } from 'react';
 
 import { Rating } from '../../consts';
 
-import { initalComment } from './consts';
+import {
+  initalComment,
+  RADIX
+} from './consts';
 
 function CommentForm(): JSX.Element {
-  const [comment, setComment] = useState(initalComment);
+  const [
+    comment,
+    setComment,
+  ] = useState(initalComment);
 
   const isSubmitButtonDisabled =
     comment.rating === initalComment.rating ||
     comment.text === initalComment.text;
 
   const handleInputRadioChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    setComment((prevComment) => ({ ...prevComment, rating: evt.target.value }));
+    setComment((prevComment) => ({
+      ...prevComment,
+      rating: parseInt(evt.target.value, RADIX),
+    }));
   };
 
   const handleTextareaChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    setComment((prevComment) => ({ ...prevComment, text: evt.target.value }));
+    setComment((prevComment) => ({
+      ...prevComment,
+      text: evt.target.value,
+    }));
   };
 
   return (
@@ -36,7 +49,7 @@ function CommentForm(): JSX.Element {
         <input
           className='form__rating-input visually-hidden'
           name='rating'
-          value='5'
+          value={Rating.Perfect}
           id='5-stars'
           type='radio'
           onChange={handleInputRadioChange}
@@ -55,7 +68,7 @@ function CommentForm(): JSX.Element {
         <input
           className='form__rating-input visually-hidden'
           name='rating'
-          value='4'
+          value={Rating.Good}
           id='4-stars'
           type='radio'
           onChange={handleInputRadioChange}
@@ -74,7 +87,7 @@ function CommentForm(): JSX.Element {
         <input
           className='form__rating-input visually-hidden'
           name='rating'
-          value='3'
+          value={Rating.NotBad}
           id='3-stars'
           type='radio'
           onChange={handleInputRadioChange}
@@ -93,7 +106,7 @@ function CommentForm(): JSX.Element {
         <input
           className='form__rating-input visually-hidden'
           name='rating'
-          value='2'
+          value={Rating.Badly}
           id='2-stars'
           type='radio'
           onChange={handleInputRadioChange}
@@ -112,7 +125,7 @@ function CommentForm(): JSX.Element {
         <input
           className='form__rating-input visually-hidden'
           name='rating'
-          value='1'
+          value={Rating.Terribly}
           id='1-star'
           type='radio'
           onChange={handleInputRadioChange}

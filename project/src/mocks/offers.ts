@@ -77,6 +77,12 @@ const fiveOfferMock: Offer = {
   title: 'Wood and stone place',
 };
 
+export const nearbyOffersMock: Offer[] = [
+  threeOfferMock,
+  fourOfferMock,
+  fiveOfferMock,
+];
+
 export const offersMock: Offers = [
   oneOfferMock,
   twoOfferMock,

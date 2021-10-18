@@ -13,15 +13,9 @@ function OfferList({
         (offer): JSX.Element => (
           <OfferCard
             key={offer.id}
-            bookmarks={offer.bookmark}
-            houseType={offer.houseType}
-            id={offer.id}
-            img={offer.img}
+            offer={offer}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
-            premium={offer.premium}
-            price={offer.price}
-            title={offer.title}
           />
         ),
       )}
