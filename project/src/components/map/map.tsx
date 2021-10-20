@@ -1,6 +1,10 @@
-import { Marker } from 'leaflet';
+import {
+  LayerGroup,
+  Marker
+} from 'leaflet';
 import {
   useEffect,
+  useMemo,
   useRef
 } from 'react';
 
@@ -16,9 +20,19 @@ function Map({
 }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
+  const layerGroup = useMemo(() => new LayerGroup(), []);
 
   useEffect(() => {
     if (map) {
+      layerGroup.clearLayers();
+      map.flyTo(
+        [
+          city.location.latitude,
+          city.location.longitude,
+        ],
+        city.location.zoom,
+      );
+
       offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
@@ -27,12 +41,25 @@ function Map({
 
         marker
           .setIcon(getMarkerIcon(activeOffer, offer))
-          .addTo(map);
+          .removeFrom(map)
+          .addTo(layerGroup);
       });
-    }
-  }, [map, offers, activeOffer]);
 
-  return <div style={{height: '100%'}} ref={mapRef}></div>;
+      layerGroup.addTo(map);
+    }
+  }, [
+    activeOffer,
+    city,
+    layerGroup,
+    map,
+    offers,
+  ]);
+
+  return (
+    <div
+      style={{height: '100%'}}
+      ref={mapRef}
+    />);
 }
 
 export default Map;

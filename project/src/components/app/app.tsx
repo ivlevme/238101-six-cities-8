@@ -18,11 +18,11 @@ import {
 import { AppRoute } from '../../routes';
 import {
   amsterdam,
+  citiesMock,
   comments,
   favoritesMock,
   nearbyOffersMock,
-  offersMock,
-  oneOfferMock
+  threeOfferMock
 } from '../../mocks';
 
 function App({ countRentalOffers }: AppProps): JSX.Element {
@@ -38,7 +38,7 @@ function App({ countRentalOffers }: AppProps): JSX.Element {
             city={amsterdam}
             comments={comments}
             nearbyOffers={nearbyOffersMock}
-            offer={oneOfferMock}
+            offer={threeOfferMock}
           />
         </PrivateRoute>
         <Route
@@ -58,9 +58,8 @@ function App({ countRentalOffers }: AppProps): JSX.Element {
           path={AppRoute.Main}
         >
           <Main
-            city={amsterdam}
+            cities={citiesMock}
             countRentalOffers={countRentalOffers}
-            offers={offersMock}
           />
         </Route>
         <Route>

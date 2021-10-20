@@ -1,18 +1,37 @@
+import type { ConnectedProps } from 'react-redux';
+import { connect } from 'react-redux';
+
+import type { State } from '../../types';
 import type { MainProps } from './types';
 
 import { initalActiveOffer } from './consts';
 import { useActiveOffer } from '../../hooks';
 import {
+  CityList,
   Header,
   Map,
   OfferList
 } from '../index';
 
+const mapStateToProps = ({
+  city,
+  offers,
+}: State) => ({
+  city,
+  offers,
+});
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux & MainProps;
+
 function Main({
+  cities,
   city,
   countRentalOffers,
   offers,
-}: MainProps): JSX.Element {
+}: ConnectedComponentProps): JSX.Element {
   const [
     activeOffer,
     handleOfferMouseEnter,
@@ -25,50 +44,14 @@ function Main({
       <main className='page__main page__main--index'>
         <h1 className='visually-hidden'>Cities</h1>
         <div className='tabs'>
-          <section className='locations container'>
-            <ul className='locations__list tabs__list'>
-              <li className='locations__item'>
-                <a className='locations__item-link tabs__item' href='/'>
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className='locations__item'>
-                <a className='locations__item-link tabs__item' href='/'>
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className='locations__item'>
-                <a className='locations__item-link tabs__item' href='/'>
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className='locations__item'>
-                <a
-                  href='/'
-                  className='locations__item-link tabs__item tabs__item--active'
-                >
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className='locations__item'>
-                <a className='locations__item-link tabs__item' href='/'>
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className='locations__item'>
-                <a className='locations__item-link tabs__item' href='/'>
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
+          <CityList cities={cities}/>
         </div>
         <div className='cities'>
           <div className='cities__places-container container'>
             <section className='cities__places places'>
               <h2 className='visually-hidden'>Places</h2>
               <b className='places__found'>
-                {countRentalOffers} places to stay in Amsterdam
+                {countRentalOffers} places to stay in {city.name}
               </b>
               <form className='places__sorting' action='#' method='get'>
                 <span className='places__sorting-caption'>Sort by</span>
@@ -118,4 +101,5 @@ function Main({
   );
 }
 
-export default Main;
+export { Main };
+export default connector(Main);

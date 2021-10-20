@@ -1,8 +1,8 @@
-import type { Offers } from '../../types';
+import type { Offer } from '../../types';
 
 import { NameCity } from '../../consts';
 
 export type FavoritesLocationProps = {
   location: NameCity;
-  offers: Offers;
+  offers: Offer[];
 };

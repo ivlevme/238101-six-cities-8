@@ -1,5 +1,7 @@
 export { default as App } from './app/app';
 export { default as Bookmarks } from './offer-card-bookmark/offer-card-bookmark';
+export { default as CityItem } from './city-item/city-item';
+export { default as CityList } from './city-list/city-list';
 export { default as Comment } from './comment/comment';
 export { default as CommentForm } from './comment-form/comment-form';
 export { default as Comments } from './comments/comments';

@@ -16,5 +16,3 @@ export type Offer = {
   price: number;
   title: string;
 };
-
-export type Offers = Offer[];

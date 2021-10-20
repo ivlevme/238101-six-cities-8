@@ -1,11 +1,11 @@
 import type {
   ActiveOffer,
   City,
-  Offers
+  Offer
 } from '../../types';
 
 export type MapProps = {
   activeOffer: ActiveOffer;
   city: City;
-  offers: Offers;
+  offers: Offer[];
 }

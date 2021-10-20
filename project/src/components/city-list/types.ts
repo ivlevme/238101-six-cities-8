@@ -1,6 +1,5 @@
 import type { City } from '../../types';
 
-export type MainProps = {
+export type CityListProps = {
   cities: City[];
-  countRentalOffers: number;
 };
