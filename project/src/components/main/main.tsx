@@ -14,10 +14,10 @@ import {
 } from '../index';
 
 const mapStateToProps = ({
-  city,
+  activeCity,
   offers,
 }: State) => ({
-  city,
+  activeCity,
   offers,
 });
 
@@ -28,7 +28,7 @@ type ConnectedComponentProps = PropsFromRedux & MainProps;
 
 function Main({
   cities,
-  city,
+  activeCity,
   countRentalOffers,
   offers,
 }: ConnectedComponentProps): JSX.Element {
@@ -51,7 +51,7 @@ function Main({
             <section className='cities__places places'>
               <h2 className='visually-hidden'>Places</h2>
               <b className='places__found'>
-                {countRentalOffers} places to stay in {city.name}
+                {countRentalOffers} places to stay in {activeCity.name}
               </b>
               <form className='places__sorting' action='#' method='get'>
                 <span className='places__sorting-caption'>Sort by</span>
@@ -89,7 +89,7 @@ function Main({
               <section className='cities__map map'>
                 <Map
                   activeOffer={activeOffer}
-                  city={city}
+                  city={activeCity}
                   offers={offers}
                 />
               </section>

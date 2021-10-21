@@ -15,10 +15,7 @@ import {
   fillOffersAction
 } from '../../store/action';
 
-const mapStateToProps = ({ city }: State) => ({
-  acitveCity: city,
-});
-
+const mapStateToProps = ({ activeCity }: State) => ({ activeCity });
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
   onChangeCity(city: City) {
     dispatch(changeCityAction(city));
@@ -35,7 +32,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & CityItemProps;
 
 function CityItem({
-  acitveCity,
+  activeCity,
   city,
   onChangeCity,
 }: ConnectedComponentProps): JSX.Element {
@@ -47,7 +44,7 @@ function CityItem({
     <li className='locations__item'>
       <Link
         className={`locations__item-link tabs__item ${
-          acitveCity.name === city.name ? 'tabs__item--active' : ''
+          activeCity.name === city.name ? 'tabs__item--active' : ''
         }`}
         onClick={handleLinkCityClick}
         to='/'

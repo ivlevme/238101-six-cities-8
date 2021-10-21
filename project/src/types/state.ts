@@ -4,6 +4,6 @@ import type {
 } from './index';
 
 export type State = {
-  city: City;
+  activeCity: City;
   offers: Offer[];
 };

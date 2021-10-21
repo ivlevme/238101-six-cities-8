@@ -9,17 +9,15 @@ import {
 import { getOffersByCity } from '../offer';
 
 const initialState = {
-  city: paris,
+  activeCity: paris,
   offers: parisOffersMock,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
   switch (action.type) {
     case ActionType.ChangeCity:
-      return { ...state, city: action.payload };
+      return { ...state, activeCity: action.payload };
     case ActionType.FillOffers:
-
-
       return { ...state, offers: getOffersByCity(action.payload) };
     default:
       return state;
