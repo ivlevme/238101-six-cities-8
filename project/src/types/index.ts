@@ -1,3 +1,4 @@
+export type { Actions } from './action';
 export type { City } from './city';
 export type {
   Comment,
@@ -9,7 +10,7 @@ export type {
   ActiveOffer,
   HandleOfferMouseEnter,
   HandleOfferMouseLeave,
-  Offer,
-  Offers
+  Offer
 } from './offer';
+export type { State } from './state';
 export type { User } from './user';

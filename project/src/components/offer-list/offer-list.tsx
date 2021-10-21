@@ -7,9 +7,9 @@ function OfferList({
   onMouseEnter,
   onMouseLeave,
 }: OfferListProps): JSX.Element {
-  return (
-    <div className='cities__places-list places__list tabs__content'>
-      {offers.map(
+  const renderOffers = () => {
+    if (offers.length) {
+      return offers.map(
         (offer): JSX.Element => (
           <OfferCard
             key={offer.id}
@@ -18,7 +18,13 @@ function OfferList({
             onMouseLeave={onMouseLeave}
           />
         ),
-      )}
+      );
+    }
+    return <span>Offers not found</span>;
+  };
+  return (
+    <div className='cities__places-list places__list tabs__content'>
+      {renderOffers()}
     </div>
   );
 }

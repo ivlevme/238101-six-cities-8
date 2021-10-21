@@ -1,7 +1,4 @@
-import type {
-  Offer,
-  Offers
-} from '../types';
+import type { Offer } from '../types';
 
 export const oneOfferMock: Offer = {
   bookmark: false,
@@ -9,8 +6,8 @@ export const oneOfferMock: Offer = {
   id: '1',
   img: 'img/apartment-01.jpg',
   location: {
-    latitude: 52.3909553943508,
-    longitude: 4.85309666406198,
+    latitude: 40.835292,
+    longitude: -73.916236,
     zoom: 8,
   },
   premium: true,
@@ -24,8 +21,8 @@ export const twoOfferMock: Offer = {
   id: '2',
   img: 'img/room.jpg',
   location: {
-    latitude: 52.369553943508,
-    longitude: 4.85309666406198,
+    latitude: 40.935292,
+    longitude: -73.816236,
     zoom: 8,
   },
   premium: false,
@@ -78,15 +75,16 @@ const fiveOfferMock: Offer = {
 };
 
 export const nearbyOffersMock: Offer[] = [
-  threeOfferMock,
   fourOfferMock,
   fiveOfferMock,
 ];
 
-export const offersMock: Offers = [
+export const amsterdamOffersMock: Offer[] = [
+  fiveOfferMock,
+  fourOfferMock,
+];
+
+export const parisOffersMock: Offer[] = [
   oneOfferMock,
   twoOfferMock,
-  threeOfferMock,
-  fourOfferMock,
-  fiveOfferMock,
 ];

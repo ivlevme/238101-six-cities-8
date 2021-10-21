@@ -1,10 +1,19 @@
-export { amsterdam } from './cities';
+export {
+  amsterdam,
+  brussels,
+  cologne,
+  dusseldorf,
+  humburg,
+  paris,
+  citiesMock
+} from './cities';
 export { comments } from './comments';
 export { favoritesMock } from './favorties';
 export {
+  amsterdamOffersMock,
   nearbyOffersMock,
-  offersMock,
   oneOfferMock,
+  parisOffersMock,
   threeOfferMock,
   twoOfferMock
 } from './offers';

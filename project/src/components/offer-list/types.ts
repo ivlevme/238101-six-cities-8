@@ -1,11 +1,11 @@
 import type {
   HandleOfferMouseEnter,
   HandleOfferMouseLeave,
-  Offers
+  Offer
 } from '../../types';
 
 export type OfferListProps = {
-  offers: Offers;
+  offers: Offer[];
   onMouseEnter: HandleOfferMouseEnter;
   onMouseLeave: HandleOfferMouseLeave;
 };
