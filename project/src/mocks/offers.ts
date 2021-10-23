@@ -12,6 +12,7 @@ export const oneOfferMock: Offer = {
   },
   premium: true,
   price: 120,
+  rating: 3.2,
   title: 'Beautiful & luxurious apartment at great location',
 };
 
@@ -27,6 +28,7 @@ export const twoOfferMock: Offer = {
   },
   premium: false,
   price: 80,
+  rating: 1.6,
   title: 'Wood and stone place',
 };
 
@@ -42,6 +44,7 @@ export const threeOfferMock: Offer = {
   },
   premium: false,
   price: 132,
+  rating: 4.1,
   title: 'Canal View Prinsengracht',
 };
 const fourOfferMock: Offer = {
@@ -56,6 +59,7 @@ const fourOfferMock: Offer = {
   },
   premium: true,
   price: 180,
+  rating: 2.5,
   title: 'Nice, cozy, warm big bed apartment',
 };
 
@@ -71,6 +75,7 @@ const fiveOfferMock: Offer = {
   },
   premium: false,
   price: 80,
+  rating: 1,
   title: 'Wood and stone place',
 };
 

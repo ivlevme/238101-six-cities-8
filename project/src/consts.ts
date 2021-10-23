@@ -26,3 +26,21 @@ export enum Rating {
   Good = 4,
   Perfect = 5,
 }
+
+export const RatingStyleWidth = {
+  0: '0%',
+  1: '20%',
+  2: '40%',
+  3: '60%',
+  4: '80%',
+  5: '100%',
+} as const;
+
+export enum Sorting {
+  Popular = 'Popular',
+  PriceHigh = 'Price: high to low',
+  PriceLow = 'Price: low to high',
+  TopRated = 'Top rated first',
+}
+
+
