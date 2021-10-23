@@ -21,11 +21,21 @@ const initialState: State = {
 const reducer = (state: State = initialState, action: Actions): State => {
   switch (action.type) {
     case ActionType.ChangeCity:
-      return { ...state, activeCity: action.payload };
+      return {
+        ...state,
+        activeCity: action.payload,
+      };
     case ActionType.FillOffers:
-      return { ...state, offers: getOffersByCity(action.payload) };
+      return {
+        ...state,
+        offers: getOffersByCity(action.payload),
+      };
     case ActionType.ChangeSorting:
-      return { ...state, sorting:  action.payload, offers: getOffersBySorting(action.payload, state.offers)};
+      return {
+        ...state,
+        sorting: action.payload,
+        offers: getOffersBySorting(action.payload, state.offers),
+      };
     default:
       return state;
   }
