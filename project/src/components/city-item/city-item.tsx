@@ -12,14 +12,26 @@ import type {
 } from '../../types';
 import {
   changeCityAction,
+  changeSortingAction,
   fillOffersAction
 } from '../../store/action';
+import { Sorting } from '../../consts';
 
-const mapStateToProps = ({ activeCity }: State) => ({ activeCity });
+const mapStateToProps = ({
+  activeCity,
+  sorting,
+}: State) => ({
+  activeCity,
+  sorting,
+});
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
-  onChangeCity(city: City) {
+  onChangeCity(
+    city: City,
+    sorting: Sorting,
+  ) {
     dispatch(changeCityAction(city));
     dispatch(fillOffersAction(city));
+    dispatch(changeSortingAction(sorting));
   },
 });
 
@@ -35,9 +47,13 @@ function CityItem({
   activeCity,
   city,
   onChangeCity,
+  sorting,
 }: ConnectedComponentProps): JSX.Element {
   const handleLinkCityClick = () => {
-    onChangeCity(city);
+    onChangeCity(
+      city,
+      sorting,
+    );
   };
 
   return (

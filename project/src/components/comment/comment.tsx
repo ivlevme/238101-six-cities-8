@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 
 import type { CommentProps } from './types';
 
-import { RatingStyleWidth } from './consts';
+import { getCalcRating } from '../../helpers';
 
 function Comment({ comment }: CommentProps): JSX.Element {
   return (
@@ -25,7 +25,7 @@ function Comment({ comment }: CommentProps): JSX.Element {
           <div className='reviews__stars rating__stars'>
             <span
               style={{
-                width: RatingStyleWidth[comment.rating],
+                width: getCalcRating(comment.rating),
               }}
             />
             <span className='visually-hidden'>Rating</span>

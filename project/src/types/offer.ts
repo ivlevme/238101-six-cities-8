@@ -14,5 +14,6 @@ export type Offer = {
   location: Location;
   premium: boolean;
   price: number;
+  rating: number;
   title: string;
 };

@@ -22,3 +22,5 @@ export { default as Offer } from './offer/offer';
 export { default as OfferList } from './offer-list/offer-list';
 export { default as OfferNotLogged } from './offer-not-logged/offer-not-logged';
 export { default as PrivateRoute } from './private-route/private-route';
+export { default as SortingItem } from './sorting-item/sorting-item';
+export { default as SortingOptions } from './sorting-options/sorting-options';

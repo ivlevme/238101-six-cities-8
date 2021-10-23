@@ -1,3 +1,4 @@
+import { Sorting } from '../consts';
 import type {
   City,
   Offer
@@ -6,4 +7,5 @@ import type {
 export type State = {
   activeCity: City;
   offers: Offer[];
+  sorting: Sorting;
 };

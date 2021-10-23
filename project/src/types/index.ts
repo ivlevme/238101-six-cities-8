@@ -12,5 +12,6 @@ export type {
   HandleOfferMouseLeave,
   Offer
 } from './offer';
+export type { RatingRange } from './rating';
 export type { State } from './state';
 export type { User } from './user';
