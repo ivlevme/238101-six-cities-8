@@ -4,9 +4,12 @@ import {
   Switch
 } from 'react-router-dom';
 
-import type { AppProps } from './types';
+import type { ConnectedProps } from 'react-redux';
+import { connect } from 'react-redux';
 
-import { AuthorizationStatus } from '../../consts';
+import type { State } from '../../types';
+
+import { cities } from '../../consts';
 import {
   Favorites,
   Login,
@@ -17,28 +20,50 @@ import {
 } from '../index';
 import { AppRoute } from '../../routes';
 import {
-  amsterdam,
-  citiesMock,
   comments,
-  favoritesMock,
-  nearbyOffersMock,
-  threeOfferMock
+  favoritesMock
 } from '../../mocks';
 
-function App({ countRentalOffers }: AppProps): JSX.Element {
+const INDEX_FIRST_OFFER = 0;
+const COUNT_NEARBY_OFFERS = 3;
+
+const mapStateToProps = ({
+  activeCity,
+  authorizationStatus,
+  offersByCity,
+}: State) => ({
+  activeCity,
+  authorizationStatus,
+  offersByCity,
+});
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+function App({
+  activeCity,
+  authorizationStatus,
+  offersByCity,
+}: PropsFromRedux): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
         <PrivateRoute
-          authorizationStatus={AuthorizationStatus.Auth}
+          authorizationStatus={authorizationStatus}
           exact
           path={AppRoute.Offer}
         >
           <Offer
-            city={amsterdam}
+            city={activeCity}
             comments={comments}
-            nearbyOffers={nearbyOffersMock}
-            offer={threeOfferMock}
+            nearbyOffers={
+              offersByCity.slice(
+                INDEX_FIRST_OFFER,
+                COUNT_NEARBY_OFFERS,
+              )
+            }
+            offer={offersByCity[INDEX_FIRST_OFFER]}
           />
         </PrivateRoute>
         <Route
@@ -58,8 +83,7 @@ function App({ countRentalOffers }: AppProps): JSX.Element {
           path={AppRoute.Main}
         >
           <Main
-            cities={citiesMock}
-            countRentalOffers={countRentalOffers}
+            cities={cities}
           />
         </Route>
         <Route>
@@ -70,4 +94,5 @@ function App({ countRentalOffers }: AppProps): JSX.Element {
   );
 }
 
-export default App;
+export { App };
+export default connector(App);

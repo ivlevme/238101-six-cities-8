@@ -16,10 +16,10 @@ import {
 
 const mapStateToProps = ({
   activeCity,
-  offers,
+  offersByCity,
 }: State) => ({
   activeCity,
-  offers,
+  offers: offersByCity,
 });
 
 const connector = connect(mapStateToProps);
@@ -30,7 +30,6 @@ type ConnectedComponentProps = PropsFromRedux & MainProps;
 function Main({
   cities,
   activeCity,
-  countRentalOffers,
   offers,
 }: ConnectedComponentProps): JSX.Element {
   const [
@@ -52,7 +51,7 @@ function Main({
             <section className='cities__places places'>
               <h2 className='visually-hidden'>Places</h2>
               <b className='places__found'>
-                {countRentalOffers} places to stay in {activeCity.name}
+                {offers.length} places to stay in {activeCity.name}
               </b>
               <SortingOptions />
               <OfferList

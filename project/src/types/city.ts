@@ -2,7 +2,7 @@ import type { NameCity } from '../consts';
 import type { Location } from './index';
 
 export type City = {
-  id: string;
+  id: number;
   location: Location;
   name: NameCity;
 };

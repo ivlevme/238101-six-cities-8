@@ -1,6 +1,6 @@
 import type { BookmarksProps } from './types';
 
-import { BookmarksText } from '../../consts';
+import { BookmarkText } from '../../consts';
 import { BookmarksClassName } from './constants';
 import { createPlaceCardClassName } from './helpers';
 
@@ -11,7 +11,7 @@ function Bookmarks({ active }: BookmarksProps): JSX.Element {
       : createPlaceCardClassName('');
 
   const renderBookmarksText = () =>
-    active ? BookmarksText.Active : BookmarksText.InActive;
+    active ? BookmarkText.Active : BookmarkText.InActive;
 
   return (
     <button className={renderPlaceCardClassName()} type='button'>

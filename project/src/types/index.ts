@@ -10,7 +10,8 @@ export type {
   ActiveOffer,
   HandleOfferMouseEnter,
   HandleOfferMouseLeave,
-  Offer
+  Offer,
+  OfferBackend
 } from './offer';
 export type { RatingRange } from './rating';
 export type { State } from './state';

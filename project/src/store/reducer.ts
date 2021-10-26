@@ -1,20 +1,24 @@
 import type { Actions } from '../types/action';
-import { Sorting } from '../consts';
+import {
+  AuthorizationStatus,
+  Sorting
+} from '../consts';
 import type { State } from '../types';
 
 import { ActionType } from './action';
-import {
-  paris,
-  parisOffersMock
-} from '../mocks';
+import { paris } from '../consts';
 import {
   getOffersByCity,
   getOffersBySorting
 } from '../helpers';
+import { getConvertedOffers } from '../adapter';
 
 const initialState: State = {
   activeCity: paris,
-  offers: parisOffersMock,
+  allOffers: [],
+  authorizationStatus: AuthorizationStatus.Unknown,
+  isDataLoaded: false,
+  offersByCity: [],
   sorting: Sorting.Popular,
 };
 
@@ -28,13 +32,31 @@ const reducer = (state: State = initialState, action: Actions): State => {
     case ActionType.FillOffers:
       return {
         ...state,
-        offers: getOffersByCity(action.payload),
+        offersByCity: getOffersByCity(action.payload, state.allOffers),
       };
     case ActionType.ChangeSorting:
       return {
         ...state,
         sorting: action.payload,
-        offers: getOffersBySorting(action.payload, state.offers),
+        offersByCity: action.payload === Sorting.Popular
+          ? getOffersByCity(state.activeCity.name, state.allOffers)
+          : getOffersBySorting(action.payload, state.offersByCity),
+      };
+    case ActionType.LoadCities:
+      return {
+        ...state,
+        isDataLoaded: true,
+        allOffers: getConvertedOffers(action.payload),
+      };
+    case ActionType.RequireAuthorization:
+      return {
+        ...state,
+        authorizationStatus: action.payload,
+      };
+    case ActionType.RequireLogout:
+      return {
+        ...state,
+        authorizationStatus: AuthorizationStatus.NoAuth,
       };
     default:
       return state;
