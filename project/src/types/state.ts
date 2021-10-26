@@ -10,7 +10,7 @@ import type {
 export type State = {
   activeCity: City;
   allOffers: Offer[];
-  authorizationStatus: AuthorizationStatus,
+  authorizationStatus: AuthorizationStatus;
   isDataLoaded: boolean;
   offersByCity: Offer[];
   sorting: Sorting;

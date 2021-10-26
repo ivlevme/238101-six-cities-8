@@ -29,7 +29,7 @@ export type OfferBackend = {
   'city': {
     'location': Location;
     'name': string;
-  },
+  };
   'description': string;
   'goods': string[];
   'host': {
@@ -37,7 +37,7 @@ export type OfferBackend = {
     'id': number;
     'is_pro': boolean;
     'name': string;
-  },
+  };
   'id': number;
   'images': string[];
   'is_favorite': boolean;
@@ -47,6 +47,6 @@ export type OfferBackend = {
   'preview_image': string;
   'price': number;
   'rating': number;
-  'title': string,
-  'type': Housing
+  'title': string;
+  'type': Housing;
 };
