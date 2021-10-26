@@ -1,4 +1,7 @@
+/**
+ * @type {AuthData} - Auth data type for auth user
+ * */
 export type AuthData = {
-  login: string;
+  email: string;
   password: string;
 };

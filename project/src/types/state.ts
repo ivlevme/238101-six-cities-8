@@ -7,6 +7,9 @@ import type {
   Offer
 } from './index';
 
+/**
+ * @type {State} - Redux store type
+ * */
 export type State = {
   activeCity: City;
   allOffers: Offer[];

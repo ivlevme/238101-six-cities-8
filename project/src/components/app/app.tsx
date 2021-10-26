@@ -1,5 +1,5 @@
 import {
-  BrowserRouter,
+  Router as BrowserRouter,
   Route,
   Switch
 } from 'react-router-dom';
@@ -9,7 +9,11 @@ import { connect } from 'react-redux';
 
 import type { State } from '../../types';
 
-import { cities } from '../../consts';
+import { browserHistory } from '../../browser-history';
+import {
+  AuthorizationStatus,
+  cities
+} from '../../consts';
 import {
   Favorites,
   Login,
@@ -47,7 +51,7 @@ function App({
   offersByCity,
 }: PropsFromRedux): JSX.Element {
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <PrivateRoute
           authorizationStatus={authorizationStatus}
@@ -72,12 +76,18 @@ function App({
         >
           <Favorites favorities={favoritesMock} />
         </Route>
-        <Route
-          exact
-          path={AppRoute.Login}
-        >
-          <Login />
-        </Route>
+        {
+          authorizationStatus !== AuthorizationStatus.Auth
+            &&
+            (
+              <Route
+                exact
+                path={AppRoute.Login}
+              >
+                <Login />
+              </Route>
+            )
+        }
         <Route
           exact
           path={AppRoute.Main}
