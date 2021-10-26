@@ -20,6 +20,7 @@ export { default as NotFoundScreen } from './not-found-screen/not-found-screen';
 export { default as OfferCard } from './offer-card/offer-card';
 export { default as Offer } from './offer/offer';
 export { default as OfferList } from './offer-list/offer-list';
+export { default as OfferLoadingScreen } from './offer-loading-screen/offer-loading-screen';
 export { default as OfferNotLogged } from './offer-not-logged/offer-not-logged';
 export { default as PrivateRoute } from './private-route/private-route';
 export { default as SortingItem } from './sorting-item/sorting-item';

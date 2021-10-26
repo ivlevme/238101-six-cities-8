@@ -1,23 +1,42 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import {
+  applyMiddleware,
+  createStore
+} from 'redux';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { App } from './components';
 import { reducer } from './store/reducer';
+import type { ThunkAppDispatch } from './types/action';
+import { createAPI } from './api';
+import { requireAuthorization } from './store/action';
+import { AuthorizationStatus } from './consts';
+import {
+  checkAuthAction,
+  fetchOffersAction
+} from './store/api-actions';
+
+const api = createAPI(
+  () => store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth)),
+);
 
 const store = createStore(
   reducer,
-  composeWithDevTools(),
+  composeWithDevTools(
+    applyMiddleware(thunk.withExtraArgument(api)),
+  ),
 );
 
-const countRentalOffers = 312;
+(store.dispatch as ThunkAppDispatch)(checkAuthAction());
+(store.dispatch as ThunkAppDispatch)(fetchOffersAction());
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App countRentalOffers={countRentalOffers} />
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

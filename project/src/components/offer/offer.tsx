@@ -1,7 +1,7 @@
 import type { ActiveOffer } from '../../types';
 import type { OfferProps } from './types';
 
-import { BookmarksText } from '../../consts';
+import { BookmarkText } from '../../consts';
 import {
   CommentForm,
   Comments,
@@ -84,8 +84,8 @@ function Offer({
                   </svg>
                   <span className='visually-hidden'>
                     {offer.bookmark
-                      ? BookmarksText.Active
-                      : BookmarksText.InActive}
+                      ? BookmarkText.Active
+                      : BookmarkText.InActive}
                   </span>
                 </button>
               </div>

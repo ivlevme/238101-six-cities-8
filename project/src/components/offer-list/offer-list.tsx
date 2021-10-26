@@ -1,12 +1,35 @@
+import type { ConnectedProps } from 'react-redux';
+import { connect } from 'react-redux';
+
+import type { State } from '../../types';
 import type { OfferListProps } from './types';
 
-import { OfferCard } from '../index';
+import {
+  OfferLoadingScreen,
+  OfferCard
+} from '../index';
+import { isCheckedAuth } from '../../helpers';
+
+const mapStateToProps = ({
+  authorizationStatus,
+  isDataLoaded,
+}: State) => ({
+  authorizationStatus,
+  isDataLoaded,
+});
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux & OfferListProps;
 
 function OfferList({
+  authorizationStatus,
+  isDataLoaded,
   offers,
   onMouseEnter,
   onMouseLeave,
-}: OfferListProps): JSX.Element {
+}: ConnectedComponentProps): JSX.Element {
   const renderOffers = () => {
     if (offers.length) {
       return offers.map(
@@ -22,11 +45,17 @@ function OfferList({
     }
     return <span>Offers not found</span>;
   };
+
   return (
     <div className='cities__places-list places__list tabs__content'>
-      {renderOffers()}
+      {
+        isCheckedAuth(authorizationStatus) || !isDataLoaded
+          ? (<OfferLoadingScreen />)
+          : (renderOffers())
+      }
     </div>
   );
 }
 
-export default OfferList;
+export { OfferList };
+export default connector(OfferList);

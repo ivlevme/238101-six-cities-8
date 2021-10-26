@@ -1,1 +1,1 @@
-export const createRouteToOffer = (id: string): string => `/offer/${id}`;
+export const createRouteToOffer = (id: number): string => `/offer/${id}`;

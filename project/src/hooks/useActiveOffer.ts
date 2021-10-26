@@ -15,7 +15,7 @@ function useActiveOffer(
 ] {
   const [activeOffer, setActiveOffer] = useState(defaultActiveOffer);
 
-  const handleOfferMouseEnter = (id: string) => {
+  const handleOfferMouseEnter = (id: number) => {
     setActiveOffer({ id });
   };
   const handleOfferMouseLeave = () => {

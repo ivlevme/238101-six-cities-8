@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
     sorting: Sorting,
   ) {
     dispatch(changeCityAction(city));
-    dispatch(fillOffersAction(city));
+    dispatch(fillOffersAction(city.name));
     dispatch(changeSortingAction(sorting));
   },
 });
