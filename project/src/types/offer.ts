@@ -24,6 +24,9 @@ export type Offer = {
   title: string;
 };
 
+/**
+ * @type {OfferBackend} - Offer Backend type for offers from remote server
+ * */
 export type OfferBackend = {
   'bedrooms': number;
   'city': {

@@ -8,18 +8,23 @@ import {
   changeCityAction,
   changeSortingAction,
   fillOffersAction,
-  loadCitiesAction,
+  loadOffersAction,
+  redirectToRoute,
   requireAuthorization,
   requireLogout
 } from '../store/action';
 
+/**
+ * @type {Actions} - Redux Actions type
+ * */
 export type Actions =
   | ReturnType<typeof changeCityAction>
   | ReturnType<typeof changeSortingAction>
   | ReturnType<typeof fillOffersAction>
-  | ReturnType<typeof loadCitiesAction>
+  | ReturnType<typeof loadOffersAction>
   | ReturnType<typeof requireAuthorization>
-  | ReturnType<typeof requireLogout>;
+  | ReturnType<typeof requireLogout>
+  | ReturnType<typeof redirectToRoute>;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Actions>;
 export type ThunkAppDispatch = ThunkDispatch<State, AxiosInstance, Actions>;

@@ -16,3 +16,4 @@ export {
   RatingStyleWidth
 } from './rating';
 export { Sorting } from './sort';
+export { FailAuthlMessage } from './toast';

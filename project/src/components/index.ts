@@ -1,3 +1,4 @@
+export { default as AuthUserNav } from './auth-user-nav/auth-user-nav';
 export { default as App } from './app/app';
 export { default as Bookmarks } from './offer-card-bookmark/offer-card-bookmark';
 export { default as CityItem } from './city-item/city-item';
@@ -25,3 +26,4 @@ export { default as OfferNotLogged } from './offer-not-logged/offer-not-logged';
 export { default as PrivateRoute } from './private-route/private-route';
 export { default as SortingItem } from './sorting-item/sorting-item';
 export { default as SortingOptions } from './sorting-options/sorting-options';
+export { default as UnauthUserNav } from './unauth-user-nav/unauth-user-nav';
