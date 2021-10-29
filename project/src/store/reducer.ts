@@ -11,13 +11,22 @@ import {
   getOffersByCity,
   getOffersBySorting
 } from '../helpers';
-import { getConvertedOffers } from '../adapter';
+import {
+  getConvertedComments,
+  getConvertedOffer,
+  getConvertedOffers
+} from '../adapter';
+import {  } from '../adapter/offer';
 
 const initialState: State = {
   activeCity: paris,
   allOffers: [],
   authorizationStatus: AuthorizationStatus.Unknown,
+  comments: [],
+  email: '',
   isDataLoaded: false,
+  nearbyOffers: [],
+  offer: null,
   offersByCity: [],
   sorting: Sorting.Popular,
 };
@@ -29,10 +38,10 @@ const reducer = (state: State = initialState, action: Actions): State => {
         ...state,
         activeCity: action.payload,
       };
-    case ActionType.FillOffers:
+    case ActionType.ChangeLoadingStatus:
       return {
         ...state,
-        offersByCity: getOffersByCity(action.payload, state.allOffers),
+        isDataLoaded: action.payload,
       };
     case ActionType.ChangeSorting:
       return {
@@ -42,11 +51,43 @@ const reducer = (state: State = initialState, action: Actions): State => {
           ? getOffersByCity(state.activeCity.name, state.allOffers)
           : getOffersBySorting(action.payload, state.offersByCity),
       };
-    case ActionType.LoadCities:
+    case ActionType.ChangeUserInfo:
+      return {
+        ...state,
+        email: action.payload,
+      };
+    case ActionType.ClearOfferAction:
+      return {
+        ...state,
+        offer: null,
+      };
+    case ActionType.FillOffers:
+      return {
+        ...state,
+        offersByCity: getOffersByCity(action.payload, state.allOffers),
+      };
+    case ActionType.LoadComments:
+      return {
+        ...state,
+        comments: getConvertedComments(action.payload),
+      };
+    case ActionType.LoadNearbyOffers:
       return {
         ...state,
         isDataLoaded: true,
+        nearbyOffers: getConvertedOffers(action.payload),
+      };
+    case ActionType.LoadOffers:
+      return {
+        ...state,
         allOffers: getConvertedOffers(action.payload),
+        isDataLoaded: true,
+      };
+    case ActionType.LoadOffer:
+      return {
+        ...state,
+        isDataLoaded: true,
+        offer: getConvertedOffer(action.payload),
       };
     case ActionType.RequireAuthorization:
       return {

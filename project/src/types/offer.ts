@@ -1,24 +1,34 @@
-import type { Location } from './index';
+import type {
+  Host,
+  Location,
+  UserBackend
+} from './index';
 
 import { Housing } from '../consts';
 
 export type ActiveOffer = {
-  id: null | number;
+  id: null | OfferId;
 };
 export type HandleOfferMouseEnter = (id: number) => void;
 export type HandleOfferMouseLeave = () => void;
 
 export type Offer = {
+  bedrooms: number;
+  bookmark: boolean;
+  description: string;
   city: {
     name: string;
     location: Location;
   }
-  bookmark: boolean;
+  goods: string[];
+  host: Host;
   houseType: string;
-  id: number;
-  img: string;
+  id: OfferId;
+  images: string[];
   location: Location;
+  maxAdults: number;
   premium: boolean;
+  previewImg: string;
   price: number;
   rating: number;
   title: string;
@@ -35,12 +45,7 @@ export type OfferBackend = {
   };
   'description': string;
   'goods': string[];
-  'host': {
-    'avatar_url': string;
-    'id': number;
-    'is_pro': boolean;
-    'name': string;
-  };
+  'host': UserBackend;
   'id': number;
   'images': string[];
   'is_favorite': boolean;
@@ -53,3 +58,5 @@ export type OfferBackend = {
   'title': string;
   'type': Housing;
 };
+
+export type OfferId = number;

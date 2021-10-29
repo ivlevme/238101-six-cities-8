@@ -1,55 +1,117 @@
-import type { ActiveOffer } from '../../types';
-import type { OfferProps } from './types';
+import { useEffect } from 'react';
 
-import { BookmarkText } from '../../consts';
+import type { ConnectedProps } from 'react-redux';
+import { connect } from 'react-redux';
+
+import { useParams } from 'react-router';
+
+import type {
+  OfferId,
+  State
+} from '../../types';
+import type {
+  OfferProps,
+  Param
+} from './types';
+import type { ThunkAppDispatch } from '../../types/action';
+
+import {
+  AuthorizationStatus,
+  BookmarkText,
+  RADIX
+} from '../../consts';
 import {
   CommentForm,
   Comments,
   Header,
   Map,
-  OfferCard
+  OfferCard,
+  OfferGood,
+  OfferPromoImage
 } from '../index';
-import { getRandomInteger } from '../../helpers';
+import { getCalcRating } from '../../helpers';
 import { useActiveOffer } from '../../hooks';
 
+import {
+  fetchCommentsAction,
+  fetchNearbyOfferAction,
+  fetchOfferAction
+} from '../../store/api-actions';
+import { clearOfferAction } from '../../store/action';
+import { PromoImage } from './const';
 
-function Offer({
+const mapStateToProps = ({
+  authorizationStatus,
+  comments,
+  nearbyOffers,
+  offer,
+}: State) => ({
+  authorizationStatus,
+  comments,
+  nearbyOffers,
+  offer,
+});
+
+const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  onLoadOffer(id: OfferId) {
+    dispatch(fetchOfferAction(id));
+    dispatch(fetchNearbyOfferAction(id));
+    dispatch(fetchCommentsAction(id));
+  },
+  onLeaveOffer() {
+    dispatch(clearOfferAction());
+  },
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector> & OfferProps;
+
+function OfferPage({
+  authorizationStatus,
   city,
   comments,
   nearbyOffers,
   offer,
-}: OfferProps): JSX.Element {
-  const initalActiveOffer: ActiveOffer = {
-    id: offer.id,
-  };
+  onLeaveOffer,
+  onLoadOffer,
+}: PropsFromRedux): JSX.Element {
+  const { id } = useParams<Param>();
+  const offerId = parseInt(id, RADIX);
+
+  useEffect(() => {
+    onLoadOffer(offerId);
+    return onLeaveOffer;
+  }, [
+    offerId,
+    onLeaveOffer,
+    onLoadOffer,
+  ]);
 
   const [
     activeOffer,
     onMouseEnterOffer,
     onMouseLeaveOffer,
-  ] = useActiveOffer(initalActiveOffer);
+  ] = useActiveOffer({ id: offerId });
 
-  const renderImage = (key: number) => (
-    <div
-      className='property__image-wrapper'
-      key={key}
-    >
-      <img
-        alt='Studio'
-        className='property__image'
-        src={offer.img}
-      />
-    </div>
-  );
+  if(!offer) {
+    return(
+      <div
+        style={{
+          textAlign: 'center',
+        }}
+      >
+        Loading Offer information...
+      </div>
+    );
+  }
 
   const renderImages = () => (
     <div className='property__gallery-container container'>
       <div className='property__gallery'>
-        {
-          Array
-            .from({ length: 6 })
-            .map(() => renderImage(getRandomInteger()))
-        }
+        {offer.images
+          .slice(PromoImage.Start, PromoImage.MaxCount)
+          .map((src) => <OfferPromoImage key={src} src={src} />)}
       </div>
     </div>
   );
@@ -91,11 +153,16 @@ function Offer({
               </div>
               <div className='property__rating rating'>
                 <div className='property__stars rating__stars'>
-                  <span style={{ width: '80%' }}></span>
+                  <span
+                    style={{
+                      width: getCalcRating(offer.rating),
+                    }}
+                  >
+                  </span>
                   <span className='visually-hidden'>Rating</span>
                 </div>
                 <span className='property__rating-value rating__value'>
-                  4.8
+                  {offer.rating}
                 </span>
               </div>
               <ul className='property__features'>
@@ -103,10 +170,10 @@ function Offer({
                   {offer.houseType}
                 </li>
                 <li className='property__feature property__feature--bedrooms'>
-                  3 Bedrooms
+                  {offer.bedrooms} Bedrooms
                 </li>
                 <li className='property__feature property__feature--adults'>
-                  Max 4 adults
+                  Max {offer.maxAdults} adults
                 </li>
               </ul>
               <div className='property__price'>
@@ -116,16 +183,12 @@ function Offer({
               <div className='property__inside'>
                 <h2 className='property__inside-title'>What&apos;s inside</h2>
                 <ul className='property__inside-list'>
-                  <li className='property__inside-item'>Wi-Fi</li>
-                  <li className='property__inside-item'>Washing machine</li>
-                  <li className='property__inside-item'>Towels</li>
-                  <li className='property__inside-item'>Heating</li>
-                  <li className='property__inside-item'>Coffee machine</li>
-                  <li className='property__inside-item'>Baby seat</li>
-                  <li className='property__inside-item'>Kitchen</li>
-                  <li className='property__inside-item'>Dishwasher</li>
-                  <li className='property__inside-item'>Cabel TV</li>
-                  <li className='property__inside-item'>Fridge</li>
+                  {offer.goods.map((good) => (
+                    <OfferGood
+                      key={good}
+                      good={good}
+                    />
+                  ))}
                 </ul>
               </div>
               <div className='property__host'>
@@ -134,25 +197,18 @@ function Offer({
                   <div className='property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper'>
                     <img
                       className='property__avatar user__avatar'
-                      src='img/avatar-angelina.jpg'
+                      src={offer.host.avatarUrl}
                       width='74'
                       height='74'
                       alt='Host avatar'
                     />
                   </div>
-                  <span className='property__user-name'>Angelina</span>
-                  <span className='property__user-status'>Pro</span>
+                  <span className='property__user-name'>{offer.host.name}</span>
+                  { offer.host.isPro && (<span className='property__user-status'>Pro</span>) }
                 </div>
                 <div className='property__description'>
                   <p className='property__text'>
-                    A quiet cozy and picturesque that hides behind a a river by
-                    the unique lightness of Amsterdam. The building is green and
-                    from 18th century.
-                  </p>
-                  <p className='property__text'>
-                    An independent House, strategically located between Rembrand
-                    Square and National Opera, but where the bustle of the city
-                    comes to rest in this alley flowery and colorful.
+                    {offer.description}
                   </p>
                 </div>
               </div>
@@ -162,7 +218,7 @@ function Offer({
                   <span className='reviews__amount'>{comments.length}</span>
                 </h2>
                 <Comments comments={comments} />
-                <CommentForm />
+                { authorizationStatus === AuthorizationStatus.Auth && <CommentForm /> }
               </section>
             </div>
           </div>
@@ -196,4 +252,5 @@ function Offer({
   );
 }
 
-export default Offer;
+export { OfferPage };
+export default connector(OfferPage);

@@ -11,6 +11,7 @@ export {
   paris
 } from './cities';
 export { Housing } from './hoising';
+export { RADIX } from './integer';
 export {
   Rating,
   RatingStyleWidth

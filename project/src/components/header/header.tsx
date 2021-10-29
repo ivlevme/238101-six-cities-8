@@ -20,7 +20,9 @@ const connector = connect(mapStateToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux;
 
-function Header({ authorizationStatus }: ConnectedComponentProps): JSX.Element {
+function Header({
+  authorizationStatus,
+}: ConnectedComponentProps): JSX.Element {
   return (
     <header className='header'>
       <div className='container'>
