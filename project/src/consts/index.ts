@@ -10,7 +10,9 @@ export {
   humburg,
   paris
 } from './cities';
+export { CommentLoadingStatus } from './comment';
 export { Housing } from './hoising';
+export { RADIX } from './integer';
 export {
   Rating,
   RatingStyleWidth

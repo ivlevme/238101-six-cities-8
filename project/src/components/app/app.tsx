@@ -10,10 +10,7 @@ import { connect } from 'react-redux';
 import type { State } from '../../types';
 
 import { browserHistory } from '../../browser-history';
-import {
-  AuthorizationStatus,
-  cities
-} from '../../consts';
+import { cities } from '../../consts';
 import {
   Favorites,
   Login,
@@ -23,22 +20,17 @@ import {
   PrivateRoute
 } from '../index';
 import { AppRoute } from '../../routes';
-import {
-  comments,
-  favoritesMock
-} from '../../mocks';
-
-const INDEX_FIRST_OFFER = 0;
-const COUNT_NEARBY_OFFERS = 3;
+import { favoritesMock } from '../../mocks';
+import { isCheckedAuth } from '../../helpers';
 
 const mapStateToProps = ({
   activeCity,
   authorizationStatus,
-  offersByCity,
+  isDataLoaded,
 }: State) => ({
   activeCity,
   authorizationStatus,
-  offersByCity,
+  isDataLoaded,
 });
 
 const connector = connect(mapStateToProps);
@@ -48,46 +40,43 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 function App({
   activeCity,
   authorizationStatus,
-  offersByCity,
+  isDataLoaded,
 }: PropsFromRedux): JSX.Element {
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+    return (
+      <div
+        style={{
+          textAlign: 'center',
+        }}
+      >
+        Loading Application...
+      </div>
+    );
+  }
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
-        <PrivateRoute
-          authorizationStatus={authorizationStatus}
+        <Route
           exact
           path={AppRoute.Offer}
         >
           <Offer
             city={activeCity}
-            comments={comments}
-            nearbyOffers={
-              offersByCity.slice(
-                INDEX_FIRST_OFFER,
-                COUNT_NEARBY_OFFERS,
-              )
-            }
-            offer={offersByCity[INDEX_FIRST_OFFER]}
           />
-        </PrivateRoute>
-        <Route
+        </Route>
+        <PrivateRoute
+          authorizationStatus={authorizationStatus}
           exact
           path={AppRoute.Favorites}
         >
           <Favorites favorities={favoritesMock} />
+        </PrivateRoute>
+        <Route
+          exact
+          path={AppRoute.Login}
+        >
+          <Login />
         </Route>
-        {
-          authorizationStatus !== AuthorizationStatus.Auth
-            &&
-            (
-              <Route
-                exact
-                path={AppRoute.Login}
-              >
-                <Login />
-              </Route>
-            )
-        }
         <Route
           exact
           path={AppRoute.Main}

@@ -18,7 +18,7 @@ function FavoritesCard({ offer }: FavoritesCardProps): JSX.Element {
             alt='Place'
             className='place-card__image'
             height='110'
-            src={offer.img}
+            src={offer.previewImg}
             width='150'
           />
         </Link>

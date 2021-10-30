@@ -30,7 +30,7 @@ function OfferCard({
         <Link to={createRouteToOffer(offer.id)}>
           <img
             className='place-card__image'
-            src={offer.img}
+            src={offer.previewImg}
             width='260'
             height='200'
             alt='Place'

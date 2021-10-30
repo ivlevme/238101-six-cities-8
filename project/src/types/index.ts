@@ -2,6 +2,7 @@ export type { Actions } from './action';
 export type { City } from './city';
 export type {
   Comment,
+  CommentBackend,
   CommentUser
 } from './comment';
 export type { Favorites } from './favorite';
@@ -11,8 +12,12 @@ export type {
   HandleOfferMouseEnter,
   HandleOfferMouseLeave,
   Offer,
-  OfferBackend
+  OfferBackend,
+  OfferId
 } from './offer';
 export type { RatingRange } from './rating';
 export type { State } from './state';
-export type { User } from './user';
+export type {
+  Host,
+  UserBackend
+} from './user';

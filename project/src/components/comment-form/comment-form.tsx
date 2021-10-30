@@ -1,23 +1,76 @@
-import type { ChangeEvent } from 'react';
-
+import {
+  ChangeEvent,
+  FormEvent,
+  useEffect
+} from 'react';
 import { useState } from 'react';
 
-import { Rating } from '../../consts';
+import type { ConnectedProps } from 'react-redux';
+import { connect } from 'react-redux';
+
+import type {
+  CommentUser,
+  Offer,
+  OfferId,
+  State
+} from '../../types';
+import type { ThunkAppDispatch } from '../../types/action';
+
+import {
+  CommentLoadingStatus,
+  RADIX,
+  Rating
+} from '../../consts';
+import { addCommentAction } from '../../store/api-actions';
 
 import {
   initalComment,
-  RADIX
+  MAX_COMMENT_LENGTH
 } from './consts';
 
-function CommentForm(): JSX.Element {
-  const [
-    comment,
-    setComment,
-  ] = useState(initalComment);
+const mapStateToProps = ({
+  commentLoadingStatus,
+  offer,
+}: State) => ({
+  offer,
+  commentLoadingStatus,
+});
+
+const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  onAddComment(
+    comment: CommentUser,
+    id: OfferId,
+  ) {
+    dispatch(
+      addCommentAction(
+        comment,
+        id,
+      ),
+    );
+  },
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+function CommentForm({
+  commentLoadingStatus,
+  onAddComment,
+  offer,
+}: PropsFromRedux): JSX.Element {
+  const [comment, setComment] = useState(initalComment);
+
+  useEffect(() => {
+    if (commentLoadingStatus === CommentLoadingStatus.Success) {
+      setComment(initalComment);
+    }
+  }, [commentLoadingStatus]);
 
   const isSubmitButtonDisabled =
     comment.rating === initalComment.rating ||
-    comment.text === initalComment.text;
+    comment.text.trim() === initalComment.text ||
+    commentLoadingStatus === CommentLoadingStatus.Loading;
 
   const handleInputRadioChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setComment((prevComment) => ({
@@ -33,11 +86,18 @@ function CommentForm(): JSX.Element {
     }));
   };
 
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    onAddComment(comment, (offer as Offer).id);
+  };
+
   return (
     <form
       action='#'
       className='reviews__form form'
       method='post'
+      onSubmit={handleFormSubmit}
     >
       <label
         className='reviews__label form__label'
@@ -144,16 +204,21 @@ function CommentForm(): JSX.Element {
       <textarea
         className='reviews__textarea form__textarea'
         id='review'
+        maxLength={MAX_COMMENT_LENGTH}
         name='review'
+        onChange={handleTextareaChange}
         placeholder='Tell how was your stay, what you like and what can be improved'
         value={comment.text}
-        onChange={handleTextareaChange}
       />
       <div className='reviews__button-wrapper'>
         <p className='reviews__help'>
           To submit review please make sure to set{' '}
           <span className='reviews__star'>rating</span> and describe your stay
-          with at least <b className='reviews__text-amount'>50 characters</b>.
+          with at least{' '}
+          <b className='reviews__text-amount'>
+            {MAX_COMMENT_LENGTH - comment.text.length} characters
+          </b>
+          .
         </p>
         <button
           className='reviews__submit form__submit button'
@@ -167,4 +232,5 @@ function CommentForm(): JSX.Element {
   );
 }
 
-export default CommentForm;
+export { CommentForm };
+export default connector(CommentForm);

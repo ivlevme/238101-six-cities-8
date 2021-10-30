@@ -5,10 +5,17 @@ import { Link } from 'react-router-dom';
 import type { ConnectedProps } from 'react-redux';
 import { connect } from 'react-redux';
 
+import type { State } from '../../types';
 import type { ThunkAppDispatch } from '../../types/action';
 
 import { AppRoute } from '../../routes';
 import { logoutAction } from '../../store/api-actions';
+
+const mapStateToProps = ({
+  email,
+}: State) => ({
+  email,
+});
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   onLogout() {
@@ -16,11 +23,12 @@ const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   },
 });
 
-const connector = connect(null, mapDispatchToProps);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function AuthUserNav({
+  email,
   onLogout,
 }: PropsFromRedux): JSX.Element {
   const handlerLogoutClick = (evt: MouseEvent<HTMLAnchorElement>) => {
@@ -37,7 +45,7 @@ function AuthUserNav({
         >
           <div className='header__avatar-wrapper user__avatar-wrapper'></div>
           <span className='header__user-name user__name'>
-            Oliver.conner@gmail.com
+            {email}
           </span>
         </Link>
       </li>

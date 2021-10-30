@@ -1,4 +1,7 @@
-import type { User } from './index';
+import type {
+  Host,
+  UserBackend
+} from './index';
 
 import { Rating } from '../consts';
 
@@ -7,10 +10,16 @@ export type CommentUser = {
   text: string;
 };
 
-export type Comment = {
+export type Comment = CommentUser & {
+  date: string;
+  id: number;
+  user: Host;
+};
+
+export type CommentBackend = {
+  comment: string;
   date: string;
   id: number;
   rating: Rating;
-  text: string;
-  user: User;
-};
+  user: UserBackend;
+}
