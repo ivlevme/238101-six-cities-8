@@ -1,6 +1,6 @@
-import type { OfferPromoImageProps } from './types';
+import type { OfferPromoImgProps } from './types';
 
-function OfferPromoImage({ src }: OfferPromoImageProps): JSX.Element {
+function OfferPromoImg({ src }: OfferPromoImgProps): JSX.Element {
   return(
     <div
       className='property__image-wrapper'
@@ -14,4 +14,4 @@ function OfferPromoImage({ src }: OfferPromoImageProps): JSX.Element {
   );
 }
 
-export default OfferPromoImage;
+export default OfferPromoImg;

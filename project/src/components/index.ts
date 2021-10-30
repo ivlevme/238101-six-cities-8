@@ -24,7 +24,7 @@ export { default as OfferGood } from './offer-good/offer-good';
 export { default as OfferList } from './offer-list/offer-list';
 export { default as OfferLoadingScreen } from './offer-loading-screen/offer-loading-screen';
 export { default as OfferNotLogged } from './offer-not-logged/offer-not-logged';
-export { default as OfferPromoImage } from './offer-promo-img/offer-promo-img';
+export { default as OfferPromoImg } from './offer-promo-img/offer-promo-img';
 export { default as PrivateRoute } from './private-route/private-route';
 export { default as SortingItem } from './sorting-item/sorting-item';
 export { default as SortingOptions } from './sorting-options/sorting-options';

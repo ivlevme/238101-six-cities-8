@@ -1,3 +1,3 @@
-export type OfferPromoImageProps = {
+export type OfferPromoImgProps = {
   src: string;
 };

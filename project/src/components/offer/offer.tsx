@@ -27,7 +27,7 @@ import {
   Map,
   OfferCard,
   OfferGood,
-  OfferPromoImage
+  OfferPromoImg
 } from '../index';
 import { getCalcRating } from '../../helpers';
 import { useActiveOffer } from '../../hooks';
@@ -111,7 +111,7 @@ function OfferPage({
       <div className='property__gallery'>
         {offer.images
           .slice(PromoImage.Start, PromoImage.MaxCount)
-          .map((src) => <OfferPromoImage key={src} src={src} />)}
+          .map((src) => <OfferPromoImg key={src} src={src} />)}
       </div>
     </div>
   );
