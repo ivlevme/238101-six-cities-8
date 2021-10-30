@@ -25,10 +25,8 @@ export const getConvertedComment = (
 
 export const getConvertedCommentToBackend = (
   comment: CommentUser,
-): Pick<CommentBackend, 'comment' | 'rating'> => (
-  {
-    comment: comment.text,
-    rating: comment.rating,
-  }
-);
+): Pick<CommentBackend, 'comment' | 'rating'> => ({
+  comment: comment.text,
+  rating: comment.rating,
+});
 

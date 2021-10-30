@@ -42,9 +42,7 @@ function App({
   authorizationStatus,
   isDataLoaded,
 }: PropsFromRedux): JSX.Element {
-  if (
-    isCheckedAuth(authorizationStatus) || !isDataLoaded
-  ) {
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
       <div
         style={{

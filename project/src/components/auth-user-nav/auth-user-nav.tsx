@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import type { ConnectedProps } from 'react-redux';
 import { connect } from 'react-redux';
 
+import type { State } from '../../types';
 import type { ThunkAppDispatch } from '../../types/action';
 
 import { AppRoute } from '../../routes';
 import { logoutAction } from '../../store/api-actions';
-import { State } from '../../types';
 
 const mapStateToProps = ({
   email,
