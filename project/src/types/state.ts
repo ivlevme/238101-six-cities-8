@@ -1,5 +1,6 @@
 import {
   AuthorizationStatus,
+  CommentLoadingStatus,
   Sorting
 } from '../consts';
 import type {
@@ -16,10 +17,11 @@ export type State = {
   allOffers: Offer[];
   authorizationStatus: AuthorizationStatus;
   comments: Comment[];
+  commentLoadingStatus: CommentLoadingStatus;
+  email: string;
   isDataLoaded: boolean;
   nearbyOffers: Offer[];
   offer: Offer | null;
   offersByCity: Offer[];
   sorting: Sorting;
-  email: string;
 };

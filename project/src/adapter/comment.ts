@@ -4,15 +4,6 @@ import type {
   CommentUser
 } from '../types';
 
-export const convertCommentToServer = (
-  comment: CommentUser,
-): Pick<CommentBackend, 'comment' | 'rating'> => (
-  {
-    comment: comment.text,
-    rating: comment.rating,
-  }
-);
-
 export const getConvertedComments = (
   comments: CommentBackend[],
 ): Comment[] => (comments.map(getConvertedComment));
@@ -31,4 +22,13 @@ export const getConvertedComment = (
     name: comment.user.name,
   },
 });
+
+export const getConvertedCommentToBackend = (
+  comment: CommentUser,
+): Pick<CommentBackend, 'comment' | 'rating'> => (
+  {
+    comment: comment.text,
+    rating: comment.rating,
+  }
+);
 

@@ -1,6 +1,7 @@
-import type {
+import {
   ChangeEvent,
-  FormEvent
+  FormEvent,
+  useEffect
 } from 'react';
 import { useState } from 'react';
 
@@ -16,6 +17,7 @@ import type {
 import type { ThunkAppDispatch } from '../../types/action';
 
 import {
+  CommentLoadingStatus,
   RADIX,
   Rating
 } from '../../consts';
@@ -27,9 +29,11 @@ import {
 } from './consts';
 
 const mapStateToProps = ({
+  commentLoadingStatus,
   offer,
 }: State) => ({
   offer,
+  commentLoadingStatus,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
@@ -51,14 +55,22 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function CommentForm({
+  commentLoadingStatus,
   onAddComment,
   offer,
 }: PropsFromRedux): JSX.Element {
   const [comment, setComment] = useState(initalComment);
 
+  useEffect(() => {
+    if (commentLoadingStatus === CommentLoadingStatus.Success) {
+      setComment(initalComment);
+    }
+  }, [commentLoadingStatus]);
+
   const isSubmitButtonDisabled =
     comment.rating === initalComment.rating ||
-    comment.text.trim() === initalComment.text;
+    comment.text.trim() === initalComment.text ||
+    commentLoadingStatus === CommentLoadingStatus.Loading;
 
   const handleInputRadioChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setComment((prevComment) => ({

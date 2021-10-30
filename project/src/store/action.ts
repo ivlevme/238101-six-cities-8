@@ -6,6 +6,7 @@ import type {
 
 import {
   AuthorizationStatus,
+  CommentLoadingStatus,
   NameCity,
   Sorting
 } from '../consts';
@@ -16,6 +17,7 @@ import { AppRoute } from '../routes';
  * */
 export enum ActionType {
   ChangeCity = 'city/change',
+  ChangeCommentLoadingStatus = 'comment/loadingStatus',
   ChangeLoadingStatus = 'data/loading',
   ChangeSorting = 'offers/sorting',
   ChangeUserInfo = 'user/info',
@@ -37,6 +39,15 @@ export enum ActionType {
 export const changeCityAction = (city: City) => ({
   type: ActionType.ChangeCity,
   payload: city,
+}) as const;
+
+/**
+ * @function changeCommentLoadingStatusAction - Action creator for change loading status for adding new comment
+ * @param status - status loading
+ * */
+export const changeCommentLoadingStatusAction = (status: CommentLoadingStatus) => ({
+  type: ActionType.ChangeCommentLoadingStatus,
+  payload: status,
 }) as const;
 
 /**

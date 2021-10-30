@@ -1,6 +1,7 @@
 import type { Actions } from '../types/action';
 import {
   AuthorizationStatus,
+  CommentLoadingStatus,
   Sorting
 } from '../consts';
 import type { State } from '../types';
@@ -24,6 +25,7 @@ const initialState: State = {
   authorizationStatus: AuthorizationStatus.Unknown,
   comments: [],
   email: '',
+  commentLoadingStatus: CommentLoadingStatus.Init,
   isDataLoaded: false,
   nearbyOffers: [],
   offer: null,
@@ -37,6 +39,11 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return {
         ...state,
         activeCity: action.payload,
+      };
+    case ActionType.ChangeCommentLoadingStatus:
+      return {
+        ...state,
+        commentLoadingStatus: action.payload,
       };
     case ActionType.ChangeLoadingStatus:
       return {

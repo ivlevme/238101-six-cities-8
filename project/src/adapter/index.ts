@@ -1,7 +1,7 @@
 export {
-  convertCommentToServer,
   getConvertedComment,
-  getConvertedComments
+  getConvertedComments,
+  getConvertedCommentToBackend
 } from './comment';
 export {
   getConvertedOffer,

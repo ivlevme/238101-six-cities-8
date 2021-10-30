@@ -9,8 +9,15 @@ import type {
 } from '../types';
 import type { ThunkActionResult } from '../types/action';
 
-import { AuthorizationStatus } from '../consts';
 import {
+  AuthorizationStatus,
+  CommentLoadingStatus
+} from '../consts';
+import { APIRoute } from '../api/const';
+import { AppRoute } from '../routes';
+import { FailAuthlMessage } from '../consts/toast';
+import {
+  changeCommentLoadingStatusAction,
   changeUserInfoAction,
   fillOffersAction,
   loadCommentsAction,
@@ -24,11 +31,9 @@ import {
 import {
   dropToken,
   saveToken,
-  Token } from '../services/token';
-import { APIRoute } from '../api/const';
-import { FailAuthlMessage } from '../consts/toast';
-import { AppRoute } from '../routes';
-import { convertCommentToServer } from '../adapter';
+  Token
+} from '../services/token';
+import { getConvertedCommentToBackend } from '../adapter';
 
 export const addCommentAction =
   (
@@ -40,13 +45,19 @@ export const addCommentAction =
     api,
   ) => {
     try {
+      dispatch(changeCommentLoadingStatusAction(CommentLoadingStatus.Loading));
+
       const { data } = await api.post<CommentBackend[]>(
         `${APIRoute.Comments}/${id}`,
-        convertCommentToServer(comment),
+        getConvertedCommentToBackend(comment),
       );
+
       dispatch(loadCommentsAction(data));
+      dispatch(changeCommentLoadingStatusAction(CommentLoadingStatus.Success));
     } catch {
       toast.info(FailAuthlMessage.Comment);
+
+      dispatch(changeCommentLoadingStatusAction(CommentLoadingStatus.Fail));
     }
   };
 
@@ -62,7 +73,6 @@ export const fetchNearbyOfferAction = (id: OfferId): ThunkActionResult =>
     const { data } = await api.get<OfferBackend[]>(`${APIRoute.Hotels}/${id}/nearby`);
 
     dispatch(loadNearbyOfferAction(data));
-    dispatch(fillOffersAction(_getState().activeCity.name));
   };
 
 export const fetchOfferAction = (id: OfferId): ThunkActionResult =>
@@ -71,7 +81,6 @@ export const fetchOfferAction = (id: OfferId): ThunkActionResult =>
       const { data } = await api.get<OfferBackend>(`${APIRoute.Hotels}/${id}`);
 
       dispatch(loadOfferAction(data));
-      dispatch(fillOffersAction(_getState().activeCity.name));
     }
     catch {
       dispatch(redirectToRoute(AppRoute.NotFound404));

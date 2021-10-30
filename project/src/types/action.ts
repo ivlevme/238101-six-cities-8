@@ -6,6 +6,7 @@ import type { AxiosInstance } from 'axios';
 import type { State } from '../types/state';
 import {
   changeCityAction,
+  changeCommentLoadingStatusAction,
   changeLoadingStatusAction,
   changeSortingAction,
   changeUserInfoAction,
@@ -25,6 +26,7 @@ import {
  * */
 export type Actions =
   | ReturnType<typeof changeCityAction>
+  | ReturnType<typeof changeCommentLoadingStatusAction>
   | ReturnType<typeof changeLoadingStatusAction>
   | ReturnType<typeof changeSortingAction>
   | ReturnType<typeof changeUserInfoAction>
