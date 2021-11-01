@@ -16,7 +16,7 @@ import {
   Login,
   Main,
   NotFoundScreen,
-  Offer,
+  OfferPage,
   PrivateRoute
 } from '../index';
 import { AppRoute } from '../../routes';
@@ -60,7 +60,7 @@ function App({
           exact
           path={AppRoute.Offer}
         >
-          <Offer
+          <OfferPage
             city={activeCity}
           />
         </Route>
