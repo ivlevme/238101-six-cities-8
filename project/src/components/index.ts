@@ -26,6 +26,7 @@ export { default as OfferNotLogged } from './offer-not-logged/offer-not-logged';
 export { default as OfferPage } from './offer-page/offer-page';
 export { default as OfferPromoImg } from './offer-promo-img/offer-promo-img';
 export { default as Offers } from './offers/offers';
+export { default as OffersEmpty } from './offers-empty/offers-empty';
 export { default as PrivateRoute } from './private-route/private-route';
 export { default as SortingItem } from './sorting-item/sorting-item';
 export { default as SortingOptions } from './sorting-options/sorting-options';

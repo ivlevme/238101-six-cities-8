@@ -30,21 +30,19 @@ function OfferList({
   onMouseEnter,
   onMouseLeave,
 }: ConnectedComponentProps): JSX.Element {
-  const renderOffers = () => {
-    if (offers.length) {
-      return offers.map(
-        (offer): JSX.Element => (
-          <OfferCard
-            key={offer.id}
-            offer={offer}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-          />
-        ),
-      );
-    }
-    return <span>Offers not found</span>;
-  };
+  const renderOffers = () =>(
+    offers.map(
+      (offer): JSX.Element => (
+        <OfferCard
+          key={offer.id}
+          offer={offer}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        />
+      ),
+    )
+  );
+
 
   return (
     <div className='cities__places-list places__list tabs__content'>

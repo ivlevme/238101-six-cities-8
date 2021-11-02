@@ -1,4 +1,8 @@
+import type { ConnectedProps } from 'react-redux';
+import { connect } from 'react-redux';
+
 import type { MainProps } from './types';
+import type { State } from '../../types';
 
 import {
   CityList,
@@ -6,13 +10,28 @@ import {
   Offers
 } from '../index';
 
+const mapStateToProps = ({
+  offersByCity,
+}: State) => ({
+  offersByCity,
+});
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux & MainProps;
+
 function Main({
   cities,
-}: MainProps): JSX.Element {
+  offersByCity,
+}: ConnectedComponentProps): JSX.Element {
   return (
     <div className='page page--gray page--main'>
       <Header />
-      <main className='page__main page__main--index'>
+      <main className={`page__main page__main--index ${
+        offersByCity.length ? '' : 'page__main--index-empty'
+      }`}
+      >
         <h1 className='visually-hidden'>Cities</h1>
         <div className='tabs'>
           <CityList cities={cities}/>
@@ -23,4 +42,5 @@ function Main({
   );
 }
 
-export default Main;
+export { Main };
+export default connector(Main);
