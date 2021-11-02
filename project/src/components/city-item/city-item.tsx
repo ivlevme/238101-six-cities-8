@@ -50,10 +50,12 @@ function CityItem({
   sorting,
 }: ConnectedComponentProps): JSX.Element {
   const handleLinkCityClick = () => {
-    onChangeCity(
-      city,
-      sorting,
-    );
+    if(activeCity.name !== city.name) {
+      onChangeCity(
+        city,
+        sorting,
+      );
+    }
   };
 
   return (
