@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import type {
   ActiveOffer,
@@ -15,12 +15,13 @@ function useActiveOffer(
 ] {
   const [activeOffer, setActiveOffer] = useState(defaultActiveOffer);
 
-  const handleOfferMouseEnter = (id: number) => {
+  const handleOfferMouseEnter = useCallback((id: number) => {
     setActiveOffer({ id });
-  };
-  const handleOfferMouseLeave = () => {
+  }, []);
+
+  const handleOfferMouseLeave = useCallback(() => {
     setActiveOffer(defaultActiveOffer);
-  };
+  }, [defaultActiveOffer]);
 
   return [activeOffer, handleOfferMouseEnter, handleOfferMouseLeave];
 }
