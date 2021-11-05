@@ -18,26 +18,32 @@ const initialState: OfferProcess = {
  */
 const offerProcess = (state = initialState, action: Actions): OfferProcess => {
   switch (action.type) {
-    case ActionType.ClearOfferAction:
+
+    case ActionType.ClearOfferAction: {
       return {
         ...state,
         offer: null,
       };
+    }
 
-    case ActionType.LoadOffer:
+    case ActionType.LoadOffer: {
       return {
         ...state,
         offer: getConvertedOffer(action.payload),
       };
+    }
 
-    case ActionType.LoadNearbyOffers:
+    case ActionType.LoadNearbyOffers: {
       return {
         ...state,
         nearbyOffers: getConvertedOffers(action.payload),
       };
+    }
 
-    default:
+    default: {
       return state;
+    }
+
   }
 };
 

@@ -16,26 +16,31 @@ const initialState: UserProcess = {
 const userProcess = (state = initialState, action: Actions): UserProcess => {
   switch (action.type) {
 
-    case ActionType.ChangeUserInfo:
+    case ActionType.ChangeUserInfo: {
       return {
         ...state,
         email: action.payload,
       };
+    }
 
-    case ActionType.RequireAuthorization:
+    case ActionType.RequireAuthorization: {
       return {
         ...state,
         authorizationStatus: action.payload,
       };
+    }
 
-    case ActionType.RequireLogout:
+    case ActionType.RequireLogout: {
       return {
         ...state,
         authorizationStatus: AuthorizationStatus.NoAuth,
       };
+    }
 
-    default:
+    default: {
       return state;
+    }
+
   }
 };
 

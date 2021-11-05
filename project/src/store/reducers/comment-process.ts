@@ -16,19 +16,25 @@ const initialState: CommentProcess = {
  */
 const commentProcess = (state = initialState, action: Actions): CommentProcess => {
   switch (action.type) {
-    case ActionType.ChangeCommentLoadingStatus:
+
+    case ActionType.ChangeCommentLoadingStatus: {
       return {
         ...state,
         commentLoadingStatus: action.payload,
       };
-    case ActionType.LoadComments:
+    }
+
+    case ActionType.LoadComments: {
       return {
         ...state,
         comments: getConvertedComments(action.payload),
       };
+    }
 
-    default:
+    default: {
       return state;
+    }
+
   }
 };
 

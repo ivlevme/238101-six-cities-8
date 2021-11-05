@@ -25,40 +25,49 @@ const initialState: OffersProcess = {
 const offersProcess = (state = initialState, action: Actions): OffersProcess => {
   switch (action.type) {
 
-    case ActionType.ChangeCity:
+    case ActionType.ChangeCity: {
       return {
         ...state,
         activeCity: action.payload,
       };
+    }
 
-    case ActionType.ChangeSorting:
+    case ActionType.ChangeSorting: {
+      const offersByCity = getOffersByCity(state.activeCity.name, state.allOffers);
+
       return {
         ...state,
         sorting: action.payload,
-        offersByCity: action.payload === Sorting.Popular
-          ? getOffersByCity(state.activeCity.name, state.allOffers)
-          : getOffersBySorting(
-            action.payload,
-            getOffersByCity(state.activeCity.name, state.allOffers),
-          ),
+        offersByCity:
+          action.payload === Sorting.Popular
+            ? offersByCity
+            : getOffersBySorting(
+              action.payload,
+              offersByCity,
+            ),
       };
+    }
 
-    case ActionType.FillOffers:
+    case ActionType.FillOffers: {
       return {
         ...state,
         offersByCity: getOffersByCity(action.payload, state.allOffers),
       };
+    }
 
 
-    case ActionType.LoadOffers:
+    case ActionType.LoadOffers: {
       return {
         ...state,
         allOffers: getConvertedOffers(action.payload),
         isDataLoaded: true,
       };
+    }
 
-    default:
+    default: {
       return state;
+    }
+
   }
 };
 
