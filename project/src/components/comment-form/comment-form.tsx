@@ -1,9 +1,12 @@
-import {
+import type {
   ChangeEvent,
-  FormEvent,
-  useEffect
+  FormEvent
 } from 'react';
-import { useState } from 'react';
+import {
+  memo,
+  useEffect,
+  useState
+} from 'react';
 
 import type { ConnectedProps } from 'react-redux';
 import { connect } from 'react-redux';
@@ -233,4 +236,4 @@ function CommentForm({
 }
 
 export { CommentForm };
-export default connector(CommentForm);
+export default memo(connector(CommentForm));
