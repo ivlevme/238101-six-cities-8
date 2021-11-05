@@ -24,13 +24,12 @@ import { favoritesMock } from '../../mocks';
 import { isCheckedAuth } from '../../helpers';
 
 const mapStateToProps = ({
-  activeCity,
-  authorizationStatus,
-  isDataLoaded,
+  OFFERS,
+  USER,
 }: State) => ({
-  activeCity,
-  authorizationStatus,
-  isDataLoaded,
+  activeCity: OFFERS.activeCity,
+  authorizationStatus: USER.authorizationStatus,
+  isDataLoaded: OFFERS.isDataLoaded,
 });
 
 const connector = connect(mapStateToProps);

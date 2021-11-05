@@ -11,9 +11,9 @@ import {
 } from '../index';
 
 const mapStateToProps = ({
-  offersByCity,
+  OFFERS,
 }: State) => ({
-  offersByCity,
+  offersByCity: OFFERS.offersByCity,
 });
 
 const connector = connect(mapStateToProps);

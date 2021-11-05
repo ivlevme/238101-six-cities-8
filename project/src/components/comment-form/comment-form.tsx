@@ -29,11 +29,11 @@ import {
 } from './consts';
 
 const mapStateToProps = ({
-  commentLoadingStatus,
-  offer,
+  COMMENT,
+  OFFER,
 }: State) => ({
-  offer,
-  commentLoadingStatus,
+  offer: OFFER.offer,
+  commentLoadingStatus: COMMENT.commentLoadingStatus,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({

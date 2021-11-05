@@ -31,12 +31,15 @@ import {
 } from '../../consts';
 import { initUserSignIn } from './const';
 
-const mapStateToProps = ({ sorting }: State) => ({ sorting });
+const mapStateToProps = ({
+  OFFERS,
+}: State) => ({
+  sorting: OFFERS.sorting,
+});
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   onSubmit(authData: AuthData) {
     dispatch(loginAction(authData));
-    dispatch(redirectToRoute(AppRoute.Main));
   },
   onChangeCity(city: City, sorting: Sorting) {
     dispatch(changeCityAction(city));

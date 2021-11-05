@@ -13,11 +13,10 @@ import {
 } from '../index';
 
 const mapStateToProps = ({
-  activeCity,
-  offersByCity,
+  OFFERS,
 }: State) => ({
-  activeCity,
-  offers: offersByCity,
+  activeCity: OFFERS.activeCity,
+  offers: OFFERS.offersByCity,
 });
 
 const connector = connect(mapStateToProps);

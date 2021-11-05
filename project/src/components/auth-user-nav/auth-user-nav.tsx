@@ -12,9 +12,9 @@ import { AppRoute } from '../../routes';
 import { logoutAction } from '../../store/api-actions';
 
 const mapStateToProps = ({
-  email,
+  USER,
 }: State) => ({
-  email,
+  email: USER.email,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({

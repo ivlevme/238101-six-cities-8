@@ -12,7 +12,12 @@ import type {
 import { Sorting } from '../../consts';
 import { changeSortingAction } from '../../store/action';
 
-const mapStateToProps = ({ sorting }: State) => ({ sorting });
+const mapStateToProps = ({
+  OFFERS,
+}: State) => ({
+  sorting: OFFERS.sorting,
+});
+
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
   onChangeSorting(sorting: Sorting) {
     dispatch(changeSortingAction(sorting));

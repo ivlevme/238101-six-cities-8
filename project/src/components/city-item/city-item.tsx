@@ -18,11 +18,10 @@ import {
 import { Sorting } from '../../consts';
 
 const mapStateToProps = ({
-  activeCity,
-  sorting,
+  OFFERS,
 }: State) => ({
-  activeCity,
-  sorting,
+  activeCity: OFFERS.activeCity,
+  sorting: OFFERS.sorting,
 });
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
   onChangeCity(

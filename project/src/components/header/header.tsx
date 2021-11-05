@@ -10,9 +10,9 @@ import { connect } from 'react-redux';
 import { AuthorizationStatus } from '../../consts';
 
 const mapStateToProps = ({
-  authorizationStatus,
+  USER,
 }: State) => ({
-  authorizationStatus,
+  authorizationStatus: USER.authorizationStatus,
 });
 
 const connector = connect(mapStateToProps);

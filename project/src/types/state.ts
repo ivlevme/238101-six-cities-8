@@ -1,3 +1,5 @@
+import type { RootState } from '../store/root-reducer';
+
 import {
   AuthorizationStatus,
   CommentLoadingStatus,
@@ -10,18 +12,41 @@ import type {
 } from './index';
 
 /**
- * @type {State} - Redux store type
+ * @CommentProcess State - Redux Reducer type for comment
  * */
-export type State = {
-  activeCity: City;
-  allOffers: Offer[];
-  authorizationStatus: AuthorizationStatus;
+export type CommentProcess = {
   comments: Comment[];
   commentLoadingStatus: CommentLoadingStatus;
-  email: string;
-  isDataLoaded: boolean;
-  nearbyOffers: Offer[];
+};
+
+/**
+ * @OfferProcess State - Redux Reducer type for offer
+ * */
+export type OfferProcess = {
   offer: Offer | null;
+  nearbyOffers: Offer[];
+}
+
+/**
+ * @OffersProcess State - Redux Reducer type for offers
+ * */
+export type OffersProcess = {
+  activeCity: City;
+  allOffers: Offer[];
+  isDataLoaded: boolean;
   offersByCity: Offer[];
   sorting: Sorting;
+}
+
+/**
+ * @UserProcess State - Redux Reducer type for user
+ * */
+export type UserProcess = {
+  authorizationStatus: AuthorizationStatus;
+  email: string;
 };
+
+/**
+ * @type State - Redux store type
+ * */
+export type State = RootState
