@@ -1,39 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  applyMiddleware,
-  createStore
-} from 'redux';
-import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { configureStore } from '@reduxjs/toolkit';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { App } from './components';
-import { reducer } from './store/reducer';
 import type { ThunkAppDispatch } from './types/action';
-import { createAPI } from './api';
+
+import { App } from './components';
 import { requireAuthorization } from './store/action';
-import { AuthorizationStatus } from './consts';
+import { rootReducer } from './store/root-reducer';
+import { redirect } from './store/middlewares/redirect';
+
+import { createAPI } from './api';
 import {
   checkAuthAction,
   fetchOffersAction
 } from './store/api-actions';
-import { redirect } from './store/middlewares/redirect';
+
+import { AuthorizationStatus } from './consts';
 
 const api = createAPI(
   () => store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth)),
 );
 
-const store = createStore(
-  reducer,
-  composeWithDevTools(
-    applyMiddleware(thunk.withExtraArgument(api)),
-    applyMiddleware(redirect),
-  ),
-);
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: {
+        extraArgument: api,
+      },
+    }).concat(redirect),
+});
 
 (store.dispatch as ThunkAppDispatch)(checkAuthAction());
 (store.dispatch as ThunkAppDispatch)(fetchOffersAction());

@@ -41,15 +41,14 @@ import { clearOfferAction } from '../../store/action';
 import { PromoImage } from './const';
 
 const mapStateToProps = ({
-  authorizationStatus,
-  comments,
-  nearbyOffers,
-  offer,
+  OFFER,
+  COMMENT,
+  USER,
 }: State) => ({
-  authorizationStatus,
-  comments,
-  nearbyOffers,
-  offer,
+  authorizationStatus: USER.authorizationStatus,
+  comments: COMMENT.comments,
+  nearbyOffers: OFFER.nearbyOffers,
+  offer: OFFER.offer,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({

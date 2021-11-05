@@ -35,6 +35,11 @@ import {
 } from '../services/token';
 import { getConvertedCommentToBackend } from '../adapter';
 
+/**
+ * @function addCommentAction – Redux Thunk Action for add comment for offer
+ * @param comment – comment data
+ * @param id – offer id
+ */
 export const addCommentAction =
   (
     comment: CommentUser,
@@ -61,6 +66,10 @@ export const addCommentAction =
     }
   };
 
+/**
+ * @function fetchCommentsAction – Redux Thunk Action for fetch comments for offer by id
+ * @param id – offer id
+ */
 export const fetchCommentsAction = (id: OfferId): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const { data } = await api.get<CommentBackend[]>(`${APIRoute.Comments}/${id}`);
@@ -68,6 +77,10 @@ export const fetchCommentsAction = (id: OfferId): ThunkActionResult =>
     dispatch(loadCommentsAction(data));
   };
 
+/**
+ * @function fetchNearbyOfferAction – Redux Thunk Action for fetch nearby offers for offer by id
+ * @param id – offer id
+ */
 export const fetchNearbyOfferAction = (id: OfferId): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const { data } = await api.get<OfferBackend[]>(`${APIRoute.Hotels}/${id}/nearby`);
@@ -75,6 +88,10 @@ export const fetchNearbyOfferAction = (id: OfferId): ThunkActionResult =>
     dispatch(loadNearbyOfferAction(data));
   };
 
+/**
+ * @function fetchOfferAction – Redux Thunk Action for fetch offer by id
+ * @param id – offer id
+ */
 export const fetchOfferAction = (id: OfferId): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     try {
@@ -87,14 +104,20 @@ export const fetchOfferAction = (id: OfferId): ThunkActionResult =>
     }
   };
 
+/**
+ * @function fetchOffersAction – Redux Thunk Action for fetch all offers
+ */
 export const fetchOffersAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const { data } = await api.get<OfferBackend[]>(APIRoute.Hotels);
 
     dispatch(loadOffersAction(data));
-    dispatch(fillOffersAction(_getState().activeCity.name));
+    dispatch(fillOffersAction(_getState().OFFERS.activeCity.name));
   };
 
+/**
+ * @function checkAuthAction – Redux Thunk Action for check user`s auth status when app start up
+ */
 export const checkAuthAction =
   (): ThunkActionResult => async (
     dispatch,
@@ -116,6 +139,9 @@ export const checkAuthAction =
     }
   };
 
+/**
+ * @function loginAction – Redux Thunk Action for login user
+ */
 export const loginAction =
   ({
     email,
@@ -141,11 +167,16 @@ export const loginAction =
       saveToken(token);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
       dispatch(changeUserInfoAction(userEmail));
+      dispatch(redirectToRoute(AppRoute.Main));
     } catch {
       toast.info(FailAuthlMessage.Fail);
     }
   };
 
+/**
+ *
+ * @function logoutAction – Redux Thunk Action for logout user
+ */
 export const logoutAction =
   (): ThunkActionResult => async (
     dispatch,

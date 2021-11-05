@@ -40,5 +40,12 @@ export type Actions =
   | ReturnType<typeof requireLogout>
   | ReturnType<typeof redirectToRoute>;
 
+/**
+ * @type {ThunkActionResult} - Thunk Action Result type for Redux with Axios
+ * */
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Actions>;
+
+/**
+ * @type {ThunkAppDispatch} - Thunk Action Dispatch type for Redux with Axios
+ * */
 export type ThunkAppDispatch = ThunkDispatch<State, AxiosInstance, Actions>;

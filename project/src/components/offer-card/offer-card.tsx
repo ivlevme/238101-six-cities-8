@@ -5,15 +5,19 @@ import { Link } from 'react-router-dom';
 import { Bookmarks } from '../index';
 import { createRouteToOffer } from '../../routes/helpers';
 import { getCalcRating } from '../../helpers';
+import { memo, useCallback } from 'react';
 
 function OfferCard({
   offer,
   onMouseEnter,
   onMouseLeave,
 }: OfferCardProps): JSX.Element {
-  const handleOfferMouseEnter = () => {
+  const handleOfferMouseEnter = useCallback(() => {
     onMouseEnter(offer.id);
-  };
+  }, [
+    offer.id,
+    onMouseEnter,
+  ]);
 
   return (
     <article
@@ -62,4 +66,4 @@ function OfferCard({
   );
 }
 
-export default OfferCard;
+export default memo(OfferCard);

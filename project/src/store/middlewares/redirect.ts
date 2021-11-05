@@ -2,10 +2,13 @@ import type { Middleware } from 'redux';
 
 import { ActionType } from '../action';
 import { browserHistory } from '../../browser-history';
-import { reducer } from '../reducer';
+import { rootReducer } from '../root-reducer';
 
-type Reducer = ReturnType<typeof reducer>;
+type Reducer = ReturnType<typeof rootReducer>;
 
+/**
+ * @function redirect – Redux middleware for redirect to App Route
+* */
 export const redirect: Middleware<unknown, Reducer> =
   (_store) => (next) => (action) => {
     if (action.type === ActionType.RedirectToRoute) {

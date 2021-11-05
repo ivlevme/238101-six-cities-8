@@ -1,4 +1,7 @@
+import { memo } from 'react';
+
 import type { CityListProps } from './types';
+
 import { CityItem } from '../index';
 
 function CityList({ cities }: CityListProps): JSX.Element {
@@ -16,4 +19,4 @@ function CityList({ cities }: CityListProps): JSX.Element {
   );
 }
 
-export default CityList;
+export default memo(CityList);

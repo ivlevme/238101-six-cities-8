@@ -7,7 +7,12 @@ import type { State } from '../../types';
 import { SortingItem } from '../index';
 import { Sorting } from '../../consts';
 
-const mapStateToProps = ({ sorting }: State) => ({ sorting });
+const mapStateToProps = ({
+  OFFERS,
+}: State) => ({
+  sorting: OFFERS.sorting,
+});
+
 const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;

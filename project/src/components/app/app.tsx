@@ -16,7 +16,7 @@ import {
   Login,
   Main,
   NotFoundScreen,
-  Offer,
+  OfferPage,
   PrivateRoute
 } from '../index';
 import { AppRoute } from '../../routes';
@@ -24,13 +24,12 @@ import { favoritesMock } from '../../mocks';
 import { isCheckedAuth } from '../../helpers';
 
 const mapStateToProps = ({
-  activeCity,
-  authorizationStatus,
-  isDataLoaded,
+  OFFERS,
+  USER,
 }: State) => ({
-  activeCity,
-  authorizationStatus,
-  isDataLoaded,
+  activeCity: OFFERS.activeCity,
+  authorizationStatus: USER.authorizationStatus,
+  isDataLoaded: OFFERS.isDataLoaded,
 });
 
 const connector = connect(mapStateToProps);
@@ -60,7 +59,7 @@ function App({
           exact
           path={AppRoute.Offer}
         >
-          <Offer
+          <OfferPage
             city={activeCity}
           />
         </Route>

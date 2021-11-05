@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import type { OfferPromoImgProps } from './types';
 
 function OfferPromoImg({ src }: OfferPromoImgProps): JSX.Element {
@@ -14,4 +16,4 @@ function OfferPromoImg({ src }: OfferPromoImgProps): JSX.Element {
   );
 }
 
-export default OfferPromoImg;
+export default memo(OfferPromoImg);

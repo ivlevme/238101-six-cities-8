@@ -13,6 +13,7 @@ export {
 export { CommentLoadingStatus } from './comment';
 export { Housing } from './hoising';
 export { RADIX } from './integer';
+export { initalActiveOffer } from './offer';
 export {
   Rating,
   RatingStyleWidth

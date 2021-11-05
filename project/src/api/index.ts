@@ -14,7 +14,9 @@ import { HttpCode } from './const';
 const BACKEND_URL = 'https://8.react.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;
 
-
+/**
+ * @function createAPI - Axios api config for app
+ * */
 export const createAPI = (onUnauthorized: UnauthorizedCallback): AxiosInstance => {
   const api = axios.create({
     baseURL: BACKEND_URL,

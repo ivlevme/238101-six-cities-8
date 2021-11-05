@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import type { CommentsProps } from './types';
 
 import { Comment } from '../index';
@@ -15,4 +17,4 @@ function Comments({ comments }: CommentsProps): JSX.Element {
   );
 }
 
-export default Comments;
+export default memo(Comments);
