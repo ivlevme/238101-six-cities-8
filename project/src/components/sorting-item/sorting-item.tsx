@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import type { Dispatch } from 'redux';
 import type { ConnectedProps } from 'react-redux';
 import { connect} from 'react-redux';
@@ -37,13 +39,23 @@ function SortingItem({
   name,
   onChangeSorting,
 }: ConnectedComponentProps): JSX.Element {
+  const handleOptionSortingClick = useCallback(() => {
+    if(name !== sorting) {
+      onChangeSorting(name);
+    }
+  }, [
+    name,
+    onChangeSorting,
+    sorting,
+  ]);
+
   return (
     <li
       className={`places__option ${
         sorting === name ? 'places__option--active' : ''
       }`}
       tabIndex={0}
-      onClick={() => onChangeSorting(name)}
+      onClick={handleOptionSortingClick}
     >
       {name}
     </li>

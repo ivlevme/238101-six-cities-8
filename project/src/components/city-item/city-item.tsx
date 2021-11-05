@@ -1,8 +1,10 @@
-import type { ConnectedProps } from 'react-redux';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
+import type { ConnectedProps } from 'react-redux';
+import { connect } from 'react-redux';
+
+import { Dispatch } from 'redux';
 
 import type { CityItemProps } from './types';
 import type {
@@ -48,14 +50,19 @@ function CityItem({
   onChangeCity,
   sorting,
 }: ConnectedComponentProps): JSX.Element {
-  const handleLinkCityClick = () => {
+  const handleLinkCityClick = useCallback(() => {
     if(activeCity.name !== city.name) {
       onChangeCity(
         city,
         sorting,
       );
     }
-  };
+  }, [
+    activeCity.name,
+    city,
+    onChangeCity,
+    sorting,
+  ]);
 
   return (
     <li className='locations__item'>
