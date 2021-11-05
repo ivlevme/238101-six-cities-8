@@ -49,4 +49,4 @@ export type UserProcess = {
 /**
  * @type State - Redux store type
  * */
-export type State = RootState
+export type State = RootState;
