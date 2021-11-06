@@ -10,13 +10,17 @@ export {
   humburg,
   paris
 } from './cities';
-export { CommentLoadingStatus } from './comment';
 export { Housing } from './hoising';
 export { RADIX } from './integer';
+export { LoadingStatus } from './loading';
 export { initalActiveOffer } from './offer';
 export {
   Rating,
   RatingStyleWidth
 } from './rating';
 export { Sorting } from './sort';
-export { FailAuthlMessage } from './toast';
+export {
+  AddMessageFail,
+  AuthMessage,
+  LoadMessageFail
+} from './toast';

@@ -1,12 +1,13 @@
 import type {
   City,
   CommentBackend,
-  OfferBackend
+  OfferBackend,
+  OfferId
 } from '../types';
 
 import {
   AuthorizationStatus,
-  CommentLoadingStatus,
+  LoadingStatus,
   NameCity,
   Sorting
 } from '../consts';
@@ -18,12 +19,15 @@ import { AppRoute } from '../routes';
 export enum ActionType {
   ChangeCity = 'city/change',
   ChangeCommentLoadingStatus = 'comment/loadingStatus',
-  ChangeLoadingStatus = 'data/loading',
+  ChangeFavoriteLoadingStatus = 'favorite/loadingStatus',
+  ChangeOfferFavoriteStatus = 'offer/changeFavoriteStatus',
   ChangeSorting = 'offers/sorting',
   ChangeUserInfo = 'user/info',
   ClearOfferAction = 'offer/clearData',
+  ClearOffersFavoriteStatus = 'offer/clearOffersFavoriteStatus',
   FillOffers = 'offers/fill',
   LoadComments = 'data/comments',
+  LoadFavorites = 'data/favorites',
   LoadNearbyOffers = 'data/nearbyOffers',
   LoadOffer = 'data/offer',
   LoadOffers = 'data/loadOffers',
@@ -42,21 +46,37 @@ export const changeCityAction = (city: City) => ({
 }) as const;
 
 /**
- * @function changeCommentLoadingStatusAction - Action creator for change loading status for adding new comment
+ * @function changeCommentLoadingStatusAction - Action creator for change
+ * loading status for adding new comment
  * @param status - status loading
  * */
-export const changeCommentLoadingStatusAction = (status: CommentLoadingStatus) => ({
+export const changeCommentLoadingStatusAction = (status: LoadingStatus) => ({
   type: ActionType.ChangeCommentLoadingStatus,
   payload: status,
 }) as const;
 
 /**
- * @function changeLoadingStatusAction - Action creator for change Loading status
- * @param status - Loading status
+ * @function changeFavoriteLoadingStatusAction - Action creator for
+ * change loading status for adding offer to favorite
+ * @param status - status loading
  * */
-export const changeLoadingStatusAction = (status: boolean) => ({
-  type: ActionType.ChangeLoadingStatus,
+export const changeFavoriteLoadingStatusAction = (status: LoadingStatus) => ({
+  type: ActionType.ChangeFavoriteLoadingStatus,
   payload: status,
+}) as const;
+
+/**
+ * @function changeOfferFavoriteStatusAction - Action creator for
+ * change favorite status for offer
+ * @param id - offer id
+ * @param status - favorite status
+ * */
+export const changeOfferFavoriteStatusAction = (id: OfferId, status: boolean) => ({
+  type: ActionType.ChangeOfferFavoriteStatus,
+  payload: {
+    id,
+    status,
+  },
 }) as const;
 
 /**
@@ -78,10 +98,19 @@ export const changeUserInfoAction = (email: string) => ({
 }) as const;
 
 /**
- * @function clearOfferAction - Action creator for clear offer data after component unmount
+ * @function clearOfferAction - Action creator for clear offer data
+ * after component unmount
  * */
 export const clearOfferAction = () => ({
   type: ActionType.ClearOfferAction,
+}) as const;
+
+/**
+ * @function clearOffersFavoriteStatusAction - Action creator for clear offers
+ * favorite status
+ * */
+export const clearOffersFavoriteStatusAction = () => ({
+  type: ActionType.ClearOffersFavoriteStatus,
 }) as const;
 
 /**
@@ -101,6 +130,16 @@ export const loadCommentsAction = (comments: CommentBackend[]) => ({
   type: ActionType.LoadComments,
   payload: comments,
 }) as const;
+
+/**
+ * @function loadFavoritesAction - Action creator for fill favorites offers
+ * @param offers - favorites offers
+ * */
+export const loadFavoritesAction = (offers: OfferBackend[]) => ({
+  type: ActionType.LoadFavorites,
+  payload: offers,
+}) as const;
+
 /**
  * @function loadNearbyOfferAction - Action creator for fill nearby offers
  * @param offers - nearby offers

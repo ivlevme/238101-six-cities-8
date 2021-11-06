@@ -2,17 +2,17 @@ import { combineReducers } from 'redux';
 
 import {
   commentProcess,
+  favoritesProcess,
   offerProcess,
   offersProcess,
   userProcess
 } from './reducers';
 
 export enum NameSpace {
-  city = 'CITY',
   comment = 'COMMENT',
+  favorite = 'FAVORITE',
   offer = 'OFFER',
   offers = 'OFFERS',
-  sorting = 'SORTING',
   user = 'USER',
 }
 /**
@@ -20,6 +20,7 @@ export enum NameSpace {
  * */
 export const rootReducer = combineReducers({
   [NameSpace.comment]: commentProcess,
+  [NameSpace.favorite]: favoritesProcess,
   [NameSpace.offer]: offerProcess,
   [NameSpace.offers]: offersProcess,
   [NameSpace.user]: userProcess,

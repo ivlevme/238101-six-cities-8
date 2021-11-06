@@ -40,6 +40,16 @@ const offerProcess = (state = initialState, action: Actions): OfferProcess => {
       };
     }
 
+    case ActionType.ChangeOfferFavoriteStatus: {
+      return {
+        ...state,
+        offer: state.offer && {
+          ...state.offer,
+          bookmark: action.payload.status,
+        },
+      };
+    }
+
     default: {
       return state;
     }

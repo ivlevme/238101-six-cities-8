@@ -1,4 +1,4 @@
-export enum CommentLoadingStatus {
+export enum LoadingStatus {
   Init = 'INIT',
   Loading = 'LOADING',
   Success = 'SUCCESS',

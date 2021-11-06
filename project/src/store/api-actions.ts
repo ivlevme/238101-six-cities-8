@@ -1,3 +1,4 @@
+import type { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 
 import type { AuthData } from '../types/auth-data';
@@ -11,16 +12,24 @@ import type { ThunkActionResult } from '../types/action';
 
 import {
   AuthorizationStatus,
-  CommentLoadingStatus
+  LoadingStatus
 } from '../consts';
-import { APIRoute } from '../api/const';
+import { APIRoute, HttpCode } from '../api/const';
 import { AppRoute } from '../routes';
-import { FailAuthlMessage } from '../consts/toast';
+import {
+  AddMessageFail,
+  AuthMessage,
+  LoadMessageFail
+} from '../consts/toast';
 import {
   changeCommentLoadingStatusAction,
+  changeFavoriteLoadingStatusAction,
+  changeOfferFavoriteStatusAction,
   changeUserInfoAction,
+  clearOffersFavoriteStatusAction,
   fillOffersAction,
   loadCommentsAction,
+  loadFavoritesAction,
   loadNearbyOfferAction,
   loadOfferAction,
   loadOffersAction,
@@ -44,27 +53,24 @@ export const addCommentAction =
   (
     comment: CommentUser,
     id: OfferId,
-  ): ThunkActionResult => async (
-    dispatch,
-    _getState,
-    api,
-  ) => {
-    try {
-      dispatch(changeCommentLoadingStatusAction(CommentLoadingStatus.Loading));
+  ): ThunkActionResult =>
+    async (dispatch, _getState, api): Promise<void> => {
+      try {
+        dispatch(changeCommentLoadingStatusAction(LoadingStatus.Loading));
 
-      const { data } = await api.post<CommentBackend[]>(
-        `${APIRoute.Comments}/${id}`,
-        getConvertedCommentToBackend(comment),
-      );
+        const { data } = await api.post<CommentBackend[]>(
+          `${APIRoute.Comments}/${id}`,
+          getConvertedCommentToBackend(comment),
+        );
 
-      dispatch(loadCommentsAction(data));
-      dispatch(changeCommentLoadingStatusAction(CommentLoadingStatus.Success));
-    } catch {
-      toast.info(FailAuthlMessage.Comment);
+        dispatch(loadCommentsAction(data));
+        dispatch(changeCommentLoadingStatusAction(LoadingStatus.Success));
+      } catch {
+        toast.info(AddMessageFail.Comment);
 
-      dispatch(changeCommentLoadingStatusAction(CommentLoadingStatus.Fail));
-    }
-  };
+        dispatch(changeCommentLoadingStatusAction(LoadingStatus.Fail));
+      }
+    };
 
 /**
  * @function fetchCommentsAction – Redux Thunk Action for fetch comments for offer by id
@@ -78,14 +84,31 @@ export const fetchCommentsAction = (id: OfferId): ThunkActionResult =>
   };
 
 /**
+ * @function fetchFavoriteAction – Redux Thunk Action for favorite offers
+ */
+export const fetchFavoriteOffersAction = (): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    try {
+      const { data } = await api.get<OfferBackend[]>(APIRoute.Favorite);
+      dispatch(loadFavoritesAction(data));
+    } catch {
+      toast.info(LoadMessageFail.Favorite);
+    }
+  };
+
+/**
  * @function fetchNearbyOfferAction – Redux Thunk Action for fetch nearby offers for offer by id
  * @param id – offer id
  */
 export const fetchNearbyOfferAction = (id: OfferId): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const { data } = await api.get<OfferBackend[]>(`${APIRoute.Hotels}/${id}/nearby`);
+    try {
+      const { data } = await api.get<OfferBackend[]>(`${APIRoute.Hotels}/${id}/nearby`);
 
-    dispatch(loadNearbyOfferAction(data));
+      dispatch(loadNearbyOfferAction(data));
+    } catch {
+      toast.info(LoadMessageFail.NearbyOffers);
+    }
   };
 
 /**
@@ -135,7 +158,38 @@ export const checkAuthAction =
       dispatch(changeUserInfoAction(userEmail));
     }
     catch {
-      toast.info(FailAuthlMessage.Reminder);
+      toast.info(AuthMessage.Reminder);
+    }
+  };
+
+/**
+ * @function changeFavoriteStatusOffer – Redux Thunk Action for add offer to favorite
+ * @param id – offer id
+ * @param status – favorite status
+ */
+export const changeFavoriteStatusOffer = (
+  id: OfferId,
+  status: boolean,
+): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    try {
+      dispatch(changeFavoriteLoadingStatusAction(LoadingStatus.Loading));
+
+      // const { data } =
+      await api.post<OfferBackend[]>(`${APIRoute.Favorite}/${id}/${+status}`);
+
+      dispatch(changeOfferFavoriteStatusAction(id, status));
+      dispatch(changeFavoriteLoadingStatusAction(LoadingStatus.Success));
+    } catch(err) {
+
+      if((err as AxiosError).response?.status === HttpCode.Unauthorized) {
+        dispatch(redirectToRoute(AppRoute.Login));
+        return;
+      }
+
+      toast.info(AddMessageFail.Favorite);
+
+      dispatch(changeCommentLoadingStatusAction(LoadingStatus.Fail));
     }
   };
 
@@ -167,9 +221,10 @@ export const loginAction =
       saveToken(token);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
       dispatch(changeUserInfoAction(userEmail));
+      dispatch(fetchOffersAction());
       dispatch(redirectToRoute(AppRoute.Main));
     } catch {
-      toast.info(FailAuthlMessage.Fail);
+      toast.info(AuthMessage.Fail);
     }
   };
 
@@ -185,5 +240,7 @@ export const logoutAction =
   ) => {
     api.delete(APIRoute.Logout);
     dropToken();
+
+    dispatch(clearOffersFavoriteStatusAction());
     dispatch(requireLogout());
   };

@@ -20,7 +20,7 @@ import type {
 import type { ThunkAppDispatch } from '../../types/action';
 
 import {
-  CommentLoadingStatus,
+  LoadingStatus,
   RADIX,
   Rating
 } from '../../consts';
@@ -36,7 +36,7 @@ const mapStateToProps = ({
   OFFER,
 }: State) => ({
   offer: OFFER.offer,
-  commentLoadingStatus: COMMENT.commentLoadingStatus,
+  commentLoadingStatus: COMMENT.loadingStatus,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
@@ -65,7 +65,7 @@ function CommentForm({
   const [comment, setComment] = useState(initalComment);
 
   useEffect(() => {
-    if (commentLoadingStatus === CommentLoadingStatus.Success) {
+    if (commentLoadingStatus === LoadingStatus.Success) {
       setComment(initalComment);
     }
   }, [commentLoadingStatus]);
@@ -73,7 +73,7 @@ function CommentForm({
   const isSubmitButtonDisabled =
     comment.rating === initalComment.rating ||
     comment.text.trim() === initalComment.text ||
-    commentLoadingStatus === CommentLoadingStatus.Loading;
+    commentLoadingStatus === LoadingStatus.Loading;
 
   const handleInputRadioChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setComment((prevComment) => ({

@@ -4,7 +4,10 @@ import type {
   UserBackend
 } from './index';
 
-import { Housing } from '../consts';
+import {
+  Housing,
+  NameCity
+} from '../consts';
 
 export type ActiveOffer = {
   id: null | OfferId;
@@ -17,7 +20,7 @@ export type Offer = {
   bookmark: boolean;
   description: string;
   city: {
-    name: string;
+    name: NameCity;
     location: Location;
   }
   goods: string[];
@@ -41,7 +44,7 @@ export type OfferBackend = {
   'bedrooms': number;
   'city': {
     'location': Location;
-    'name': string;
+    'name': NameCity;
   };
   'description': string;
   'goods': string[];

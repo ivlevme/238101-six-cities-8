@@ -33,6 +33,7 @@ import { getCalcRating } from '../../helpers';
 import { useActiveOffer } from '../../hooks';
 
 import {
+  changeFavoriteStatusOffer,
   fetchCommentsAction,
   fetchNearbyOfferAction,
   fetchOfferAction
@@ -52,6 +53,15 @@ const mapStateToProps = ({
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  onFavoriteButtonClick(
+    id: OfferId,
+    status: boolean,
+  ) {
+    dispatch(changeFavoriteStatusOffer(
+      id,
+      status,
+    ));
+  },
   onLoadOffer(id: OfferId) {
     dispatch(fetchOfferAction(id));
     dispatch(fetchNearbyOfferAction(id));
@@ -72,6 +82,7 @@ function OfferPage({
   comments,
   nearbyOffers,
   offer,
+  onFavoriteButtonClick,
   onLeaveOffer,
   onLoadOffer,
 }: PropsFromRedux): JSX.Element {
@@ -93,7 +104,7 @@ function OfferPage({
     onMouseLeaveOffer,
   ] = useActiveOffer({ id: offerId });
 
-  if(!offer) {
+  if(!offer?.id) {
     return(
       <div
         style={{
@@ -115,6 +126,10 @@ function OfferPage({
     </div>
   );
 
+  const handleBookmarkButtonClick = () => {
+    onFavoriteButtonClick(offer.id, !offer.bookmark);
+  };
+
   return (
     <div className='page'>
       <Header />
@@ -134,6 +149,7 @@ function OfferPage({
                   className={`property__bookmark-button ${
                     offer.bookmark ? 'property__bookmark-button--active' : ''
                   } button`}
+                  onClick={handleBookmarkButtonClick}
                   type='button'
                 >
                   <svg

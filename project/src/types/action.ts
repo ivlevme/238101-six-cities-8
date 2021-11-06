@@ -7,12 +7,15 @@ import type { State } from '../types/state';
 import {
   changeCityAction,
   changeCommentLoadingStatusAction,
-  changeLoadingStatusAction,
+  changeFavoriteLoadingStatusAction,
+  changeOfferFavoriteStatusAction,
   changeSortingAction,
   changeUserInfoAction,
   clearOfferAction,
+  clearOffersFavoriteStatusAction,
   fillOffersAction,
   loadCommentsAction,
+  loadFavoritesAction,
   loadNearbyOfferAction,
   loadOfferAction,
   loadOffersAction,
@@ -27,12 +30,15 @@ import {
 export type Actions =
   | ReturnType<typeof changeCityAction>
   | ReturnType<typeof changeCommentLoadingStatusAction>
-  | ReturnType<typeof changeLoadingStatusAction>
+  | ReturnType<typeof changeFavoriteLoadingStatusAction>
+  | ReturnType<typeof changeOfferFavoriteStatusAction>
   | ReturnType<typeof changeSortingAction>
   | ReturnType<typeof changeUserInfoAction>
   | ReturnType<typeof clearOfferAction>
+  | ReturnType<typeof clearOffersFavoriteStatusAction>
   | ReturnType<typeof fillOffersAction>
   | ReturnType<typeof loadCommentsAction>
+  | ReturnType<typeof loadFavoritesAction>
   | ReturnType<typeof loadNearbyOfferAction>
   | ReturnType<typeof loadOfferAction>
   | ReturnType<typeof loadOffersAction>
