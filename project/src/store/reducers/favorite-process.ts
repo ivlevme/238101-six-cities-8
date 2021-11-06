@@ -8,6 +8,7 @@ import { getConvertedOffers } from '../../adapter';
 
 const initialState: FavoritesProcess = {
   favorites: [],
+  loadingPageStatus: LoadingStatus.Init,
   loadingStatus: LoadingStatus.Init,
 };
 
@@ -21,6 +22,13 @@ const favoritesProcess = (state = initialState, action: Actions): FavoritesProce
       return {
         ...state,
         loadingStatus: action.payload,
+      };
+    }
+
+    case ActionType.ChangeFavoritePageLoadingStatus: {
+      return {
+        ...state,
+        loadingPageStatus: action.payload,
       };
     }
 

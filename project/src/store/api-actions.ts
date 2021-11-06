@@ -24,7 +24,9 @@ import {
 import {
   changeCommentLoadingStatusAction,
   changeFavoriteLoadingStatusAction,
+  changeFavoritePageLoadingStatusAction,
   changeOfferFavoriteStatusAction,
+  changeOfferLoadingStatusAction,
   changeUserInfoAction,
   clearOffersFavoriteStatusAction,
   fillOffersAction,
@@ -89,10 +91,16 @@ export const fetchCommentsAction = (id: OfferId): ThunkActionResult =>
 export const fetchFavoriteOffersAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     try {
+      dispatch(changeFavoritePageLoadingStatusAction(LoadingStatus.Loading));
+
       const { data } = await api.get<OfferBackend[]>(APIRoute.Favorite);
+
       dispatch(loadFavoritesAction(data));
+      dispatch(changeFavoritePageLoadingStatusAction(LoadingStatus.Success));
     } catch {
       toast.info(LoadMessageFail.Favorite);
+
+      dispatch(changeFavoritePageLoadingStatusAction(LoadingStatus.Fail));
     }
   };
 
@@ -118,12 +126,16 @@ export const fetchNearbyOfferAction = (id: OfferId): ThunkActionResult =>
 export const fetchOfferAction = (id: OfferId): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     try {
+      dispatch(changeOfferLoadingStatusAction(LoadingStatus.Loading));
+
       const { data } = await api.get<OfferBackend>(`${APIRoute.Hotels}/${id}`);
 
       dispatch(loadOfferAction(data));
+      dispatch(changeOfferLoadingStatusAction(LoadingStatus.Success));
     }
     catch {
       dispatch(redirectToRoute(AppRoute.NotFound404));
+      dispatch(changeOfferLoadingStatusAction(LoadingStatus.Fail));
     }
   };
 

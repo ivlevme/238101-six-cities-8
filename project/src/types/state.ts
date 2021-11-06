@@ -24,6 +24,7 @@ export type CommentProcess = {
  * */
 export type FavoritesProcess = {
   favorites: Offer[];
+  loadingPageStatus: LoadingStatus;
   loadingStatus: LoadingStatus;
 };
 
@@ -32,6 +33,7 @@ export type FavoritesProcess = {
  * */
 export type OfferProcess = {
   offer: Offer | null;
+  loadingStatus: LoadingStatus;
   nearbyOffers: Offer[];
 }
 

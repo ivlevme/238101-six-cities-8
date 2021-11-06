@@ -2,14 +2,26 @@ import type { ConnectedProps } from 'react-redux';
 import { connect } from 'react-redux';
 
 import type { ThunkAppDispatch } from '../../types/action';
-import type { OfferId } from '../../types';
+import type {
+  OfferId,
+  State
+} from '../../types';
 
 import type { BookmarksProps } from './types';
 
-import { BookmarkText } from '../../consts';
+import {
+  BookmarkText,
+  LoadingStatus
+} from '../../consts';
 import { BookmarksClassName } from './constants';
 import { createPlaceCardClassName } from './helpers';
 import { changeFavoriteStatusOffer } from '../../store/api-actions';
+
+const mapStateToProps = ({
+  FAVORITE,
+}: State) => ({
+  loadingFavoriteStatus: FAVORITE.loadingStatus,
+});
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   onFavoriteButtonClick(id: OfferId, status: boolean) {
@@ -17,7 +29,7 @@ const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   },
 });
 
-const connector = connect(null, mapDispatchToProps);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
@@ -26,6 +38,7 @@ type ConnectedComponentProps = PropsFromRedux & BookmarksProps;
 function Bookmarks({
   active,
   id,
+  loadingFavoriteStatus,
   onFavoriteButtonClick,
 }: ConnectedComponentProps): JSX.Element {
 
@@ -42,7 +55,12 @@ function Bookmarks({
   };
 
   return (
-    <button onClick={handleButtonClick} className={renderPlaceCardClassName()} type='button'>
+    <button
+      disabled={loadingFavoriteStatus === LoadingStatus.Loading}
+      className={renderPlaceCardClassName()}
+      onClick={handleButtonClick}
+      type='button'
+    >
       <svg
         className='place-card__bookmark-icon'
         height='19'

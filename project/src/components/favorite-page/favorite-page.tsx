@@ -10,7 +10,10 @@ import type {
 } from '../../types';
 import type { ThunkAppDispatch } from '../../types/action';
 
-import { NameCity } from '../../consts';
+import {
+  LoadingStatus,
+  NameCity
+} from '../../consts';
 import {
   FavoritesEmpty,
   FavoritesLocation,
@@ -27,6 +30,7 @@ const mapStateToProps = ({
   FAVORITE,
 }: State) => ({
   favorities: FAVORITE.favorites,
+  loadingPageStatus: FAVORITE.loadingPageStatus,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
@@ -43,11 +47,26 @@ type ConnectedComponentProps = PropsFromRedux;
 
 function FavoritePage({
   favorities,
+  loadingPageStatus,
   onLoadFavorites,
 }: ConnectedComponentProps): JSX.Element {
   useEffect(() => {
     onLoadFavorites();
-  }, [onLoadFavorites]);
+  }, [
+    onLoadFavorites,
+  ]);
+
+  if(loadingPageStatus === LoadingStatus.Loading) {
+    return (
+      <div
+        style={{
+          textAlign: 'center',
+        }}
+      >
+        Loading Favorite Offers information...
+      </div>
+    );
+  }
 
   const renderLocation = (location: NameCity, offers: Offer[]) => (
     <FavoritesLocation

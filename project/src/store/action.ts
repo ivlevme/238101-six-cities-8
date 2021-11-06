@@ -20,7 +20,9 @@ export enum ActionType {
   ChangeCity = 'city/change',
   ChangeCommentLoadingStatus = 'comment/loadingStatus',
   ChangeFavoriteLoadingStatus = 'favorite/loadingStatus',
+  ChangeFavoritePageLoadingStatus = 'offer/loadingPageStatus',
   ChangeOfferFavoriteStatus = 'offer/changeFavoriteStatus',
+  ChangeOfferLoadingStatus = 'offer/loadingStatus',
   ChangeSorting = 'offers/sorting',
   ChangeUserInfo = 'user/info',
   ClearOfferAction = 'offer/clearData',
@@ -62,6 +64,26 @@ export const changeCommentLoadingStatusAction = (status: LoadingStatus) => ({
  * */
 export const changeFavoriteLoadingStatusAction = (status: LoadingStatus) => ({
   type: ActionType.ChangeFavoriteLoadingStatus,
+  payload: status,
+}) as const;
+
+/**
+ * @function changeFavoritePageLoadingStatusAction - Action creator for
+ * change loading status for favorite page
+ * @param status - status loading
+ * */
+export const changeFavoritePageLoadingStatusAction = (status: LoadingStatus) => ({
+  type: ActionType.ChangeFavoritePageLoadingStatus,
+  payload: status,
+}) as const;
+
+/**
+ * @function changeOfferLoadingStatusAction - Action creator for
+ * change offer loading status
+ * @param status - loading status
+ * */
+export const changeOfferLoadingStatusAction = (status: LoadingStatus) => ({
+  type: ActionType.ChangeOfferLoadingStatus,
   payload: status,
 }) as const;
 
@@ -112,6 +134,7 @@ export const clearOfferAction = () => ({
 export const clearOffersFavoriteStatusAction = () => ({
   type: ActionType.ClearOffersFavoriteStatus,
 }) as const;
+
 
 /**
  * @function fillOffersAction - Action creator for fill offers by city

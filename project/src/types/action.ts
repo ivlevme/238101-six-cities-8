@@ -8,6 +8,8 @@ import {
   changeCityAction,
   changeCommentLoadingStatusAction,
   changeFavoriteLoadingStatusAction,
+  changeFavoritePageLoadingStatusAction,
+  changeOfferLoadingStatusAction,
   changeOfferFavoriteStatusAction,
   changeSortingAction,
   changeUserInfoAction,
@@ -31,6 +33,8 @@ export type Actions =
   | ReturnType<typeof changeCityAction>
   | ReturnType<typeof changeCommentLoadingStatusAction>
   | ReturnType<typeof changeFavoriteLoadingStatusAction>
+  | ReturnType<typeof changeFavoritePageLoadingStatusAction>
+  | ReturnType<typeof changeOfferLoadingStatusAction>
   | ReturnType<typeof changeOfferFavoriteStatusAction>
   | ReturnType<typeof changeSortingAction>
   | ReturnType<typeof changeUserInfoAction>

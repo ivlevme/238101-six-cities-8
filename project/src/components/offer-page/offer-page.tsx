@@ -18,6 +18,7 @@ import type { ThunkAppDispatch } from '../../types/action';
 import {
   AuthorizationStatus,
   BookmarkText,
+  LoadingStatus,
   RADIX
 } from '../../consts';
 import {
@@ -42,12 +43,15 @@ import { clearOfferAction } from '../../store/action';
 import { PromoImage } from './const';
 
 const mapStateToProps = ({
-  OFFER,
   COMMENT,
+  FAVORITE,
+  OFFER,
   USER,
 }: State) => ({
   authorizationStatus: USER.authorizationStatus,
   comments: COMMENT.comments,
+  loadingFavoriteStatus: FAVORITE.loadingStatus,
+  loadingStatus: OFFER.loadingStatus,
   nearbyOffers: OFFER.nearbyOffers,
   offer: OFFER.offer,
 });
@@ -80,6 +84,8 @@ function OfferPage({
   authorizationStatus,
   city,
   comments,
+  loadingFavoriteStatus,
+  loadingStatus,
   nearbyOffers,
   offer,
   onFavoriteButtonClick,
@@ -104,7 +110,7 @@ function OfferPage({
     onMouseLeaveOffer,
   ] = useActiveOffer({ id: offerId });
 
-  if(!offer?.id) {
+  if(loadingStatus === LoadingStatus.Loading) {
     return(
       <div
         style={{
@@ -112,6 +118,18 @@ function OfferPage({
         }}
       >
         Loading Offer information...
+      </div>
+    );
+  }
+
+  if(!offer) {
+    return(
+      <div
+        style={{
+          textAlign: 'center',
+        }}
+      >
+        Error loading offer information.
       </div>
     );
   }
@@ -146,6 +164,7 @@ function OfferPage({
               <div className='property__name-wrapper'>
                 <h1 className='property__name'>{offer.title}</h1>
                 <button
+                  disabled={loadingFavoriteStatus === LoadingStatus.Loading}
                   className={`property__bookmark-button ${
                     offer.bookmark ? 'property__bookmark-button--active' : ''
                   } button`}
