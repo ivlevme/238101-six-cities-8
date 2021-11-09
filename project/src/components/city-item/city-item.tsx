@@ -16,7 +16,7 @@ import {
   changeCityAction,
   changeSortingAction,
   fillOffersAction
-} from '../../store/action';
+} from '../../store/actions';
 import { Sorting } from '../../consts';
 
 const mapStateToProps = ({

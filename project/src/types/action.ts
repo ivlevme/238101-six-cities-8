@@ -24,7 +24,7 @@ import {
   redirectToRoute,
   requireAuthorization,
   requireLogout
-} from '../store/action';
+} from '../store/actions';
 
 /**
  * @type {Actions} - Redux Actions type

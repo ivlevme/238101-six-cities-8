@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import type { ThunkAppDispatch } from './types/action';
 
 import { App } from './components';
-import { requireAuthorization } from './store/action';
+import { requireAuthorization } from './store/actions';
 import { rootReducer } from './store/root-reducer';
 import { redirect } from './store/middlewares/redirect';
 

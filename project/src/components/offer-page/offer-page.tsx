@@ -39,7 +39,7 @@ import {
   fetchNearbyOfferAction,
   fetchOfferAction
 } from '../../store/api-actions';
-import { clearOfferAction } from '../../store/action';
+import { clearOfferAction } from '../../store/actions';
 import { PromoImage } from './const';
 
 const mapStateToProps = ({

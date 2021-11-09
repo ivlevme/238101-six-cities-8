@@ -7,7 +7,7 @@ import {
   getOffersBySorting
 } from '../../helpers';
 
-import { ActionType } from '../action';
+import { ActionType } from '../action-type';
 import { paris, Sorting } from '../../consts';
 
 

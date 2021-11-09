@@ -1,7 +1,7 @@
 import type { Actions } from '../../types/action';
 import type { FavoritesProcess } from '../../types/state';
 
-import { ActionType } from '../action';
+import { ActionType } from '../action-type';
 
 import { LoadingStatus } from '../../consts';
 import { getConvertedOffers } from '../../adapter';

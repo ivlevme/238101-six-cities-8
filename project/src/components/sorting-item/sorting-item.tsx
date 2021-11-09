@@ -12,7 +12,7 @@ import type {
 } from '../../types';
 
 import { Sorting } from '../../consts';
-import { changeSortingAction } from '../../store/action';
+import { changeSortingAction } from '../../store/actions';
 
 const mapStateToProps = ({
   OFFERS,

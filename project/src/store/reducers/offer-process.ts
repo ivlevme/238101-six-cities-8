@@ -6,7 +6,7 @@ import {
   getConvertedOffers
 } from '../../adapter';
 
-import { ActionType } from '../action';
+import { ActionType } from '../action-type';
 import { LoadingStatus } from '../../consts';
 
 const initialState: OfferProcess = {
