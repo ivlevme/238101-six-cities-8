@@ -2,7 +2,7 @@ import type { RootState } from '../store/root-reducer';
 
 import {
   AuthorizationStatus,
-  CommentLoadingStatus,
+  LoadingStatus,
   Sorting
 } from '../consts';
 import type {
@@ -16,7 +16,16 @@ import type {
  * */
 export type CommentProcess = {
   comments: Comment[];
-  commentLoadingStatus: CommentLoadingStatus;
+  loadingStatus: LoadingStatus;
+};
+
+/**
+ * @FavoritesProcess State - Redux Reducer type for favorites offers
+ * */
+export type FavoritesProcess = {
+  favorites: Offer[];
+  loadingPageStatus: LoadingStatus;
+  loadingStatus: LoadingStatus;
 };
 
 /**
@@ -24,6 +33,7 @@ export type CommentProcess = {
  * */
 export type OfferProcess = {
   offer: Offer | null;
+  loadingStatus: LoadingStatus;
   nearbyOffers: Offer[];
 }
 

@@ -12,7 +12,7 @@ import type { State } from '../../types';
 import { browserHistory } from '../../browser-history';
 import { cities } from '../../consts';
 import {
-  Favorites,
+  FavoritePage,
   Login,
   Main,
   NotFoundScreen,
@@ -20,7 +20,6 @@ import {
   PrivateRoute
 } from '../index';
 import { AppRoute } from '../../routes';
-import { favoritesMock } from '../../mocks';
 import { isCheckedAuth } from '../../helpers';
 
 const mapStateToProps = ({
@@ -68,7 +67,7 @@ function App({
           exact
           path={AppRoute.Favorites}
         >
-          <Favorites favorities={favoritesMock} />
+          <FavoritePage />
         </PrivateRoute>
         <Route
           exact

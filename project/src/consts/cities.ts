@@ -32,8 +32,8 @@ export const brussels: City = {
 export const cologne: City = {
   id: 3,
   location: {
-    latitude: 50.918461,
-    longitude: 6.969974,
+    latitude: 50.938361,
+    longitude: 6.959974,
     zoom: 13,
   },
   name: NameCity.Cologne,

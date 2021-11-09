@@ -18,6 +18,7 @@ import type { ThunkAppDispatch } from '../../types/action';
 import {
   AuthorizationStatus,
   BookmarkText,
+  LoadingStatus,
   RADIX
 } from '../../consts';
 import {
@@ -33,25 +34,38 @@ import { getCalcRating } from '../../helpers';
 import { useActiveOffer } from '../../hooks';
 
 import {
+  changeFavoriteStatusOffer,
   fetchCommentsAction,
   fetchNearbyOfferAction,
   fetchOfferAction
 } from '../../store/api-actions';
-import { clearOfferAction } from '../../store/action';
+import { clearOfferAction } from '../../store/actions';
 import { PromoImage } from './const';
 
 const mapStateToProps = ({
-  OFFER,
   COMMENT,
+  FAVORITE,
+  OFFER,
   USER,
 }: State) => ({
   authorizationStatus: USER.authorizationStatus,
   comments: COMMENT.comments,
+  loadingFavoriteStatus: FAVORITE.loadingStatus,
+  loadingStatus: OFFER.loadingStatus,
   nearbyOffers: OFFER.nearbyOffers,
   offer: OFFER.offer,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  onFavoriteButtonClick(
+    id: OfferId,
+    status: boolean,
+  ) {
+    dispatch(changeFavoriteStatusOffer(
+      id,
+      status,
+    ));
+  },
   onLoadOffer(id: OfferId) {
     dispatch(fetchOfferAction(id));
     dispatch(fetchNearbyOfferAction(id));
@@ -70,8 +84,11 @@ function OfferPage({
   authorizationStatus,
   city,
   comments,
+  loadingFavoriteStatus,
+  loadingStatus,
   nearbyOffers,
   offer,
+  onFavoriteButtonClick,
   onLeaveOffer,
   onLoadOffer,
 }: PropsFromRedux): JSX.Element {
@@ -93,7 +110,7 @@ function OfferPage({
     onMouseLeaveOffer,
   ] = useActiveOffer({ id: offerId });
 
-  if(!offer) {
+  if(loadingStatus === LoadingStatus.Loading) {
     return(
       <div
         style={{
@@ -101,6 +118,18 @@ function OfferPage({
         }}
       >
         Loading Offer information...
+      </div>
+    );
+  }
+
+  if(!offer) {
+    return(
+      <div
+        style={{
+          textAlign: 'center',
+        }}
+      >
+        Error loading offer information.
       </div>
     );
   }
@@ -114,6 +143,10 @@ function OfferPage({
       </div>
     </div>
   );
+
+  const handleBookmarkButtonClick = () => {
+    onFavoriteButtonClick(offer.id, !offer.bookmark);
+  };
 
   return (
     <div className='page'>
@@ -131,9 +164,11 @@ function OfferPage({
               <div className='property__name-wrapper'>
                 <h1 className='property__name'>{offer.title}</h1>
                 <button
+                  disabled={loadingFavoriteStatus === LoadingStatus.Loading}
                   className={`property__bookmark-button ${
                     offer.bookmark ? 'property__bookmark-button--active' : ''
                   } button`}
+                  onClick={handleBookmarkButtonClick}
                   type='button'
                 >
                   <svg

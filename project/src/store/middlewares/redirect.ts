@@ -1,6 +1,6 @@
 import type { Middleware } from 'redux';
 
-import { ActionType } from '../action';
+import { ActionType } from '../action-type';
 import { browserHistory } from '../../browser-history';
 import { rootReducer } from '../root-reducer';
 

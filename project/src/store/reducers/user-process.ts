@@ -1,7 +1,7 @@
 import type { Actions } from '../../types/action';
 import type { UserProcess } from '../../types/state';
 
-import { ActionType } from '../action';
+import { ActionType } from '../action-type';
 import { AuthorizationStatus } from '../../consts';
 
 

@@ -6,10 +6,12 @@ import {
   getConvertedOffers
 } from '../../adapter';
 
-import { ActionType } from '../action';
+import { ActionType } from '../action-type';
+import { LoadingStatus } from '../../consts';
 
 const initialState: OfferProcess = {
   offer: null,
+  loadingStatus: LoadingStatus.Init,
   nearbyOffers: [],
 };
 
@@ -18,6 +20,23 @@ const initialState: OfferProcess = {
  */
 const offerProcess = (state = initialState, action: Actions): OfferProcess => {
   switch (action.type) {
+
+    case ActionType.ChangeOfferFavoriteStatus: {
+      return {
+        ...state,
+        offer: state.offer && {
+          ...state.offer,
+          bookmark: action.payload.status,
+        },
+      };
+    }
+
+    case ActionType.ChangeOfferLoadingStatus: {
+      return {
+        ...state,
+        loadingStatus: action.payload,
+      };
+    }
 
     case ActionType.ClearOfferAction: {
       return {

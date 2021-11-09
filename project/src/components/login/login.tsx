@@ -24,7 +24,7 @@ import {
   changeSortingAction,
   fillOffersAction,
   redirectToRoute
-} from '../../store/action';
+} from '../../store/actions';
 import {
   amsterdam,
   Sorting

@@ -1,5 +1,16 @@
-export enum FailAuthlMessage {
-  Comment = 'Не удалось добавить новый комментарий :(',
+export enum AuthMessage {
   Reminder = 'Не забудьте авторизоваться',
   Fail = 'Логин или пароль неверные',
+}
+
+export enum LoadMessageFail {
+  Comments = 'Не удалось загрузить комментарии',
+  Favorite = 'Не удалось загрузить избранные предложения',
+  NearbyOffers = 'Не удалось загрузить предложения по близости',
+  Offer = 'Не удалось загрузить информацию о предложении',
+}
+
+export enum AddMessageFail {
+  Comment = 'Не удалось добавить новый комментарий :(',
+  Favorite = 'Не удалось добавить предложение в избранное :(',
 }

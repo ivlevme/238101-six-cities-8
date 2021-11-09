@@ -1,14 +1,14 @@
 import type { Actions } from '../../types/action';
 import type { CommentProcess } from '../../types/state';
 
-import { ActionType } from '../action';
+import { ActionType } from '../action-type';
 
-import { CommentLoadingStatus } from '../../consts';
+import { LoadingStatus } from '../../consts';
 import { getConvertedComments } from '../../adapter';
 
 const initialState: CommentProcess = {
-  commentLoadingStatus: CommentLoadingStatus.Init,
   comments: [],
+  loadingStatus: LoadingStatus.Init,
 };
 
 /**
@@ -20,7 +20,7 @@ const commentProcess = (state = initialState, action: Actions): CommentProcess =
     case ActionType.ChangeCommentLoadingStatus: {
       return {
         ...state,
-        commentLoadingStatus: action.payload,
+        loadingStatus: action.payload,
       };
     }
 

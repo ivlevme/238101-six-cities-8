@@ -7,7 +7,7 @@ import {
   getOffersBySorting
 } from '../../helpers';
 
-import { ActionType } from '../action';
+import { ActionType } from '../action-type';
 import { paris, Sorting } from '../../consts';
 
 
@@ -32,6 +32,26 @@ const offersProcess = (state = initialState, action: Actions): OffersProcess => 
       };
     }
 
+
+    case ActionType.ClearOffersFavoriteStatus: {
+      return {
+        ...state,
+        offersByCity: state.offersByCity.map(
+          (offer) => ({
+            ...offer,
+            bookmark: false,
+          }),
+        ),
+
+        allOffers: state.allOffers.map(
+          (offer) => ({
+            ...offer,
+            bookmark: false,
+          }),
+        ),
+      };
+    }
+
     case ActionType.ChangeSorting: {
       const offersByCity = getOffersByCity(state.activeCity.name, state.allOffers);
 
@@ -45,6 +65,33 @@ const offersProcess = (state = initialState, action: Actions): OffersProcess => 
               action.payload,
               offersByCity,
             ),
+      };
+    }
+
+    case ActionType.ChangeOfferFavoriteStatus: {
+      return {
+        ...state,
+        offersByCity: state.offersByCity.map((offer) => {
+          if (offer.id === action.payload.id) {
+            return {
+              ...offer,
+              bookmark: action.payload.status,
+            };
+          }
+
+          return offer;
+        }),
+
+        allOffers: state.allOffers.map((offer) => {
+          if (offer.id === action.payload.id) {
+            return {
+              ...offer,
+              bookmark: action.payload.status,
+            };
+          }
+
+          return offer;
+        }),
       };
     }
 
