@@ -1,3 +1,5 @@
+import { createAction } from '@reduxjs/toolkit';
+
 import type {
   City,
   CommentBackend,
@@ -42,50 +44,60 @@ export enum ActionType {
  * @function changeCityAction - Action creator for change Active Cite
  * @param city - Current active City
  * */
-export const changeCityAction = (city: City) => ({
-  type: ActionType.ChangeCity,
-  payload: city,
-}) as const;
+export const changeCityAction = createAction(
+  ActionType.ChangeCity,
+  (city: City) => ({
+    payload: city,
+  }),
+);
 
 /**
  * @function changeCommentLoadingStatusAction - Action creator for change
  * loading status for adding new comment
  * @param status - status loading
  * */
-export const changeCommentLoadingStatusAction = (status: LoadingStatus) => ({
-  type: ActionType.ChangeCommentLoadingStatus,
-  payload: status,
-}) as const;
+export const changeCommentLoadingStatusAction = createAction(
+  ActionType.ChangeCommentLoadingStatus,
+  (status: LoadingStatus) => ({
+    payload: status,
+  }),
+);
 
 /**
  * @function changeFavoriteLoadingStatusAction - Action creator for
  * change loading status for adding offer to favorite
  * @param status - status loading
  * */
-export const changeFavoriteLoadingStatusAction = (status: LoadingStatus) => ({
-  type: ActionType.ChangeFavoriteLoadingStatus,
-  payload: status,
-}) as const;
+export const changeFavoriteLoadingStatusAction = createAction(
+  ActionType.ChangeFavoriteLoadingStatus,
+  (status: LoadingStatus) => ({
+    payload: status,
+  }),
+);
 
 /**
  * @function changeFavoritePageLoadingStatusAction - Action creator for
  * change loading status for favorite page
  * @param status - status loading
  * */
-export const changeFavoritePageLoadingStatusAction = (status: LoadingStatus) => ({
-  type: ActionType.ChangeFavoritePageLoadingStatus,
-  payload: status,
-}) as const;
+export const changeFavoritePageLoadingStatusAction = createAction(
+  ActionType.ChangeFavoritePageLoadingStatus,
+  (status: LoadingStatus) => ({
+    payload: status,
+  }),
+);
 
 /**
  * @function changeOfferLoadingStatusAction - Action creator for
  * change offer loading status
  * @param status - loading status
  * */
-export const changeOfferLoadingStatusAction = (status: LoadingStatus) => ({
-  type: ActionType.ChangeOfferLoadingStatus,
-  payload: status,
-}) as const;
+export const changeOfferLoadingStatusAction = createAction(
+  ActionType.ChangeOfferLoadingStatus,
+  (status: LoadingStatus) => ({
+    payload: status,
+  }),
+);
 
 /**
  * @function changeOfferFavoriteStatusAction - Action creator for
@@ -93,124 +105,145 @@ export const changeOfferLoadingStatusAction = (status: LoadingStatus) => ({
  * @param id - offer id
  * @param status - favorite status
  * */
-export const changeOfferFavoriteStatusAction = (id: OfferId, status: boolean) => ({
-  type: ActionType.ChangeOfferFavoriteStatus,
-  payload: {
-    id,
-    status,
-  },
-}) as const;
+export const changeOfferFavoriteStatusAction = createAction(
+  ActionType.ChangeOfferFavoriteStatus,
+  (id: OfferId, status: boolean) => ({
+    payload: {
+      id,
+      status,
+    },
+  }),
+);
 
 /**
  * @function changeSortingAction - Action creator for change active sorting
  * @param sort - Current Sorting type
  * */
-export const changeSortingAction = (sort: Sorting) => ({
-  type: ActionType.ChangeSorting,
-  payload: sort,
-}) as const;
+export const changeSortingAction = createAction(
+  ActionType.ChangeSorting,
+  (sort: Sorting) => ({
+    payload: sort,
+  }),
+);
 
 /**
  * @function changeUserInfoAction - Action creator for change user info
  * @param user - Current Sorting type
  * */
-export const changeUserInfoAction = (email: string) => ({
-  type: ActionType.ChangeUserInfo,
-  payload: email,
-}) as const;
+export const changeUserInfoAction = createAction(
+  ActionType.ChangeUserInfo,
+  (email: string) => ({
+    payload: email,
+  }),
+);
 
 /**
  * @function clearOfferAction - Action creator for clear offer data
  * after component unmount
  * */
-export const clearOfferAction = () => ({
-  type: ActionType.ClearOfferAction,
-}) as const;
+export const clearOfferAction = createAction(
+  ActionType.ClearOfferAction,
+);
 
 /**
  * @function clearOffersFavoriteStatusAction - Action creator for clear offers
  * favorite status
  * */
-export const clearOffersFavoriteStatusAction = () => ({
-  type: ActionType.ClearOffersFavoriteStatus,
-}) as const;
-
+export const clearOffersFavoriteStatusAction = createAction(
+  ActionType.ClearOffersFavoriteStatus,
+);
 
 /**
  * @function fillOffersAction - Action creator for fill offers by city
  * @param city - Current active City
  * */
-export const fillOffersAction = (city: NameCity) => ({
-  type: ActionType.FillOffers,
-  payload: city,
-}) as const;
+export const fillOffersAction = createAction(
+  ActionType.FillOffers,
+  (city: NameCity) => ({
+    payload: city,
+  }),
+);
 
 /**
  * @function loadNearbyOfferAction - Action creator for fill nearby offers
  * @param offers - nearby offers
  * */
-export const loadCommentsAction = (comments: CommentBackend[]) => ({
-  type: ActionType.LoadComments,
-  payload: comments,
-}) as const;
+export const loadCommentsAction = createAction(
+  ActionType.LoadComments,
+  (comments: CommentBackend[]) => ({
+    payload: comments,
+  }),
+);
 
 /**
  * @function loadFavoritesAction - Action creator for fill favorites offers
  * @param offers - favorites offers
  * */
-export const loadFavoritesAction = (offers: OfferBackend[]) => ({
-  type: ActionType.LoadFavorites,
-  payload: offers,
-}) as const;
+export const loadFavoritesAction = createAction(
+  ActionType.LoadFavorites,
+  (offers: OfferBackend[]) => ({
+    payload: offers,
+  }),
+);
 
 /**
  * @function loadNearbyOfferAction - Action creator for fill nearby offers
  * @param offers - nearby offers
  * */
-export const loadNearbyOfferAction = (offers: OfferBackend[]) => ({
-  type: ActionType.LoadNearbyOffers,
-  payload: offers,
-}) as const;
+export const loadNearbyOfferAction = createAction(
+  ActionType.LoadNearbyOffers,
+  (offers: OfferBackend[]) => ({
+    payload: offers,
+  }),
+);
 
 /**
  * @function loadOfferAction - Action creator for load offer from server
  * @param id - Offer id received from remote server
  * */
-export const loadOfferAction = (offer: OfferBackend) => ({
-  type: ActionType.LoadOffer,
-  payload: offer,
-}) as const;
+export const loadOfferAction = createAction(
+  ActionType.LoadOffer,
+  (offer: OfferBackend) => ({
+    payload: offer,
+  }),
+);
 
 /**
  * @function loadOffersAction - Action creator for load offers from server
  * @param offers - Offers received from remote server
  * */
-export const loadOffersAction = (offers: OfferBackend[]) => ({
-  type: ActionType.LoadOffers,
-  payload: offers,
-}) as const;
+export const loadOffersAction = createAction(
+  ActionType.LoadOffers,
+  (offers: OfferBackend[]) => ({
+    payload: offers,
+  }),
+);
 
 /**
  * @function requireAuthorization - Action creator for define auth status
  * @param authStatus - user`s auth status
  * */
-export const requireAuthorization = (authStatus: AuthorizationStatus) => ({
-  type: ActionType.RequireAuthorization,
-  payload: authStatus,
-} as const);
+export const requireAuthorization = createAction(
+  ActionType.RequireAuthorization,
+  (authStatus: AuthorizationStatus) => ({
+    payload: authStatus,
+  }),
+);
 
 /**
  * @function requireLogout - Action creator for logout
  * */
-export const requireLogout = () => ({
-  type: ActionType.RequireLogout,
-} as const);
+export const requireLogout = createAction(
+  ActionType.RequireLogout,
+);
 
 /**
  * @function redirectToRoute - Action creator for redirect to another page
  * * @param url - path url to redirect
  * */
-export const redirectToRoute = (url: AppRoute) => ({
-  type: ActionType.RedirectToRoute,
-  payload: url,
-} as const);
+export const redirectToRoute = createAction(
+  ActionType.RedirectToRoute,
+  (url: AppRoute) => ({
+    payload: url,
+  }),
+);
