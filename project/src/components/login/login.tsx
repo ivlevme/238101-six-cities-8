@@ -27,17 +27,23 @@ import {
 } from '../../store/actions';
 import {
   amsterdam,
+  AuthorizationStatus,
   Sorting
 } from '../../consts';
 import { initUserSignIn } from './const';
 
 const mapStateToProps = ({
   OFFERS,
+  USER,
 }: State) => ({
   sorting: OFFERS.sorting,
+  authorizationStatus: USER.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  redirectToMain() {
+    dispatch(redirectToRoute(AppRoute.Main));
+  },
   onSubmit(authData: AuthData) {
     dispatch(loginAction(authData));
   },
@@ -54,11 +60,17 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function Login({
+  authorizationStatus,
+  sorting,
+  redirectToMain,
   onChangeCity,
   onSubmit,
-  sorting,
 }: PropsFromRedux): JSX.Element {
   const [userSignIn, setUserSignIn] = useState(initUserSignIn);
+
+  if(authorizationStatus === AuthorizationStatus.Auth) {
+    redirectToMain();
+  }
 
   const isSignInButtonDisabled =
     userSignIn.email.trim() === initUserSignIn.email ||
