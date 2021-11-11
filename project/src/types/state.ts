@@ -33,7 +33,8 @@ export type FavoritesProcess = {
  * */
 export type OfferProcess = {
   offer: Offer | null;
-  loadingStatus: LoadingStatus;
+  loadingOfferStatus: LoadingStatus;
+  loadingNearbyStatus: LoadingStatus;
   nearbyOffers: Offer[];
 }
 

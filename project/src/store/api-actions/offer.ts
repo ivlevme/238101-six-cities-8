@@ -13,6 +13,7 @@ import {
 } from '../../consts';
 import { AppRoute } from '../../routes';
 import {
+  changeNearbyLoadingStatusAction,
   changeOfferLoadingStatusAction,
   loadNearbyOfferAction,
   loadOfferAction,
@@ -27,11 +28,14 @@ import {
 export const fetchNearbyOfferAction = (id: OfferId): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     try {
-      const { data } = await api.get<OfferBackend[]>(`${APIRoute.Hotels}/${id}/nearby`);
+      dispatch(changeNearbyLoadingStatusAction(LoadingStatus.Loading));
+      const { data } = await api.get<OfferBackend[]>(`${APIRoute.Hotels}/${id}${APIRoute.Nearby}`);
 
       dispatch(loadNearbyOfferAction(data));
+      dispatch(changeNearbyLoadingStatusAction(LoadingStatus.Success));
     } catch {
       toast.info(LoadMessageFail.NearbyOffers);
+      dispatch(changeNearbyLoadingStatusAction(LoadingStatus.Fail));
     }
   };
 

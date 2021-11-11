@@ -17,7 +17,8 @@ import {
   Main,
   NotFoundScreen,
   OfferPage,
-  PrivateRoute
+  PrivateRoute,
+  Spinner
 } from '../index';
 import { AppRoute } from '../../routes';
 import { isCheckedAuth } from '../../helpers';
@@ -41,16 +42,9 @@ function App({
   isDataLoaded,
 }: PropsFromRedux): JSX.Element {
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
-    return (
-      <div
-        style={{
-          textAlign: 'center',
-        }}
-      >
-        Loading Application...
-      </div>
-    );
+    return <Spinner text='Loading Application...'/>;
   }
+
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>

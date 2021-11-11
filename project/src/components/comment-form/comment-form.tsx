@@ -36,7 +36,7 @@ const mapStateToProps = ({
   OFFER,
 }: State) => ({
   offer: OFFER.offer,
-  commentLoadingStatus: COMMENT.loadingStatus,
+  loadingStatus: COMMENT.loadingStatus,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
@@ -58,22 +58,22 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function CommentForm({
-  commentLoadingStatus,
+  loadingStatus,
   onAddComment,
   offer,
 }: PropsFromRedux): JSX.Element {
   const [comment, setComment] = useState(initalComment);
 
   useEffect(() => {
-    if (commentLoadingStatus === LoadingStatus.Success) {
+    if (loadingStatus === LoadingStatus.Success) {
       setComment(initalComment);
     }
-  }, [commentLoadingStatus]);
+  }, [loadingStatus]);
 
   const isSubmitButtonDisabled =
     comment.rating === initalComment.rating ||
     comment.text.trim() === initalComment.text ||
-    commentLoadingStatus === LoadingStatus.Loading;
+    loadingStatus === LoadingStatus.Loading;
 
   const handleInputRadioChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setComment((prevComment) => ({

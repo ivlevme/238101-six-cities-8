@@ -9,6 +9,7 @@ export {
 export {
   changeOfferFavoriteStatusAction,
   changeOfferLoadingStatusAction,
+  changeNearbyLoadingStatusAction,
   clearOfferAction,
   loadCommentsAction,
   loadNearbyOfferAction,

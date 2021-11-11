@@ -28,7 +28,8 @@ import {
   Map,
   OfferCard,
   OfferGood,
-  OfferPromoImg
+  OfferPromoImg,
+  Spinner
 } from '../index';
 import { getCalcRating } from '../../helpers';
 import { useActiveOffer } from '../../hooks';
@@ -50,8 +51,10 @@ const mapStateToProps = ({
 }: State) => ({
   authorizationStatus: USER.authorizationStatus,
   comments: COMMENT.comments,
+  loadingCommentsStatus: COMMENT.loadingStatus,
   loadingFavoriteStatus: FAVORITE.loadingStatus,
-  loadingStatus: OFFER.loadingStatus,
+  loadingOfferStatus: OFFER.loadingOfferStatus,
+  loadingNearbyStatus: OFFER.loadingNearbyStatus,
   nearbyOffers: OFFER.nearbyOffers,
   offer: OFFER.offer,
 });
@@ -84,8 +87,10 @@ function OfferPage({
   authorizationStatus,
   city,
   comments,
+  loadingCommentsStatus,
   loadingFavoriteStatus,
-  loadingStatus,
+  loadingOfferStatus,
+  loadingNearbyStatus,
   nearbyOffers,
   offer,
   onFavoriteButtonClick,
@@ -110,16 +115,12 @@ function OfferPage({
     onMouseLeaveOffer,
   ] = useActiveOffer({ id: offerId });
 
-  if(loadingStatus === LoadingStatus.Loading) {
-    return(
-      <div
-        style={{
-          textAlign: 'center',
-        }}
-      >
-        Loading Offer information...
-      </div>
-    );
+  if(
+    loadingOfferStatus === LoadingStatus.Loading ||
+    loadingCommentsStatus === LoadingStatus.Loading ||
+    loadingNearbyStatus === LoadingStatus.Loading
+  ) {
+    return <Spinner text='Loading Offer information...'/>;
   }
 
   if(!offer) {
@@ -246,14 +247,27 @@ function OfferPage({
                   </p>
                 </div>
               </div>
-              <section className='property__reviews reviews'>
-                <h2 className='reviews__title'>
-                  Reviews &middot;{' '}
-                  <span className='reviews__amount'>{comments.length}</span>
-                </h2>
-                <Comments comments={comments} />
-                { authorizationStatus === AuthorizationStatus.Auth && <CommentForm /> }
-              </section>
+              {loadingCommentsStatus === LoadingStatus.Fail
+                ? (
+                  <div
+                    style={{
+                      marginBottom: 20,
+                    }}
+                  >
+                    Failed loading comments
+                  </div>
+                )
+                :
+                (
+                  <section className='property__reviews reviews'>
+                    <h2 className='reviews__title'>
+                      Reviews &middot;{' '}
+                      <span className='reviews__amount'>{comments.length}</span>
+                    </h2>
+                    <Comments comments={comments} />
+                    { authorizationStatus === AuthorizationStatus.Auth && <CommentForm /> }
+                  </section>
+                )}
             </div>
           </div>
           <section className='property__map map'>
@@ -265,21 +279,34 @@ function OfferPage({
           </section>
         </section>
         <div className='container'>
-          <section className='near-places places'>
-            <h2 className='near-places__title'>
-              Other places in the neighbourhood
-            </h2>
-            <div className='near-places__list places__list'>
-              {nearbyOffers.map((nearbyOffer) => (
-                <OfferCard
-                  key={nearbyOffer.id}
-                  offer={nearbyOffer}
-                  onMouseEnter={onMouseEnterOffer}
-                  onMouseLeave={onMouseLeaveOffer}
-                />
-              ))}
-            </div>
-          </section>
+          {loadingNearbyStatus === LoadingStatus.Fail
+            ? (
+              <div
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                Failed loading nearby offers
+              </div>
+            )
+            :
+            (
+              <section className='near-places places'>
+                <h2 className='near-places__title'>
+                  Other places in the neighbourhood
+                </h2>
+                <div className='near-places__list places__list'>
+                  {nearbyOffers.map((nearbyOffer) => (
+                    <OfferCard
+                      key={nearbyOffer.id}
+                      offer={nearbyOffer}
+                      onMouseEnter={onMouseEnterOffer}
+                      onMouseLeave={onMouseLeaveOffer}
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
         </div>
       </main>
     </div>

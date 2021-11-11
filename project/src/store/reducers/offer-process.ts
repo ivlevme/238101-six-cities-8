@@ -11,7 +11,8 @@ import { LoadingStatus } from '../../consts';
 
 const initialState: OfferProcess = {
   offer: null,
-  loadingStatus: LoadingStatus.Init,
+  loadingOfferStatus: LoadingStatus.Init,
+  loadingNearbyStatus: LoadingStatus.Init,
   nearbyOffers: [],
 };
 
@@ -34,7 +35,14 @@ const offerProcess = (state = initialState, action: Actions): OfferProcess => {
     case ActionType.ChangeOfferLoadingStatus: {
       return {
         ...state,
-        loadingStatus: action.payload,
+        loadingOfferStatus: action.payload,
+      };
+    }
+
+    case ActionType.ChangeNearbyLoadingStatus: {
+      return {
+        ...state,
+        loadingNearbyStatus: action.payload,
       };
     }
 

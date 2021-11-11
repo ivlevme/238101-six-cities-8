@@ -11,7 +11,8 @@ import type { ThunkActionResult } from '../../types/action';
 import { APIRoute } from '../../api/const';
 import {
   AddMessageFail,
-  LoadingStatus
+  LoadingStatus,
+  LoadMessageFail
 } from '../../consts';
 import {
   changeCommentLoadingStatusAction,
@@ -56,7 +57,15 @@ export const addCommentAction =
  */
 export const fetchCommentsAction = (id: OfferId): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const { data } = await api.get<CommentBackend[]>(`${APIRoute.Comments}/${id}`);
+    try {
+      dispatch(changeCommentLoadingStatusAction(LoadingStatus.Loading));
+      const { data } = await api.get<CommentBackend[]>(`${APIRoute.Comments}/${id}`);
 
-    dispatch(loadCommentsAction(data));
+      dispatch(loadCommentsAction(data));
+      dispatch(changeCommentLoadingStatusAction(LoadingStatus.Success));
+    } catch {
+      toast.info(LoadMessageFail.Comments);
+
+      dispatch(changeCommentLoadingStatusAction(LoadingStatus.Fail));
+    }
   };

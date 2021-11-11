@@ -22,6 +22,18 @@ export const changeOfferLoadingStatusAction = createAction(
 );
 
 /**
+ * @function changeNearbyLoadingStatusAction - Action creator for
+ * change loading status for nearby offers
+ * @param status - favorite status
+ * */
+export const changeNearbyLoadingStatusAction = createAction(
+  ActionType.ChangeNearbyLoadingStatus,
+  (status: LoadingStatus) => ({
+    payload: status,
+  }),
+);
+
+/**
  * @function changeOfferFavoriteStatusAction - Action creator for
  * change favorite status for offer
  * @param id - offer id
