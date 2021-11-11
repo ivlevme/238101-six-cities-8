@@ -18,7 +18,9 @@ import {
   FavoritesEmpty,
   FavoritesLocation,
   Footer,
-  Header
+  Header,
+  LoadingFailed,
+  Spinner
 } from '../index';
 import { getRandomInteger } from '../../helpers';
 import { fetchFavoriteOffersAction } from '../../store/api-actions';
@@ -57,15 +59,7 @@ function FavoritePage({
   ]);
 
   if(loadingPageStatus === LoadingStatus.Loading) {
-    return (
-      <div
-        style={{
-          textAlign: 'center',
-        }}
-      >
-        Loading Favorite Offers information...
-      </div>
-    );
+    return <Spinner text='Loading Favorite Offers information...'/>;
   }
 
   const renderLocation = (location: NameCity, offers: Offer[]) => (
@@ -108,20 +102,25 @@ function FavoritePage({
   };
 
   const renderFavoritesContent = () =>
-    favorities.length ?
-      (
+    favorities.length
+      ? (
         <section className='favorites'>
           <h1 className='favorites__title'>Saved listing</h1>
           <ul className='favorites__list'>{renderFavoritesCardByLocation()}</ul>
         </section>
-      ) : (<FavoritesEmpty />);
+      )
+      : (<FavoritesEmpty />);
 
   return (
     <div className='page'>
       <Header />
       <main className='page__main page__main--favorites'>
         <div className='page__favorites-container container'>
-          {renderFavoritesContent()}
+          {
+            loadingPageStatus === LoadingStatus.Fail
+              ? (<LoadingFailed text='Failed loading favorite offers information' />)
+              : renderFavoritesContent()
+          }
         </div>
       </main>
       <Footer />

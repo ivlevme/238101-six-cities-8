@@ -1,4 +1,4 @@
-import { OffersEmptyProps } from './types';
+import type { OffersEmptyProps } from './types';
 
 function OffersEmpty({ city }: OffersEmptyProps): JSX.Element {
   return (

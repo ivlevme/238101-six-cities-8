@@ -25,6 +25,7 @@ import {
   CommentForm,
   Comments,
   Header,
+  LoadingFailed,
   Map,
   OfferCard,
   OfferGood,
@@ -248,17 +249,8 @@ function OfferPage({
                 </div>
               </div>
               {loadingCommentsStatus === LoadingStatus.Fail
-                ? (
-                  <div
-                    style={{
-                      marginBottom: 20,
-                    }}
-                  >
-                    Failed loading comments
-                  </div>
-                )
-                :
-                (
+                ? (<LoadingFailed text='Failed loading comments' />)
+                : (
                   <section className='property__reviews reviews'>
                     <h2 className='reviews__title'>
                       Reviews &middot;{' '}
@@ -280,17 +272,8 @@ function OfferPage({
         </section>
         <div className='container'>
           {loadingNearbyStatus === LoadingStatus.Fail
-            ? (
-              <div
-                style={{
-                  textAlign: 'center',
-                }}
-              >
-                Failed loading nearby offers
-              </div>
-            )
-            :
-            (
+            ? (<LoadingFailed text='Failed loading nearby offers' />)
+            : (
               <section className='near-places places'>
                 <h2 className='near-places__title'>
                   Other places in the neighbourhood

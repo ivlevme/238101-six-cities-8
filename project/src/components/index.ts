@@ -12,6 +12,7 @@ export { default as FavoritesCard } from './favorites-card/favorites-card';
 export { default as FavoritesLocation } from './favorites-location/favorites-location';
 export { default as Footer } from './footer/footer';
 export { default as Header } from './header/header';
+export { default as LoadingFailed } from './loading-failed/loading-failed';
 export { default as Login } from './login/login';
 export { default as Logo } from './logo/logo';
 export { default as Main } from './main/main';
