@@ -58,7 +58,7 @@ function FavoritePage({
     onLoadFavorites,
   ]);
 
-  if(loadingPageStatus === LoadingStatus.Loading) {
+  if (loadingPageStatus === LoadingStatus.Loading) {
     return <Spinner text='Loading Favorite Offers information...'/>;
   }
 
