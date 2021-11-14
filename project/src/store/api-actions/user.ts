@@ -7,11 +7,13 @@ import type { Token } from '../../services/token';
 import { APIRoute } from '../../api/const';
 import {
   AuthMessage,
-  AuthorizationStatus
+  AuthorizationStatus,
+  LoadingStatus
 } from '../../consts';
 import { AppRoute } from '../../routes';
 import {
   changeUserInfoAction,
+  changeUserLoadingStatusAction,
   clearOffersFavoriteStatusAction,
   redirectToRoute,
   requireAuthorization,
@@ -44,6 +46,8 @@ export const checkAuthAction =
    }
    catch {
      toast.info(AuthMessage.Reminder);
+
+     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
    }
  };
 
@@ -60,6 +64,8 @@ export const loginAction =
   api,
 ) => {
   try {
+    dispatch(changeUserLoadingStatusAction(LoadingStatus.Loading));
+
     const {
       data: {
         email: userEmail,
@@ -72,13 +78,18 @@ export const loginAction =
       },
     );
 
+    dispatch(changeUserLoadingStatusAction(LoadingStatus.Success));
+
     saveToken(token);
+
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(changeUserInfoAction(userEmail));
     dispatch(fetchOffersAction());
     dispatch(redirectToRoute(AppRoute.Main));
   } catch {
     toast.info(AuthMessage.Fail);
+
+    dispatch(changeUserLoadingStatusAction(LoadingStatus.Fail));
   }
 };
 

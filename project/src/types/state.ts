@@ -56,6 +56,7 @@ export type OffersProcess = {
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
   email: string;
+  loadingStatus: LoadingStatus;
 };
 
 /**

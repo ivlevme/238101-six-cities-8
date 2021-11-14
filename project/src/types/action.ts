@@ -13,6 +13,7 @@ import {
   changeOfferLoadingStatusAction,
   changeOfferFavoriteStatusAction,
   changeNearbyLoadingStatusAction,
+  changeUserLoadingStatusAction,
   changeSortingAction,
   changeUserInfoAction,
   clearOfferAction,
@@ -40,6 +41,7 @@ export type Actions =
   | ReturnType<typeof changeOfferLoadingStatusAction>
   | ReturnType<typeof changeOfferFavoriteStatusAction>
   | ReturnType<typeof changeNearbyLoadingStatusAction>
+  | ReturnType<typeof changeUserLoadingStatusAction>
   | ReturnType<typeof changeSortingAction>
   | ReturnType<typeof changeUserInfoAction>
   | ReturnType<typeof clearOfferAction>

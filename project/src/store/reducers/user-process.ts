@@ -2,12 +2,13 @@ import type { Actions } from '../../types/action';
 import type { UserProcess } from '../../types/state';
 
 import { ActionType } from '../action-type';
-import { AuthorizationStatus } from '../../consts';
+import { AuthorizationStatus, LoadingStatus } from '../../consts';
 
 
 const initialState: UserProcess = {
   authorizationStatus: AuthorizationStatus.Unknown,
   email: '',
+  loadingStatus: LoadingStatus.Init,
 };
 
 /**
@@ -15,6 +16,13 @@ const initialState: UserProcess = {
  */
 const userProcess = (state = initialState, action: Actions): UserProcess => {
   switch (action.type) {
+
+    case ActionType.ChangeUserLoadingStatus: {
+      return {
+        ...state,
+        loadingStatus: action.payload,
+      };
+    }
 
     case ActionType.ChangeUserInfo: {
       return {

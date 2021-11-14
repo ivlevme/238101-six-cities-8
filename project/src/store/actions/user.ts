@@ -1,7 +1,21 @@
 import { createAction } from '@reduxjs/toolkit';
 
 import { ActionType } from '../action-type';
-import { AuthorizationStatus } from '../../consts';
+import {
+  AuthorizationStatus,
+  LoadingStatus
+} from '../../consts';
+
+/**
+ * @function changeUserLoadingStatusAction - Action creator for change loading status user
+ * @param status - Loading status
+ * */
+export const changeUserLoadingStatusAction = createAction(
+  ActionType.ChangeUserLoadingStatus,
+  (status: LoadingStatus) => ({
+    payload: status,
+  }),
+);
 
 /**
  * @function changeUserInfoAction - Action creator for change user info

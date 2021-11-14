@@ -28,6 +28,7 @@ import {
 import {
   amsterdam,
   AuthorizationStatus,
+  LoadingStatus,
   Sorting
 } from '../../consts';
 import { initUserSignIn } from './const';
@@ -36,8 +37,9 @@ const mapStateToProps = ({
   OFFERS,
   USER,
 }: State) => ({
-  sorting: OFFERS.sorting,
   authorizationStatus: USER.authorizationStatus,
+  sorting: OFFERS.sorting,
+  loadingStatus: USER.loadingStatus,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
@@ -61,6 +63,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function Login({
   authorizationStatus,
+  loadingStatus,
   sorting,
   redirectToMain,
   onChangeCity,
@@ -68,14 +71,16 @@ function Login({
 }: PropsFromRedux): JSX.Element {
   const [userSignIn, setUserSignIn] = useState(initUserSignIn);
 
-  if(authorizationStatus === AuthorizationStatus.Auth) {
+  if (authorizationStatus === AuthorizationStatus.Auth) {
     redirectToMain();
   }
 
+  const isFormLoading = loadingStatus === LoadingStatus.Loading;
+
   const isSignInButtonDisabled =
     userSignIn.email.trim() === initUserSignIn.email ||
-    userSignIn.password.trim() === initUserSignIn.password;
-
+    userSignIn.password.trim() === initUserSignIn.password ||
+    isFormLoading;
 
   const handleEmailChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setUserSignIn((prevUserSignIn) => ({
@@ -123,6 +128,7 @@ function Login({
                 <label className='visually-hidden'>E-mail</label>
                 <input
                   className='login__input form__input'
+                  disabled={isFormLoading}
                   name='email'
                   onChange={handleEmailChange}
                   placeholder='Email'
@@ -136,6 +142,7 @@ function Login({
                 <input
                   autoComplete="off"
                   className='login__input form__input'
+                  disabled={isFormLoading}
                   name='password'
                   onChange={handlePasswordChange}
                   placeholder='Password'

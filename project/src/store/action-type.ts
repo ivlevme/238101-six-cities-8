@@ -10,6 +10,7 @@ export enum ActionType {
   ChangeOfferFavoriteStatus = 'offer/changeFavoriteStatus',
   ChangeOfferLoadingStatus = 'offer/loadingStatus',
   ChangeNearbyLoadingStatus = 'nearby/loadingStatus',
+  ChangeUserLoadingStatus = 'user/loadingStatus',
   ChangeSorting = 'offers/sorting',
   ChangeUserInfo = 'user/info',
   ClearOfferAction = 'offer/clearData',

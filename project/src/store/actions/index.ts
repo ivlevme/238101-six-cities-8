@@ -27,6 +27,7 @@ export {
   redirectToRoute
 } from './route';
 export {
+  changeUserLoadingStatusAction,
   changeUserInfoAction,
   requireAuthorization,
   requireLogout
