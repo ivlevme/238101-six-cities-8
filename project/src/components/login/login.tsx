@@ -34,6 +34,8 @@ import {
 } from '../../consts';
 import { initUserSignIn } from './const';
 
+const validationPassword = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$/;
+
 const mapStateToProps = ({
   OFFERS,
   USER,
@@ -87,6 +89,7 @@ function Login({
   const isSignInButtonDisabled =
     userSignIn.email.trim() === initUserSignIn.email ||
     userSignIn.password.trim() === initUserSignIn.password ||
+    !validationPassword.test(userSignIn.password) ||
     isFormLoading;
 
   const handleEmailChange = (evt: ChangeEvent<HTMLInputElement>) => {
