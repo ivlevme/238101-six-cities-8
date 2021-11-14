@@ -7,6 +7,7 @@ import type { State } from '../types/state';
 import {
   changeCityAction,
   changeCommentLoadingStatusAction,
+  changeCommentsLoadingStatusAction,
   changeFavoriteLoadingStatusAction,
   changeFavoritePageLoadingStatusAction,
   changeOfferLoadingStatusAction,
@@ -33,6 +34,7 @@ import {
 export type Actions =
   | ReturnType<typeof changeCityAction>
   | ReturnType<typeof changeCommentLoadingStatusAction>
+  | ReturnType<typeof changeCommentsLoadingStatusAction>
   | ReturnType<typeof changeFavoriteLoadingStatusAction>
   | ReturnType<typeof changeFavoritePageLoadingStatusAction>
   | ReturnType<typeof changeOfferLoadingStatusAction>

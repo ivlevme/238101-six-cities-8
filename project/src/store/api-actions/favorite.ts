@@ -19,7 +19,6 @@ import {
   LoadMessageFail
 } from '../../consts';
 import {
-  changeCommentLoadingStatusAction,
   changeFavoriteLoadingStatusAction,
   changeFavoritePageLoadingStatusAction,
   changeOfferFavoriteStatusAction,
@@ -74,6 +73,6 @@ export const changeFavoriteStatusOffer = (
 
       toast.info(AddMessageFail.Favorite);
 
-      dispatch(changeCommentLoadingStatusAction(LoadingStatus.Fail));
+      dispatch(changeFavoriteLoadingStatusAction(LoadingStatus.Fail));
     }
   };

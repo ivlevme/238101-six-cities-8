@@ -16,6 +16,7 @@ import {
 } from '../../consts';
 import {
   changeCommentLoadingStatusAction,
+  changeCommentsLoadingStatusAction,
   loadCommentsAction
 } from '../actions';
 
@@ -58,14 +59,14 @@ export const addCommentAction =
 export const fetchCommentsAction = (id: OfferId): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     try {
-      dispatch(changeCommentLoadingStatusAction(LoadingStatus.Loading));
+      dispatch(changeCommentsLoadingStatusAction(LoadingStatus.Loading));
       const { data } = await api.get<CommentBackend[]>(`${APIRoute.Comments}/${id}`);
 
       dispatch(loadCommentsAction(data));
-      dispatch(changeCommentLoadingStatusAction(LoadingStatus.Success));
+      dispatch(changeCommentsLoadingStatusAction(LoadingStatus.Success));
     } catch {
       toast.info(LoadMessageFail.Comments);
 
-      dispatch(changeCommentLoadingStatusAction(LoadingStatus.Fail));
+      dispatch(changeCommentsLoadingStatusAction(LoadingStatus.Fail));
     }
   };

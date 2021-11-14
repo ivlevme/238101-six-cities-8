@@ -15,8 +15,9 @@ import type {
  * @CommentProcess State - Redux Reducer type for comment
  * */
 export type CommentProcess = {
+  allCommentsLoadingStatus: LoadingStatus;
   comments: Comment[];
-  loadingStatus: LoadingStatus;
+  newCommentLoadingStatus: LoadingStatus;
 };
 
 /**

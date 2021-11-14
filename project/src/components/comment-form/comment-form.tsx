@@ -27,8 +27,9 @@ import {
 import { addCommentAction } from '../../store/api-actions';
 
 import {
-  initalComment,
-  MAX_COMMENT_LENGTH
+  MAX_COMMENT_LENGTH,
+  MIN_COMMENT_LENGTH,
+  initalComment
 } from './consts';
 
 const mapStateToProps = ({
@@ -36,7 +37,7 @@ const mapStateToProps = ({
   OFFER,
 }: State) => ({
   offer: OFFER.offer,
-  loadingStatus: COMMENT.loadingStatus,
+  loadingStatus: COMMENT.newCommentLoadingStatus,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
@@ -72,7 +73,8 @@ function CommentForm({
 
   const isSubmitButtonDisabled =
     comment.rating === initalComment.rating ||
-    comment.text.trim() === initalComment.text ||
+    comment.text.trim().length < MIN_COMMENT_LENGTH ||
+    comment.text.trim().length > MAX_COMMENT_LENGTH ||
     loadingStatus === LoadingStatus.Loading;
 
   const handleInputRadioChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -208,6 +210,7 @@ function CommentForm({
         className='reviews__textarea form__textarea'
         id='review'
         maxLength={MAX_COMMENT_LENGTH}
+        minLength={MIN_COMMENT_LENGTH}
         name='review'
         onChange={handleTextareaChange}
         placeholder='Tell how was your stay, what you like and what can be improved'
@@ -219,7 +222,7 @@ function CommentForm({
           <span className='reviews__star'>rating</span> and describe your stay
           with at least{' '}
           <b className='reviews__text-amount'>
-            {MAX_COMMENT_LENGTH - comment.text.length} characters
+            {MIN_COMMENT_LENGTH} characters
           </b>
           .
         </p>

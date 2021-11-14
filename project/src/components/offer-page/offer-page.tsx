@@ -52,7 +52,7 @@ const mapStateToProps = ({
 }: State) => ({
   authorizationStatus: USER.authorizationStatus,
   comments: COMMENT.comments,
-  loadingCommentsStatus: COMMENT.loadingStatus,
+  loadingCommentsStatus: COMMENT.allCommentsLoadingStatus,
   loadingFavoriteStatus: FAVORITE.loadingStatus,
   loadingOfferStatus: OFFER.loadingOfferStatus,
   loadingNearbyStatus: OFFER.loadingNearbyStatus,

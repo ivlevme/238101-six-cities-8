@@ -1,5 +1,6 @@
 export {
-  changeCommentLoadingStatusAction
+  changeCommentLoadingStatusAction,
+  changeCommentsLoadingStatusAction
 } from './comment';
 export {
   changeFavoriteLoadingStatusAction,

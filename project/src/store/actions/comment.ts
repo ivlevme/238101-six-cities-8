@@ -14,3 +14,14 @@ export const changeCommentLoadingStatusAction = createAction(
     payload: status,
   }),
 );
+/**
+ * @function changeCommentsLoadingStatusAction - Action creator for change
+ * loading status for all comments
+ * @param status - status loading
+ * */
+export const changeCommentsLoadingStatusAction = createAction(
+  ActionType.ChangeCommentsLoadingStatus,
+  (status: LoadingStatus) => ({
+    payload: status,
+  }),
+);

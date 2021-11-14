@@ -3,12 +3,14 @@ import type { CommentProcess } from '../../types/state';
 
 import { ActionType } from '../action-type';
 
-import { LoadingStatus } from '../../consts';
 import { getConvertedComments } from '../../adapter';
+import { LoadingStatus } from '../../consts';
+import { getFilteredCommentsByNewest } from '../../helpers';
 
 const initialState: CommentProcess = {
+  allCommentsLoadingStatus: LoadingStatus.Init,
   comments: [],
-  loadingStatus: LoadingStatus.Init,
+  newCommentLoadingStatus: LoadingStatus.Init,
 };
 
 /**
@@ -20,14 +22,23 @@ const commentProcess = (state = initialState, action: Actions): CommentProcess =
     case ActionType.ChangeCommentLoadingStatus: {
       return {
         ...state,
-        loadingStatus: action.payload,
+        newCommentLoadingStatus: action.payload,
+      };
+    }
+
+    case ActionType.ChangeCommentsLoadingStatus: {
+      return {
+        ...state,
+        allCommentsLoadingStatus: action.payload,
       };
     }
 
     case ActionType.LoadComments: {
       return {
         ...state,
-        comments: getConvertedComments(action.payload),
+        comments: getFilteredCommentsByNewest(
+          getConvertedComments(action.payload),
+        ),
       };
     }
 

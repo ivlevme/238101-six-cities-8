@@ -58,8 +58,8 @@ export const clearOfferAction = createAction(
 );
 
 /**
- * @function loadNearbyOfferAction - Action creator for fill nearby offers
- * @param offers - nearby offers
+ * @function loadCommentsAction - Action creator for fill all comments
+ * @param comments - all comments
  * */
 export const loadCommentsAction = createAction(
   ActionType.LoadComments,

@@ -4,6 +4,7 @@
 export enum ActionType {
   ChangeCity = 'city/change',
   ChangeCommentLoadingStatus = 'comment/loadingStatus',
+  ChangeCommentsLoadingStatus = 'comments/loadingStatus',
   ChangeFavoriteLoadingStatus = 'favorite/loadingStatus',
   ChangeFavoritePageLoadingStatus = 'offer/loadingPageStatus',
   ChangeOfferFavoriteStatus = 'offer/changeFavoriteStatus',
