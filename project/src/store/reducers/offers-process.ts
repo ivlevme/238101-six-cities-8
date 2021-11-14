@@ -8,12 +8,15 @@ import {
 } from '../../helpers';
 
 import { ActionType } from '../action-type';
-import { paris, Sorting } from '../../consts';
+import {
+  Paris,
+  Sorting
+} from '../../consts';
 
 
 const initialState: OffersProcess = {
   allOffers: [],
-  activeCity: paris,
+  activeCity: Paris,
   isDataLoaded: false,
   offersByCity: [],
   sorting: Sorting.Popular,

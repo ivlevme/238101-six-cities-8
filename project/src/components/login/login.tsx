@@ -1,13 +1,15 @@
-import type {
+import {
   ChangeEvent,
   FormEvent,
-  MouseEvent
+  MouseEvent,
+  useEffect
 } from 'react';
 import { useState } from 'react';
 
 import type { ConnectedProps } from 'react-redux';
 import { connect } from 'react-redux';
 
+import type { LoginProps } from './types';
 import type { AuthData } from '../../types/auth-data';
 import type { ThunkAppDispatch } from '../../types/action';
 import type {
@@ -26,7 +28,6 @@ import {
   redirectToRoute
 } from '../../store/actions';
 import {
-  amsterdam,
   AuthorizationStatus,
   LoadingStatus,
   Sorting
@@ -59,21 +60,27 @@ const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-type PropsFromRedux = ConnectedProps<typeof connector>;
+type PropsFromRedux = ConnectedProps<typeof connector> & LoginProps;
 
 function Login({
   authorizationStatus,
   loadingStatus,
   sorting,
   redirectToMain,
+  suggestedCity,
   onChangeCity,
   onSubmit,
 }: PropsFromRedux): JSX.Element {
-  const [userSignIn, setUserSignIn] = useState(initUserSignIn);
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      redirectToMain();
+    }
+  }, [
+    authorizationStatus,
+    redirectToMain,
+  ]);
 
-  if (authorizationStatus === AuthorizationStatus.Auth) {
-    redirectToMain();
-  }
+  const [userSignIn, setUserSignIn] = useState(initUserSignIn);
 
   const isFormLoading = loadingStatus === LoadingStatus.Loading;
 
@@ -108,7 +115,7 @@ function Login({
   const handleLinkToCityClick = (evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
 
-    onChangeCity(amsterdam, sorting);
+    onChangeCity(suggestedCity, sorting);
   };
 
   return (
@@ -167,7 +174,7 @@ function Login({
                 href="/"
                 onClick={handleLinkToCityClick}
               >
-                <span>Amsterdam</span>
+                <span>{suggestedCity.name}</span>
               </a>
             </div>
           </section>

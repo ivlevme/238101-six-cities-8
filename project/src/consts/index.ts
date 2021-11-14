@@ -2,13 +2,13 @@ export { AuthorizationStatus } from './auth';
 export { BookmarkText } from './bookmark';
 export {
   NameCity,
-  amsterdam,
-  brussels,
-  cities,
-  cologne,
-  dusseldorf,
-  humburg,
-  paris
+  Amsterdam,
+  Brussels,
+  Cities,
+  Cologne,
+  Dusseldorf,
+  Humburg,
+  Paris
 } from './cities';
 export { Housing } from './hoising';
 export { RADIX } from './integer';

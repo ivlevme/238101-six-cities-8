@@ -9,7 +9,7 @@ export enum NameCity {
   Dusseldorf = 'Dusseldorf',
 }
 
-export const amsterdam: City = {
+export const Amsterdam: City = {
   id: 1,
   location: {
     latitude: 52.37454,
@@ -19,7 +19,7 @@ export const amsterdam: City = {
   name: NameCity.Amsterdam,
 };
 
-export const brussels: City = {
+export const Brussels: City = {
   id: 2,
   location: {
     latitude: 50.846557,
@@ -29,7 +29,7 @@ export const brussels: City = {
   name: NameCity.Brussels,
 };
 
-export const cologne: City = {
+export const Cologne: City = {
   id: 3,
   location: {
     latitude: 50.938361,
@@ -39,7 +39,7 @@ export const cologne: City = {
   name: NameCity.Cologne,
 };
 
-export const dusseldorf: City = {
+export const Dusseldorf: City = {
   id: 4,
   location: {
     latitude: 51.225402,
@@ -49,7 +49,7 @@ export const dusseldorf: City = {
   name: NameCity.Dusseldorf,
 };
 
-export const humburg: City = {
+export const Humburg: City = {
   id: 5,
   location: {
     latitude: 53.550341,
@@ -59,7 +59,7 @@ export const humburg: City = {
   name: NameCity.Hamburg,
 };
 
-export const paris: City = {
+export const Paris: City = {
   id: 6,
   location: {
     latitude: 48.85661,
@@ -69,11 +69,11 @@ export const paris: City = {
   name: NameCity.Paris,
 };
 
-export const cities: City[] = [
-  paris,
-  cologne,
-  brussels,
-  amsterdam,
-  humburg,
-  dusseldorf,
+export const Cities: City[] = [
+  Paris,
+  Cologne,
+  Brussels,
+  Amsterdam,
+  Humburg,
+  Dusseldorf,
 ];

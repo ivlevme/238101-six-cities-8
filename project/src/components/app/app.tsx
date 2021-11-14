@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import type { State } from '../../types';
 
 import { browserHistory } from '../../browser-history';
-import { cities } from '../../consts';
+import { Cities } from '../../consts';
 import {
   FavoritePage,
   Login,
@@ -21,7 +21,10 @@ import {
   Spinner
 } from '../index';
 import { AppRoute } from '../../routes';
-import { isCheckedAuth } from '../../helpers';
+import {
+  getSuggestedCity,
+  isCheckedAuth
+} from '../../helpers';
 
 const mapStateToProps = ({
   OFFERS,
@@ -35,6 +38,8 @@ const mapStateToProps = ({
 const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const suggestedCity = getSuggestedCity(Cities);
 
 function App({
   activeCity,
@@ -67,14 +72,14 @@ function App({
           exact
           path={AppRoute.Login}
         >
-          <Login />
+          <Login suggestedCity={suggestedCity} />
         </Route>
         <Route
           exact
           path={AppRoute.Main}
         >
           <Main
-            cities={cities}
+            cities={Cities}
           />
         </Route>
         <Route>

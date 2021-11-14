@@ -64,6 +64,7 @@ export const changeFavoriteStatusOffer = (
       dispatch(changeOfferFavoriteStatusAction(id, status));
       dispatch(changeFavoriteLoadingStatusAction(LoadingStatus.Success));
     } catch(err) {
+      dispatch(changeFavoriteLoadingStatusAction(LoadingStatus.Fail));
 
       if((err as AxiosError).response?.status === HttpCode.Unauthorized) {
         dispatch(redirectToRoute(AppRoute.Login));
@@ -71,7 +72,5 @@ export const changeFavoriteStatusOffer = (
       }
 
       toast.info(AddMessageFail.Favorite);
-
-      dispatch(changeFavoriteLoadingStatusAction(LoadingStatus.Fail));
     }
   };
