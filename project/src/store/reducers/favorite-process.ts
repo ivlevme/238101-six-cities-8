@@ -35,16 +35,8 @@ const favoritesProcess = (state = initialState, action: Actions): FavoritesProce
     case ActionType.ChangeOfferFavoriteStatus: {
       return {
         ...state,
-        favorites: state.favorites.map((offer) => {
-          if (offer.id === action.payload.id) {
-            return {
-              ...offer,
-              bookmark: action.payload.status,
-            };
-          }
-
-          return offer;
-        }),
+        favorites: state.favorites.filter((offer) =>
+          offer.id !== action.payload.id),
       };
     }
 

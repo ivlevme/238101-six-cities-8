@@ -59,7 +59,6 @@ export const changeFavoriteStatusOffer = (
     try {
       dispatch(changeFavoriteLoadingStatusAction(LoadingStatus.Loading));
 
-      // const { data } =
       await api.post<OfferBackend[]>(`${APIRoute.Favorite}/${id}/${+status}`);
 
       dispatch(changeOfferFavoriteStatusAction(id, status));

@@ -29,6 +29,17 @@ const offerProcess = (state = initialState, action: Actions): OfferProcess => {
           ...state.offer,
           bookmark: action.payload.status,
         },
+
+        nearbyOffers: state.nearbyOffers.map((offer) => {
+          if (offer.id === action.payload.id) {
+            return {
+              ...offer,
+              bookmark: action.payload.status,
+            };
+          }
+
+          return offer;
+        }),
       };
     }
 
